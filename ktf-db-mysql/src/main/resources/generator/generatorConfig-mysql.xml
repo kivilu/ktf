@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE generatorConfiguration
+        PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
+        "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+
+<generatorConfiguration>
+    <properties resource="./generator/jdbc-mysql.properties"/>
+    	  
+    <context id="Mysql" targetRuntime="MyBatis3Simple" defaultModelType="flat">
+        <property name="beginningDelimiter" value="`"/>
+        <property name="endingDelimiter" value="`"/>
+        <property name="javaFileEncoding" value="UTF-8"/>
+        
+        <plugin type="tk.mybatis.mapper.generator.MapperPlugin">
+            <property name="mappers" value="com.kivi.framework.db.util.MyMapper"/>
+        </plugin>
+        <!-- 自动生成toString方法 -->
+        <plugin type="org.mybatis.generator.plugins.ToStringPlugin"/>
+        <!-- 自动生成equals方法和hashcode方法 -->
+        <plugin type="org.mybatis.generator.plugins.EqualsHashCodePlugin"/>
+        
+        <commentGenerator>
+			<property name="suppressDate" value="true" />
+			<property name="suppressAllComments" value="false" />
+		</commentGenerator>
+		
+        <jdbcConnection driverClass="${spring.datasource.driverClassName}"
+                        connectionURL="${spring.datasource.url}"
+                        userId="${spring.datasource.username}"
+                        password="${spring.datasource.password}">
+        </jdbcConnection>
+        
+        <!-- java类型处理器 用于处理DB中的类型到Java中的类型，默认使用JavaTypeResolverDefaultImpl；
+                               注意一点，默认会先尝试使用Integer，Long，Short等来对应DECIMAL和 NUMERIC数据类型； --> 
+        <javaTypeResolver type="org.mybatis.generator.internal.types.JavaTypeResolverDefaultImpl"> 
+             <!-- true：使用BigDecimal对应DECIMAL和 NUMERIC数据类型 
+                  false： 默认, scale>0;length>18：使用BigDecimal; 
+                              scale=0;length[10,18]：使用Long； 
+                              scale=0;length[5,9]：使用Integer； 
+                              scale=0;length<5：使用Short； --> 
+             <property name="forceBigDecimals" value="false"/> 
+       </javaTypeResolver>
+       
+
+        <javaModelGenerator targetPackage="com.kivi.framework.persist.model" targetProject="src/main/java">
+        	<property name="rootClass" value="com.kivi.framework.persist.model.BaseModel"/>
+        </javaModelGenerator>
+
+        <sqlMapGenerator targetPackage="com.kivi.framework.persist.mapper" targetProject="src/main/java"/>
+
+        <javaClientGenerator targetPackage="com.kivi.framework.persist.dao" targetProject="src/main/java"
+                             type="XMLMAPPER">
+        </javaClientGenerator>
+
+        <table tableName="KTF_%">
+            <generatedKey column="id" sqlStatement="Mysql" identity="true"/>
+             <columnOverride column="gmt_%" javaType="java.util.Date"
+                jdbcType="TIMESTAMP"></columnOverride>
+        </table>
+        
+    </context>
+</generatorConfiguration>

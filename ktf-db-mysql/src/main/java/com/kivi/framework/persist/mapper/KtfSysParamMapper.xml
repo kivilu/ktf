@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.kivi.framework.persist.dao.KtfSysParamMapper">
+  <resultMap id="BaseResultMap" type="com.kivi.framework.persist.model.KtfSysParam">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    <id column="ID" jdbcType="INTEGER" property="id" />
+    <result column="PID" jdbcType="BIGINT" property="pid" />
+    <result column="custom_code" jdbcType="VARCHAR" property="customCode" />
+    <result column="biz_code" jdbcType="VARCHAR" property="bizCode" />
+    <result column="param_code" jdbcType="VARCHAR" property="paramCode" />
+    <result column="param_name" jdbcType="VARCHAR" property="paramName" />
+    <result column="param_type" jdbcType="CHAR" property="paramType" />
+    <result column="param_value" jdbcType="VARCHAR" property="paramValue" />
+    <result column="LAST_UPDATE_USER" jdbcType="VARCHAR" property="lastUpdateUser" />
+    <result column="gmt_create" jdbcType="TIMESTAMP" property="gmtCreate" />
+    <result column="gmt_update" jdbcType="TIMESTAMP" property="gmtUpdate" />
+  </resultMap>
+</mapper>

@@ -1,0 +1,65 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <parent>
+    <groupId>com.kivi</groupId>
+    <artifactId>ktf</artifactId>
+    <version>1.0.0</version>
+  </parent>
+  <artifactId>ktf-web</artifactId>
+  <description>Spring boot web功能集成</description>
+  
+  <dependencies>
+  		<!-- kivi -->
+  		<dependency>
+       		<groupId>com.kivi</groupId>
+       		<artifactId>framework-common</artifactId>
+       		<version>1.0.0</version>
+       		<optional>true</optional>
+       	</dependency>
+       	<dependency>
+       		<groupId>com.kivi</groupId>
+       		<artifactId>framework-db</artifactId>
+       		<version>1.0.0</version>
+       		<optional>true</optional>
+       	</dependency>
+       	
+  		<!-- /kivi -->
+        <!-- spring starter web -->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-web</artifactId>
+			<exclusions>
+				<exclusion>
+					<groupId>org.springframework.boot</groupId>
+            		<artifactId>spring-boot-starter-tomcat</artifactId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+		<dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-undertow</artifactId>
+        </dependency>
+        
+        <dependency>    
+		  <groupId>org.springframework</groupId>    
+		  <artifactId>spring-webmvc</artifactId>
+		</dependency>
+        
+		<!-- swagger2 -->
+		<dependency>
+			<groupId>io.springfox</groupId>
+			<artifactId>springfox-swagger2</artifactId>
+			<version>${springfox-swagger2-version}</version>
+			<optional>true</optional>
+		</dependency>
+		<dependency>
+			<groupId>io.springfox</groupId>
+			<artifactId>springfox-swagger-ui</artifactId>
+			<version>${springfox-swagger2-version}</version>
+			<optional>true</optional>
+		</dependency>
+		<!-- /swagger2 -->
+		
+  </dependencies>
+  
+</project>

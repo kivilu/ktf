@@ -22,6 +22,12 @@
        		<version>1.0.0</version>
        	</dependency>
        	
+       	<dependency>
+       		<groupId>com.kivi</groupId>
+       		<artifactId>ktf-cache</artifactId>
+       		<version>1.0.0</version>
+       	</dependency>
+       	
        	<!-- mysql jdbc驱动 -->
 		<dependency>
 			<groupId>mysql</groupId>

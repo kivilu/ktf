@@ -8,7 +8,6 @@ import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.util.Iterator;
 import java.util.List;
-import java.util.Timer;
 import java.util.TimerTask;
 import java.util.UUID;
 import java.util.concurrent.atomic.AtomicInteger;
@@ -24,7 +23,6 @@ import org.springframework.stereotype.Service;
 
 import com.alibaba.fastjson.JSON;
 import com.kivi.framework.component.ApplicationKit;
-import com.kivi.framework.component.SpringContextHolder;
 import com.kivi.framework.constant.GlobalErrorConst;
 import com.kivi.framework.db.dao.BaseDao;
 import com.kivi.framework.enums.KtfServiceStatus;
@@ -32,7 +30,6 @@ import com.kivi.framework.exception.AppException;
 import com.kivi.framework.persist.mapper.KtfServiceNameMapperEx;
 import com.kivi.framework.persist.model.KtfServiceName;
 import com.kivi.framework.properties.KtfProperties;
-import com.kivi.framework.service.IServiceName;
 import com.kivi.framework.service.KtfNameService;
 import com.kivi.framework.util.CommonUtils;
 import com.kivi.framework.util.kit.DateTimeKit;
@@ -85,16 +82,10 @@ public class KtfNameServiceImpl extends BaseDao<KtfServiceName> implements KtfNa
         if (!fmyid.exists()) {
             // myid不存在，需要注册
             KtfServiceName entity = null;
-            if (!SpringContextHolder.containsBean("iServiceName")) {
-                entity = new KtfServiceName();
-                entity.setName(ApplicationKit.me().getAppcationName());
-                entity.setHost(CommonUtils.geLocaltHostIp());
-                entity.setPort(ApplicationKit.me().getServerPort());
-            }
-            else {
-                IServiceName service = SpringContextHolder.getBean("iServiceName");
-                entity = service.getName();
-            }
+            entity = new KtfServiceName();
+            entity.setName(ApplicationKit.me().getAppcationName());
+            entity.setHost(CommonUtils.geLocaltHostIp());
+            entity.setPort(ApplicationKit.me().getServerPort());
 
             // 注册service
             serviceName = this.registService(entity);
@@ -108,8 +99,10 @@ public class KtfNameServiceImpl extends BaseDao<KtfServiceName> implements KtfNa
             this.updateServiceStatus(KtfServiceStatus.online);
         }
 
-        Timer time = new Timer();
-        time.schedule(new ServiceStatusTask(), STATUS_UPDATE_SECOND * 1000, STATUS_UPDATE_SECOND * 1000);
+        //
+        // Timer time = new Timer();
+        // time.schedule(new ServiceStatusTask(), STATUS_UPDATE_SECOND * 1000,
+        // STATUS_UPDATE_SECOND * 1000);
     }
 
     @PreDestroy
@@ -149,15 +142,7 @@ public class KtfNameServiceImpl extends BaseDao<KtfServiceName> implements KtfNa
 
     @Override
     public String getUniqueqId() {
-        if (StrKit.isBlank(seqPrefix)) {
-            seqPrefix = StrKit.join("", serviceName.getName(), String.format("%03d", serviceName.getSlotId()));
-            if (seqPrefix.length() > 8)
-                seqPrefix = StrKit.subSuf(seqPrefix, seqPrefix.length() - 8);
-        }
-
-        localSequence.compareAndSet(99999999, 10000000);
-
-        return StrKit.join("", seqPrefix, DateTimeKit.nowCompact(), localSequence.getAndIncrement());
+        return StrKit.join("", serviceName.getSlotId(), ApplicationKit.me().nextId());
     }
 
     private List<KtfServiceName> listOnlineService() {
@@ -205,6 +190,8 @@ public class KtfNameServiceImpl extends BaseDao<KtfServiceName> implements KtfNa
         super.updateNotNull(updateEntity);
     }
 
+    @SuppressWarnings( "unused" )
+    @Deprecated
     private class ServiceStatusTask extends TimerTask {
 
         @Override

@@ -3,8 +3,8 @@ package com.kivi.framework.log.factory;
 import com.kivi.framework.log.constant.enums.LogStatus;
 import com.kivi.framework.log.constant.enums.LogType;
 import com.kivi.framework.util.kit.DateTimeKit;
-import com.kivi.framework.vo.log.LoginLogVO;
-import com.kivi.framework.vo.log.OperationLogVO;
+import com.kivi.framework.vo.LoginLogVO;
+import com.kivi.framework.vo.OperationLogVO;
 
 /**
  * 日志对象创建工厂

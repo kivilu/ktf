@@ -12,8 +12,8 @@ import com.kivi.framework.log.constant.enums.LogType;
 import com.kivi.framework.util.ToolUtil;
 import com.kivi.framework.util.kit.BeanKit;
 import com.kivi.framework.util.kit.StrKit;
-import com.kivi.framework.vo.log.LoginLogVO;
-import com.kivi.framework.vo.log.OperationLogVO;
+import com.kivi.framework.vo.LoginLogVO;
+import com.kivi.framework.vo.OperationLogVO;
 
 /**
  * 日志操作任务创建工厂

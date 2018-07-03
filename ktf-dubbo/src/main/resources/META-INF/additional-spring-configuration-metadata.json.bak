@@ -1372,6 +1372,6 @@
       "type": "java.lang.Boolean",
       "defaultValue": true,
       "description": "可选  默认情况下，dubbo 接收任何主机发起的命令，若要禁用则修改为false 2.5.8以上版本"
-    },
+    }
   ]
 }

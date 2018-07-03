@@ -25,6 +25,9 @@ public class DateTimeKit {
 
     /** 标准日期格式 ,yyyy-MM-dd */
     public final static String                   NORM_DATE_PATTERN            = "yyyy-MM-dd";
+    /** 紧凑日期格式 ,yyyyMMdd */
+    public final static String                   COMPACT_DATE_PATTERN         = "yyyyMMdd";
+
     /** 标准时间格式 ，HH:mm:ss */
     public final static String                   NORM_TIME_PATTERN            = "HH:mm:ss";
     /** 标准日期时间格式，精确到分 ,yyyy-MM-dd HH:mm */

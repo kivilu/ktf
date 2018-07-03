@@ -1,5 +1,6 @@
 <ehcache xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:noNamespaceSchemaLocation="ehcache.xsd">
+         
 
     <diskStore path="java.io.tmpdir/ehcache"/>
 
@@ -14,7 +15,7 @@
     />
 
     <!-- 全局变量：永不过期-->
-    <cache name="KTFCACHE-CONSTANT"
+    <cache name="ktf.sys_param"
     	   maxElementsInMemory="50000"
            eternal="true"
     	   clearOnFlush="false"

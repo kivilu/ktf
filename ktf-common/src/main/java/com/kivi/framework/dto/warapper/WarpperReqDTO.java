@@ -30,6 +30,11 @@ public class WarpperReqDTO<T> implements Serializable {
     private String            fromAppName;
 
     /**
+     * 交易流水号
+     */
+    private String            tranSeqId;
+
+    /**
      * 请求内容
      */
     private T                 reqObject;

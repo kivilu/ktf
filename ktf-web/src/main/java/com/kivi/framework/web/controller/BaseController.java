@@ -8,20 +8,28 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.springframework.context.annotation.DependsOn;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 
+import com.kivi.framework.component.SpringContextHolder;
 import com.kivi.framework.constant.enums.Order;
+import com.kivi.framework.properties.KtfProperties;
+import com.kivi.framework.service.ITimeoutService;
+import com.kivi.framework.service.KtfNameService;
 import com.kivi.framework.util.FileUtil;
 import com.kivi.framework.util.kit.StrKit;
 import com.kivi.framework.vo.page.PageInfoBT;
 import com.kivi.framework.vo.page.PageReqVO;
+import com.kivi.framework.web.async.KtfDeferredResult;
+import com.kivi.framework.web.async.KtfTimeoutRunnable;
 import com.kivi.framework.web.constant.tips.SuccessTip;
 import com.kivi.framework.web.util.kit.HttpKit;
 import com.kivi.framework.web.warpper.BaseControllerWarpper;
 
+@DependsOn( value = { "springContextHolder", "ktfProperties" } )
 public class BaseController {
 
     protected static String     SUCCESS     = "SUCCESS";
@@ -133,8 +141,24 @@ public class BaseController {
     /**
      * 把service层的分页信息，封装为bootstrap table通用的分页封装
      */
-    protected <T> PageInfoBT<T> packForBT( long total, List<T> page ) {
-        return new PageInfoBT<T>(total, page);
+    protected <T> PageInfoBT<T> packForBT( long total, List<T> list ) {
+        return new PageInfoBT<T>(total, list);
+    }
+
+    protected String msgId() {
+        KtfNameService ktfNameService = SpringContextHolder.getBean(KtfNameService.class);
+        return ktfNameService.getUniqueqId();
+    }
+
+    protected KtfDeferredResult newDeferredResult() {
+        KtfProperties ktfProperties = SpringContextHolder.getBean(KtfProperties.class);
+
+        ITimeoutService timeoutService = SpringContextHolder.getBean(ITimeoutService.class);
+
+        KtfDeferredResult result = new KtfDeferredResult(msgId(), ktfProperties.getApi().getTimeout());
+        result.onTimeout(new KtfTimeoutRunnable(result, timeoutService));
+
+        return result;
     }
 
 }

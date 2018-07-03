@@ -25,6 +25,7 @@ public class KtfProperties {
     private Dubbo   dubbo;
     private Swagger swagger;
     private Shiro   shiro;
+    private Api     api;
 
     public KtfProperties() {
         this.common = new Common();
@@ -32,6 +33,7 @@ public class KtfProperties {
         this.dubbo = new Dubbo();
         this.swagger = new Swagger();
         this.shiro = new Shiro();
+        this.api = new Api();
     }
 
     @Getter
@@ -221,6 +223,12 @@ public class KtfProperties {
             private String  threadpool;
             private Integer threads;
         }
+    }
+
+    @Setter
+    @Getter
+    public static class Api {
+        private Long timeout = 30000L;
     }
 
 }

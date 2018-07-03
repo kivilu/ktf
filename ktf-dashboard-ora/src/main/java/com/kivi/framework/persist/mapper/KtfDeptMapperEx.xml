@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.kivi.framework.persist.mapper.KtfDeptMapperEx">
+  <resultMap id="BaseResultMap" type="com.kivi.framework.vo.web.DeptVO">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    <id column="ID" jdbcType="NUMERIC" property="id" />
+    <result column="NUM" jdbcType="NUMERIC" property="num" />
+    <result column="PID" jdbcType="NUMERIC" property="pid" />
+    <result column="PIDS" jdbcType="VARCHAR" property="pids" />
+    <result column="SIMPLENAME" jdbcType="VARCHAR" property="simplename" />
+    <result column="FULLNAME" jdbcType="VARCHAR" property="fullname" />
+    <result column="TIPS" jdbcType="VARCHAR" property="tips" />
+    <result column="GMT_CREATE" jdbcType="TIMESTAMP" property="gmtCreate" />
+    <result column="GMT_UPDATE" jdbcType="TIMESTAMP" property="gmtUpdate" />
+    <result column="VERSION" jdbcType="NUMERIC" property="version" />
+  </resultMap>
+  
+  <select id="tree" resultType="com.kivi.framework.vo.web.ZTreeNode">
+        select id,pid as pId,simplename as name,
+        (
+	        CASE
+	        WHEN (pId = 0 OR pId IS NULL) THEN
+	        	1
+	        ELSE
+	        	0
+	        END
+        ) as open from ktf_dept
+    </select>
+
+    <select id="list" resultMap="BaseResultMap">
+        select * from ktf_dept
+        <if test="condition != null and condition != ''">
+            where simplename like CONCAT('%',#{condition},'%') or fullname like CONCAT('%',#{condition},'%')
+        </if>
+        order by num ASC
+    </select>
+</mapper>

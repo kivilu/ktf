@@ -670,6 +670,21 @@ public class Convert {
         }
         return longs;
     }
+    
+    public static Long[] toLongArray( boolean isIgnoreConvertError, String... values ) {
+        if (CollectionKit.isEmpty(values)) {
+            return new Long[] {};
+        }
+        final Long[] longs = new Long[values.length];
+        for (int i = 0; i < values.length; i++) {
+            final Long v = toLong(values[i], null);
+            if (null == v && isIgnoreConvertError == false) {
+                throw new ToolBoxException(StrKit.format("Convert [{}] to Long error!", values[i]));
+            }
+            longs[i] = v;
+        }
+        return longs;
+    }
 
     /**
      * 转换为double<br>
@@ -1277,6 +1292,9 @@ public class Convert {
     }
 
     public static <T> T convertObject( Object source, Class<T> clazz ) {
+    	if( source ==null)
+    		return null;
+    	
         T target = ClassKit.newInstance(clazz);
         BeanKit.copyProperties(source, target, true);
 

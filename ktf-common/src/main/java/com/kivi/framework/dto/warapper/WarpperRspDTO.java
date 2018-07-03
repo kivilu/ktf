@@ -20,6 +20,11 @@ public class WarpperRspDTO<T> implements Serializable {
     private String            fromAppName;
 
     /**
+     * 交易流水号
+     */
+    private String            tranSeqId;
+
+    /**
      * 参数
      */
     private Object[]          params;

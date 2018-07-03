@@ -11,6 +11,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.kivi.framework.component.ErrorLoader;
 import com.kivi.framework.db.dao.BaseDao;
 import com.kivi.framework.persist.mapper.KtfErrorCodeMapperEx;
 import com.kivi.framework.persist.model.KtfErrorCode;
@@ -25,6 +26,35 @@ public class ErrorCodeServiceImpl extends BaseDao<KtfErrorCode> implements Error
 
     @Autowired
     private KtfErrorCodeMapperEx ktfErrorCodeMapperEx;
+
+    @Override
+    public KtfErrorCode saveNotNull( KtfErrorCode entity ) {
+
+        KtfErrorCode result = super.saveNotNull(entity);
+        ErrorLoader.me().enableLoad();
+        return result;
+    }
+
+    @Override
+    public int delete( Object key ) {
+        int row = super.delete(key);
+        ErrorLoader.me().enableLoad();
+        return row;
+    }
+
+    @Override
+    public KtfErrorCode updateNotNull( KtfErrorCode entity ) {
+        KtfErrorCode result = super.updateNotNull(entity);
+        ErrorLoader.me().enableLoad();
+        return result;
+    }
+
+    @Override
+    public int updateNotNull( KtfErrorCode condEntity, KtfErrorCode updateEntity ) {
+        int row = super.updateNotNull(condEntity, updateEntity);
+        ErrorLoader.me().enableLoad();
+        return row;
+    }
 
     @Override
     public Map<String, String[]> loadErrorCode() {

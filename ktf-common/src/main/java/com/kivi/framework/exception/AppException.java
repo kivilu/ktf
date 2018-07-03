@@ -1,5 +1,6 @@
 package com.kivi.framework.exception;
 
+import com.kivi.framework.component.ErrorKit;
 import com.kivi.framework.constant.GlobalErrorConst;
 import com.kivi.framework.util.kit.StrKit;
 
@@ -42,7 +43,7 @@ public class AppException extends RuntimeException {
     }
 
     public AppException( String errorCode, String errorTip, Throwable cause ) {
-        this(errorCode, errorCode, errorTip, cause);
+        this(errorCode, ErrorKit.me().getDesc(errorCode), errorTip, cause);
     }
 
     public AppException( String errorCode, String errorMessage, String errorTip, Throwable cause ) {

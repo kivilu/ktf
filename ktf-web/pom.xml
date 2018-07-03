@@ -12,13 +12,13 @@
   		<!-- kivi -->
   		<dependency>
        		<groupId>com.kivi</groupId>
-       		<artifactId>framework-common</artifactId>
+       		<artifactId>ktf-common</artifactId>
        		<version>1.0.0</version>
        		<optional>true</optional>
        	</dependency>
        	<dependency>
        		<groupId>com.kivi</groupId>
-       		<artifactId>framework-db</artifactId>
+       		<artifactId>ktf-db</artifactId>
        		<version>1.0.0</version>
        		<optional>true</optional>
        	</dependency>

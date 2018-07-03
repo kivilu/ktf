@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.kivi.framework.persist.mapper.KtfRoleMapperEx">
+  <resultMap id="BaseResultMap" type="com.kivi.framework.vo.web.RoleVO">
+    <!--
+      WARNING - @mbg.generated
+    -->
+   <id column="ID" jdbcType="NUMERIC" property="id" />
+    <result column="NUM" jdbcType="NUMERIC" property="num" />
+    <result column="PID" jdbcType="NUMERIC" property="pid" />
+    <result column="NAME" jdbcType="VARCHAR" property="name" />
+    <result column="DEPT_ID" jdbcType="NUMERIC" property="deptId" />
+    <result column="TIPS" jdbcType="VARCHAR" property="tips" />
+    <result column="GMT_CREATE" jdbcType="TIMESTAMP" property="gmtCreate" />
+    <result column="GMT_UPDATE" jdbcType="TIMESTAMP" property="gmtUpdate" />
+    <result column="VERSION" jdbcType="NUMERIC" property="version" />
+  </resultMap>
+  
+   <sql id="Base_Column_List">
+        id, num, pid, name, DEPT_ID, tips, version
+    </sql>
+  
+   <select id="listRoleByUserId" parameterType="Long" resultMap="BaseResultMap">
+  	SELECT r.id,r.NUM, r.PID, r.NAME, r.DEPT_ID,r.TIPS, r.CREATE_TIME,r.UPDATE_TIME,r.VERSION
+    FROM KTF_role r, KTF_user_role ur 
+    WHERE ur.user_id= #{id} AND ur.role_Id = r.id
+  </select>
+
+  
+  <select id="listRoleWithSelected" parameterType="Long" resultMap="BaseResultMap">
+    SELECT r.id,r.NUM, r.PID, r.NAME, r.DEPT_ID,r.TIPS, r.CREATE_TIME,r.UPDATE_TIME,r.VERSION,r.checked,
+    (CASE WHEN (SELECT ur.role_id FROM KTF_user_role ur WHERE ur.user_id= #{id} AND ur.role_Id = r.id) THEN 1 ELSE 0 END) AS checked
+    FROM KTF_role r
+  </select>
+  
+  <select id="listRoleNameByIds" parameterType="java.util.List" resultType="java.lang.String">
+  	SELECT name 
+  	FROM KTF_role
+  	WHERE id IN
+  		<foreach collection="list" index="index" item="item" open="(" separator="," close=")">  
+        	#{item}  
+    	</foreach>
+  </select>
+  
+  <select id="selectRoles" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from KTF_role
+        <if test="condition != null">
+            where name like CONCAT('%',#{condition},'%')
+        </if>
+        order by NUM
+    </select>
+    
+    
+    <select id="roleTreeList" resultType="com.kivi.framework.vo.web.ZTreeNode">
+        select id,
+		       pId,
+		       name,
+		       (case
+		         when (pId = 0 or pId is null) then
+		          1
+		         else
+		          0
+		       end) open
+		  from KTF_role
+    </select>
+
+    <select id="roleTreeListByRoleId" resultType="com.kivi.framework.vo.web.ZTreeNode">
+        SELECT r.id "id",
+	       pId "pId",
+	       NAME AS "name",
+	       (CASE
+	         WHEN (pId = 0 OR pId IS NULL) THEN
+	          1
+	         ELSE
+	          0
+	       END) "open",
+	       (CASE
+	         WHEN (r1.ID = 0 OR r1.ID IS NULL) THEN
+	          0
+	         ELSE
+	          1
+	       END) "checked"
+	    FROM KTF_role r
+        LEFT JOIN (SELECT ID FROM KTF_role WHERE ID IN
+	        <foreach collection="list" index="index" item="i" open="(" separator="," close=")">
+	            #{i}
+	        </foreach>) r1 
+	        ON r.ID = r1.ID
+ 		ORDER BY pId, num ASC
+    </select>
+  
+</mapper>

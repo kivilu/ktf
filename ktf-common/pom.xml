@@ -83,6 +83,14 @@
 		    <optional>true</optional>
 		</dependency>
 		
+		<!-- netty -->
+		<dependency>
+		    <groupId>io.netty</groupId>
+		    <artifactId>netty-common</artifactId>
+		    <version>${netty.version}</version>
+		    <optional>true</optional>
+		</dependency>
+		
   </dependencies>
   
 </project>

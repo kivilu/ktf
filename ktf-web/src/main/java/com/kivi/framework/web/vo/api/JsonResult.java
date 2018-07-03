@@ -4,6 +4,7 @@ import java.io.Serializable;
 
 import com.alibaba.fastjson.JSON;
 import com.kivi.framework.component.ErrorKit;
+import com.kivi.framework.component.ErrorLoader;
 import com.kivi.framework.constant.GlobalErrorConst;
 import com.kivi.framework.exception.AppException;
 

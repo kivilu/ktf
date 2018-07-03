@@ -6,7 +6,9 @@
     <version>1.0.0</version>
   </parent>
   <artifactId>ktf-db</artifactId>
-  <name>Spring Boot数据库集成</name>
+  
+  <name>ktf-db</name>
+  <description>Spring Boot数据库集成</description>
   
   <dependencies>
        <!-- kivi -->

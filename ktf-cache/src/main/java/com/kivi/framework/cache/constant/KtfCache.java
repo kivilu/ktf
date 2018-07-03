@@ -2,6 +2,13 @@ package com.kivi.framework.cache.constant;
 
 public interface KtfCache {
 
+    public interface SysParam {
+        public final static String PARAM      = "ktf.sys_param";
+        public final static String PARAM_STR  = "ktf.sys_param.string";
+        public final static String PARAM_INT  = "ktf.sys_param.int";
+        public final static String PARAM_LONG = "ktf.sys_param.long";
+    };
+
     /**
      * ConstantFactory中的缓存
      */
@@ -32,8 +39,6 @@ public interface KtfCache {
     public final static String SHIRO_PASSWORD_RETRY_CACHE = "ktf.shiro_password_retry";
 
     public final static String SHIRO_KEY_PREFIX           = "ktf.shiro.session:";
-
-    public final static String SYS_PARAM                  = "KTF_SYS_PARAM";
 
     // 文件上传缓存
     public final static String UPLOAD_CACHE               = "ktf.upload";

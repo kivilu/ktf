@@ -10,6 +10,7 @@ import org.springframework.core.io.Resource;
 import org.springframework.stereotype.Component;
 
 import com.kivi.framework.exception.ToolBoxException;
+import com.kivi.framework.util.IdWalker;
 
 /**
  * 应用帮助类，主要用于获取SpringBoot应用的相关信息
@@ -25,6 +26,8 @@ public class ApplicationKit {
 
     @Autowired
     private Environment        env;
+
+    private static IdWalker    idWalker = new IdWalker();
 
     public static ApplicationKit me() {
 
@@ -48,6 +51,10 @@ public class ApplicationKit {
     public String getAppcationName() {
         String name = env.getProperty("spring.application.name");
         return name;
+    }
+
+    public long nextId() {
+        return idWalker.nextId();
     }
 
     public Resource[] getResources( String locationPattern ) {

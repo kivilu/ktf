@@ -11,6 +11,12 @@ public class GlobalErrorConst {
     /** 成功 */
     public static final String SUCCESS                = "S0000000";
 
+    /** 未知状态 */
+    public static final String E_UNKNOWN_STATUS       = "W0000000";
+
+    /** 请求超时 */
+    public static final String E_REQ_TIMEOUT          = "W0000001";
+
     /** 用户未认证通过 */
     public static final String E_USER_NOT_AUTH        = "E0000100";
     /** 权限异常 */

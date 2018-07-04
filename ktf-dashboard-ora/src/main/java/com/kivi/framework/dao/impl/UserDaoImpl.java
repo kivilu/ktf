@@ -65,15 +65,39 @@ public class UserDaoImpl extends BaseDao<KtfUser> implements UserDao {
         return super.updateNotNull(entity);
     }
 
-	@Override
-	public UserVO getByAccountWithPwd(String account) {
-		
-		KtfUser query = new KtfUser();
-		query.setAccount(account);
-		
-		KtfUser user = super.selectOne(query);
+    @Override
+    public UserVO getByAccountWithPwd( String account ) {
 
-		return Convert.convertObject(user, UserVO.class);
-	}
+        KtfUser query = new KtfUser();
+        query.setAccount(account);
+
+        KtfUser user = super.selectOne(query);
+
+        return Convert.convertObject(user, UserVO.class);
+    }
+
+    @Override
+    public int save( UserVO user ) {
+        KtfUser entity = Convert.convertObject(user, KtfUser.class);
+        entity.setGmtCreate(DateTimeKit.date());
+        entity.setGmtUpdate(entity.getGmtCreate());
+
+        super.saveNotNull(entity);
+        return 1;
+    }
+
+    @Override
+    public int update( UserVO user ) {
+        KtfUser entity = Convert.convertObject(user, KtfUser.class);
+        entity.setGmtUpdate(DateTimeKit.date());
+
+        super.saveNotNull(entity);
+        return 1;
+    }
+
+    @Override
+    public int delete( Long id ) {
+        return super.delete(id);
+    }
 
 }

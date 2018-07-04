@@ -6,14 +6,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.kivi.framework.constant.enums.KtfDBStatus;
-import com.kivi.framework.dao.TestDatabaseDao;
+import com.kivi.framework.dao.KtfTestDatabaseDao;
 import com.kivi.framework.persist.mapper.KtfTestDBMapper;
 import com.kivi.framework.util.kit.StrKit;
 
 @Repository
-public class TestDatabaseDaoImpl implements TestDatabaseDao {
+public class KtfTestDatabaseDaoImpl implements KtfTestDatabaseDao {
 
-    private static final Logger log = LoggerFactory.getLogger(TestDatabaseDaoImpl.class);
+    private static final Logger log = LoggerFactory.getLogger(KtfTestDatabaseDaoImpl.class);
 
     @Autowired
     private KtfTestDBMapper     ktfTestDBMapper;

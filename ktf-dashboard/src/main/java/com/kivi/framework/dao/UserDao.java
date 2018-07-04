@@ -22,13 +22,13 @@ public interface UserDao {
      * @return
      */
     UserVO getUserByAccount( String account );
-    
-    
+
     /**
      * 根据用户账号查询用户信息和密钥
+     * 
      * @return
      */
-    UserVO getByAccountWithPwd( String account);
+    UserVO getByAccountWithPwd( String account );
 
     /**
      * 根据条件查询用户列表
@@ -42,4 +42,28 @@ public interface UserDao {
      */
     PageInfoKtf<UserVO> listPageUsers( DataScope dataScope, String name,
             String beginTime, String endTime, Long deptid, PageReqVO pageReq );
+
+    /**
+     * 保存用户
+     * 
+     * @param user
+     * @return
+     */
+    int save( UserVO user );
+
+    /**
+     * 更新用户
+     * 
+     * @param user
+     * @return
+     */
+    int update( UserVO user );
+
+    /**
+     * 删除用户
+     * 
+     * @param id
+     * @return
+     */
+    int delete( Long id );
 }

@@ -48,46 +48,47 @@
         </javaClientGenerator>
 
         
-        <table tableName="ktf_%">
+       <!--  <table tableName="ktf_%">
             <generatedKey column="id" sqlStatement="SELECT SEQ_KTF_COMMON.NEXTVAL AS ID FROM DUAL" type="pre"/>
              <columnOverride column="gmt_%" javaType="java.util.Date"
                 jdbcType="TIMESTAMP"></columnOverride>
              <columnOverride column="ID" javaType="java.lang.Long" jdbcType="NUMERIC"></columnOverride>
              <columnOverride column="PID" javaType="java.lang.Long" jdbcType="NUMERIC"></columnOverride>
              <columnOverride column="VERSION" javaType="java.lang.Integer" jdbcType="NUMERIC"></columnOverride>
-             <!-- <columnOverride column="NUM" javaType="java.lang.Integer" jdbcType="NUMERIC"></columnOverride> -->
+             <columnOverride column="NUM" javaType="java.lang.Integer" jdbcType="NUMERIC"></columnOverride>
              <columnOverride column="DEPT_ID" javaType="java.lang.Long" jdbcType="NUMERIC"></columnOverride>
              <columnOverride column="ROLE_ID" javaType="java.lang.Long" jdbcType="NUMERIC"></columnOverride>
              <columnOverride column="USER_ID" javaType="java.lang.Long" jdbcType="NUMERIC"></columnOverride>
              <columnOverride column="RESOURCE_ID" javaType="java.lang.Long" jdbcType="NUMERIC"></columnOverride>
-        </table>
+        </table> -->
         
-        <table tableName="KTF_SERVICE_NAME">
-            <generatedKey column="id" sqlStatement="SELECT TO_CHAR(sysdate,''yyyymmdd'')||SEQ_KTF_COMMON.NEXTVAL AS ID FROM DUAL" type="pre"/>
-             <columnOverride column="gmt_%" javaType="java.util.Date"  jdbcType="TIMESTAMP"></columnOverride>
-             <columnOverride column="PORT" javaType="java.lang.Integer" jdbcType="INTEGER"></columnOverride>
-             <columnOverride column="SLOT_ID" javaType="java.lang.Short" jdbcType="NUMERIC"></columnOverride>    
-        </table>
-        
-        
-        
-        <table tableName="ktf_ktf_notice">
-            <generatedKey column="id" sqlStatement="SELECT TO_CHAR(sysdate,''yyyymmddhh24miss'')||SEQ_ktf_notice.NEXTVAL AS ID FROM DUAL" type="pre"/>
-             <columnOverride column="gmt_%" javaType="java.util.Date"
-                jdbcType="TIMESTAMP"></columnOverride>
-                <columnOverride column="TYPE" javaType="java.lang.Integer" jdbcType="NUMERIC"></columnOverride>
-                <columnOverride column="CREATER" javaType="java.lang.Long" jdbcType="NUMERIC"></columnOverride>
-        </table>
-        
-        <table tableName="ktf_login_log">
-            <generatedKey column="id" sqlStatement="SELECT TO_CHAR(sysdate,''yyyymmddhh24miss'')||SEQ_ktf_login_log.NEXTVAL AS ID FROM DUAL" type="pre"/>
+        <table tableName="KTF_DEPT">
+            <generatedKey column="id" sqlStatement="SELECT SEQ_KTF_COMMON.NEXTVAL AS ID FROM DUAL" type="pre"/>
              <columnOverride column="gmt_%" javaType="java.util.Date"
                 jdbcType="TIMESTAMP"></columnOverride>
         </table>
         
-        <table tableName="ktf_operation_log">
-            <generatedKey column="id" sqlStatement="SELECT TO_CHAR(sysdate,''yyyymmddhh24miss'')||SEQ_KTF_OPT_LOG.NEXTVAL AS ID FROM DUAL" type="pre"/>
-            <columnOverride column="gmt_%" javaType="java.util.Date"
+        <table tableName="KTF_RESOURCE">
+            <generatedKey column="id" sqlStatement="SELECT SEQ_KTF_COMMON.NEXTVAL AS ID FROM DUAL" type="pre"/>
+             <columnOverride column="gmt_%" javaType="java.util.Date"
+                jdbcType="TIMESTAMP"></columnOverride>
+        </table>
+        
+        <table tableName="KTF_ROLE">
+            <generatedKey column="id" sqlStatement="SELECT SEQ_KTF_COMMON.NEXTVAL AS ID FROM DUAL" type="pre"/>
+             <columnOverride column="gmt_%" javaType="java.util.Date"
+                jdbcType="TIMESTAMP"></columnOverride>
+        </table>
+        
+        <table tableName="KTF_ROLE_RESOURCE">
+            <generatedKey column="id" sqlStatement="SELECT SEQ_KTF_COMMON.NEXTVAL AS ID FROM DUAL" type="pre"/>
+             <columnOverride column="gmt_%" javaType="java.util.Date"
+                jdbcType="TIMESTAMP"></columnOverride>
+        </table>
+        
+        <table tableName="KTF_USER_ROLE">
+            <generatedKey column="id" sqlStatement="SELECT SEQ_KTF_COMMON.NEXTVAL AS ID FROM DUAL" type="pre"/>
+             <columnOverride column="gmt_%" javaType="java.util.Date"
                 jdbcType="TIMESTAMP"></columnOverride>
         </table>
         
@@ -97,6 +98,12 @@
                 jdbcType="TIMESTAMP"></columnOverride>
             <columnOverride column="VERSION" javaType="java.lang.Integer" jdbcType="NUMERIC"></columnOverride>
             <columnOverride column="DEPT_ID" javaType="java.lang.Long" jdbcType="NUMERIC"></columnOverride>
+        </table>
+        
+        <table tableName="ktf_login_log">
+            <generatedKey column="id" sqlStatement="SELECT TO_CHAR(sysdate,''yyyymmddhh24miss'')||SEQ_ktf_login_log.NEXTVAL AS ID FROM DUAL" type="pre"/>
+             <columnOverride column="gmt_%" javaType="java.util.Date"
+                jdbcType="TIMESTAMP"></columnOverride>
         </table>
         
         

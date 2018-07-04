@@ -140,5 +140,6 @@
 		<module>ktf-db-oracle</module>
 		<module>ktf-dashboard</module>
 		<module>ktf-dashboard-ora</module>
+		<module>ktf-file-parser</module>
 	</modules>
 </project>

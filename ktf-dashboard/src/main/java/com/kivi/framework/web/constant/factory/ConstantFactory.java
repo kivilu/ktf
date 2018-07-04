@@ -12,7 +12,7 @@ import com.kivi.framework.component.SpringContextHolder;
 import com.kivi.framework.constant.enums.KtfStatus;
 import com.kivi.framework.dao.DeptDao;
 import com.kivi.framework.dao.DictDao;
-import com.kivi.framework.dao.NoticeDao;
+import com.kivi.framework.dao.KtfNoticeDao;
 import com.kivi.framework.dao.ResourceDao;
 import com.kivi.framework.dao.RoleDao;
 import com.kivi.framework.dao.UserDao;
@@ -45,7 +45,7 @@ public class ConstantFactory implements IConstantFactory {
     private UserDao                                  userDao      = SpringContextHolder.getBean(UserDao.class);
     private ResourceDao                              resourceDao  = SpringContextHolder.getBean(ResourceDao.class);
     private DeptDao									 deptDao = SpringContextHolder.getBean(DeptDao.class);
-    private NoticeDao								noticeDao = SpringContextHolder.getBean(NoticeDao.class);
+    private KtfNoticeDao								noticeDao = SpringContextHolder.getBean(KtfNoticeDao.class);
     private DictDao								dictDao = SpringContextHolder.getBean(DictDao.class);
 
     private static ConcurrentHashMap<String, String> dictMap      = new ConcurrentHashMap<>();

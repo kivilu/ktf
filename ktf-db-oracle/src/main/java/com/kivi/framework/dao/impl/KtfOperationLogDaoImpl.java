@@ -9,19 +9,18 @@ import org.springframework.stereotype.Repository;
 
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
-import com.kivi.framework.dao.OperationLogDao;
+import com.kivi.framework.dao.KtfOperationLogDao;
 import com.kivi.framework.db.dao.BaseDao;
 import com.kivi.framework.persist.mapper.KtfOperationLogMapperEx;
 import com.kivi.framework.persist.model.KtfOperationLog;
 import com.kivi.framework.util.Convert;
 import com.kivi.framework.util.kit.BeanKit;
-import com.kivi.framework.vo.KtfNoticeVO;
 import com.kivi.framework.vo.OperationLogVO;
 import com.kivi.framework.vo.page.PageInfoKtf;
 import com.kivi.framework.vo.page.PageReqVO;
 
 @Repository
-public class OperationLogDaoImpl extends BaseDao<KtfOperationLog> implements OperationLogDao {
+public class KtfOperationLogDaoImpl extends BaseDao<KtfOperationLog> implements KtfOperationLogDao {
 
     @Autowired
     private KtfOperationLogMapperEx ktfOperationLogMapperEx;
@@ -42,9 +41,11 @@ public class OperationLogDaoImpl extends BaseDao<KtfOperationLog> implements Ope
 
         List<KtfOperationLog> list = ktfOperationLogMapperEx.getOperationLogs(beginTime, endTime, logName, logType,
                 pageReq.getSort(), pageReq.isAsc());
-        
-        List<OperationLogVO> result = list.stream().map(r->{return Convert.convertObject(r, OperationLogVO.class);})
-        		.collect(Collectors.toList());
+
+        List<OperationLogVO> result = list.stream().map(r-> {
+            return Convert.convertObject(r, OperationLogVO.class);
+        })
+                .collect(Collectors.toList());
 
         return new PageInfoKtf<OperationLogVO>(new PageInfo<>(result));
 
@@ -53,6 +54,12 @@ public class OperationLogDaoImpl extends BaseDao<KtfOperationLog> implements Ope
     @Override
     public void deleteAll() {
         mapper.delete(new KtfOperationLog());
+    }
+
+    @Override
+    public OperationLogVO getByKey( Long id ) {
+        KtfOperationLog entity = super.selectByKey(id);
+        return Convert.convertObject(entity, OperationLogVO.class);
     }
 
 }

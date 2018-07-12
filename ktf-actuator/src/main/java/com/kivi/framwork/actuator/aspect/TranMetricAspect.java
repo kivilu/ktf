@@ -2,8 +2,10 @@ package com.kivi.framwork.actuator.aspect;
 
 import java.lang.reflect.Method;
 
+import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.Signature;
+import org.aspectj.lang.annotation.AfterReturning;
 import org.aspectj.lang.annotation.AfterThrowing;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
@@ -15,6 +17,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.actuate.metrics.CounterService;
 import org.springframework.stereotype.Component;
 
+import com.kivi.framework.constant.GlobalErrorConst;
+import com.kivi.framework.dto.BaseRsp;
 import com.kivi.framework.util.kit.StrKit;
 import com.kivi.framwork.actuator.annotation.TranMetric;
 import com.kivi.framwork.actuator.annotation.enums.MetircType;
@@ -27,94 +31,116 @@ import com.kivi.framwork.actuator.annotation.enums.MetircType;
 @Component
 public class TranMetricAspect {
 
-	private Logger log = LoggerFactory.getLogger(this.getClass());
+    private Logger                  log         = LoggerFactory.getLogger(this.getClass());
 
-	private ThreadLocal<TranMetric> tranMetrics = new ThreadLocal<TranMetric>();
+    private ThreadLocal<TranMetric> tranMetrics = new ThreadLocal<TranMetric>();
 
-	private final CounterService counterService;
+    private final CounterService    counterService;
 
-	@Autowired
-	public TranMetricAspect(CounterService counterService) {
-		this.counterService = counterService;
-	}
+    @Autowired
+    public TranMetricAspect( CounterService counterService ) {
+        this.counterService = counterService;
+    }
 
-	@Pointcut(value = "@annotation(com.kivi.framwork.actuator.annotation.TranMetric)")
-	public void cutMethod() {
-	}
+    @Pointcut( value = "@annotation(com.kivi.framwork.actuator.annotation.TranMetric)" )
+    public void aopMethed() {
+    }
 
-	@Around("cutMethod()")
-	public Object tranMetric(ProceedingJoinPoint point) throws Throwable {
+    @Around( "aopMethed()" )
+    public Object tranMetric( ProceedingJoinPoint point ) throws Throwable {
 
-		// 获取拦截的方法名
-		Signature sig = point.getSignature();
-		MethodSignature msig = null;
-		if (!(sig instanceof MethodSignature)) {
-			throw new IllegalArgumentException("该注解只能用于.方法");
-		}
-		msig = (MethodSignature) sig;
-		Object target = point.getTarget();
+        // 获取拦截的方法名
+        Signature sig = point.getSignature();
+        MethodSignature msig = null;
+        if (!(sig instanceof MethodSignature)) {
+            throw new IllegalArgumentException("该注解只能用于.方法");
+        }
+        msig = (MethodSignature) sig;
+        Object target = point.getTarget();
 
-		log.trace("交易统计，方法：{}.{}", target.getClass().getName(), msig.getName());
+        log.trace("交易统计，方法：{}.{}", target.getClass().getName(), msig.getName());
 
-		Method currentMethod = target.getClass().getMethod(msig.getName(), msig.getParameterTypes());
+        Method currentMethod = target.getClass().getMethod(msig.getName(), msig.getParameterTypes());
 
-		// 获取操作名称
-		TranMetric annotation = currentMethod.getAnnotation(TranMetric.class);
-		tranMetrics.set(annotation);
-		beforeProcess(annotation);
-		// 先执行业务
-		Object result = point.proceed();
-		afterProcess(annotation);
+        // 获取操作名称
+        TranMetric annotation = currentMethod.getAnnotation(TranMetric.class);
+        tranMetrics.set(annotation);
+        beforeProcess(annotation);
+        // 先执行业务
+        Object result = point.proceed();
+        afterProcess(annotation, result);
 
-		return result;
-	}
+        return result;
+    }
 
-	@AfterThrowing(value = "cutMethod()", throwing = "ex")
-	public void tranExceptionMetric(Exception ex) {
-		TranMetric annotation = tranMetrics.get();
-		throwingProcess(annotation);
-	}
+    @AfterThrowing( value = "aopMethed()", throwing = "ex" )
+    public void tranExceptionMetric( Exception ex ) {
+        TranMetric annotation = tranMetrics.get();
+        throwingProcess(annotation);
+    }
 
-	/**
-	 * 函数处理前的度量
-	 * 
-	 * @param annotation
-	 */
-	private void beforeProcess(TranMetric annotation) {
-		MetircType[] types = annotation.type();
+    @AfterReturning( value = "aopMethed()", returning = "returnValue" )
+    public void afterReturningProceed( JoinPoint joinPoint, Object returnValue ) {
 
-		for (MetircType type : types) {
-			counter(annotation.value(), type);
-		}
-	}
+    }
 
-	private void afterProcess(TranMetric annotation) {
-		MetircType[] types = annotation.type();
-		for (MetircType type : types) {
-			if (MetircType.Processing.compareTo(type) == 0)
-				counter(annotation.value(), MetircType.Done);
-		}
-	}
+    /**
+     * 函数处理前的度量
+     * 
+     * @param annotation
+     */
+    private void beforeProcess( TranMetric annotation ) {
+        MetircType[] types = annotation.type();
 
-	private void throwingProcess(TranMetric annotation) {
-		counter(annotation.value(), MetircType.Throwing);
-	}
+        for (MetircType type : types) {
+            counter(annotation.value(), type);
+        }
+    }
 
-	private void counter(String name, MetircType type) {
-		if (MetircType.Total.compareTo(type) == 0) {
-			counterService.increment(StrKit.join(".", name, type.name()));
-		} else if (MetircType.Queued.compareTo(type) == 0) {
-			counterService.increment(StrKit.join(".", name, type.name()));
-		} else if (MetircType.Processing.compareTo(type) == 0) {
-			counterService.increment(StrKit.join(".", name, type.name()));
-			counterService.decrement(StrKit.join(".", name, MetircType.Queued.name()));
-		} else if (MetircType.Done.compareTo(type) == 0) {
-			counterService.increment(StrKit.join(".", name, type.name()));
-			counterService.decrement(StrKit.join(".", name, MetircType.Processing.name()));
-		} else {
-			counterService.increment(StrKit.join(".", name, type.name()));
-		}
+    private void afterProcess( TranMetric annotation, Object result ) {
+        BaseRsp<?> rspObj = null;
+        if (result instanceof BaseRsp<?>) {
+            rspObj = BaseRsp.class.cast(result);
+        }
 
-	}
+        MetircType[] types = annotation.type();
+        for (MetircType type : types) {
+            if (MetircType.Processing.compareTo(type) == 0)
+                counter(annotation.value(), MetircType.Done);
+
+            if (rspObj != null) {
+                if (MetircType.Success.compareTo(type) == 0 && GlobalErrorConst.SUCCESS.equals(rspObj.getRspCode()))
+                    counter(annotation.value(), MetircType.Success);
+
+                if (MetircType.Failure.compareTo(type) == 0 && !GlobalErrorConst.SUCCESS.equals(rspObj.getRspCode()))
+                    counter(annotation.value(), MetircType.Failure);
+            }
+        }
+    }
+
+    private void throwingProcess( TranMetric annotation ) {
+        counter(annotation.value(), MetircType.Throwing);
+    }
+
+    private void counter( String name, MetircType type ) {
+        if (MetircType.Total.compareTo(type) == 0) {
+            counterService.increment(StrKit.join(".", name, type.name()));
+        }
+        else if (MetircType.Queued.compareTo(type) == 0) {
+            counterService.increment(StrKit.join(".", name, type.name()));
+        }
+        else if (MetircType.Processing.compareTo(type) == 0) {
+            counterService.increment(StrKit.join(".", name, type.name()));
+            counterService.decrement(StrKit.join(".", name, MetircType.Queued.name()));
+        }
+        else if (MetircType.Done.compareTo(type) == 0) {
+            counterService.increment(StrKit.join(".", name, type.name()));
+            counterService.decrement(StrKit.join(".", name, MetircType.Processing.name()));
+        }
+        else {
+            counterService.increment(StrKit.join(".", name, type.name()));
+        }
+
+    }
 
 }

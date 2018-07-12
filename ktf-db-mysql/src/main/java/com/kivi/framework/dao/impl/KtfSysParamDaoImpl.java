@@ -51,7 +51,7 @@ public class KtfSysParamDaoImpl extends BaseDao<KtfSysParam> implements KtfSysPa
     }
 
     @Override
-    @Cacheable( value = KtfCache.SysParam.PARAM, key = "#key" )
+    @Cacheable( value = KtfCache.SysParam.PARAM, key = "caches[0].name+'_'+#key" )
     public KtfSysParam selectByKey( Object key ) {
         return super.selectByKey(key);
     }
@@ -81,7 +81,7 @@ public class KtfSysParamDaoImpl extends BaseDao<KtfSysParam> implements KtfSysPa
     }
 
     @Override
-    @Cacheable( value = KtfCache.SysParam.PARAM, key = "#customCode+#bizCode+#paramCode" )
+    @Cacheable( value = KtfCache.SysParam.PARAM, key = "caches[0].name+'_'+#customCode+#bizCode+#paramCode" )
     public KtfSysParamVO getKtfSysParam( String customCode, String bizCode, String paramCode ) {
         KtfSysParam entity = new KtfSysParam();
         entity.setCustomCode(customCode);
@@ -89,13 +89,13 @@ public class KtfSysParamDaoImpl extends BaseDao<KtfSysParam> implements KtfSysPa
         entity.setParamCode(paramCode);
 
         KtfSysParam r = super.selectOne(entity);
-        if (r == null )
+        if (r == null)
             return null;
 
         return Convert.convertObject(r, KtfSysParamVO.class);
     }
 
-    @Cacheable( value = KtfCache.SysParam.PARAM, key = "#customCode+#bizCode" )
+    @Cacheable( value = KtfCache.SysParam.PARAM, key = "caches[0].name+'_'+#customCode+#bizCode" )
     @Override
     public String listKtfSysParamValue( String customCode, String bizCode ) {
         Map<String, Object> map = new HashMap<String, Object>();

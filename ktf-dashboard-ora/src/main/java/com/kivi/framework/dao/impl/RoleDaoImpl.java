@@ -16,12 +16,10 @@ import com.kivi.framework.dao.RoleResourceDao;
 import com.kivi.framework.db.dao.BaseDao;
 import com.kivi.framework.persist.mapper.KtfRoleMapperEx;
 import com.kivi.framework.persist.model.KtfRole;
-import com.kivi.framework.persist.model.KtfRoleResource;
 import com.kivi.framework.util.Convert;
 import com.kivi.framework.util.kit.BeanKit;
 import com.kivi.framework.util.kit.CollectionKit;
 import com.kivi.framework.util.kit.DateTimeKit;
-import com.kivi.framework.util.kit.StrKit;
 import com.kivi.framework.vo.web.RoleVO;
 import com.kivi.framework.vo.web.ZTreeNode;
 
@@ -60,7 +58,7 @@ public class RoleDaoImpl extends BaseDao<KtfRole> implements RoleDao {
         return ktfRoleMapperEx.listRoleNameByIds(Arrays.asList(ids));
     }
 
-    @Cacheable( value = KtfCache.Dashboard.ROLE_VO, key = "#id" )
+    @Cacheable( value = KtfCache.Dashboard.ROLE_VO, key = "caches[0].name+'_'+#id" )
     @Override
     public RoleVO getRoleByPk( Long id ) {
         KtfRole entity = super.selectByKey(id);
@@ -76,7 +74,7 @@ public class RoleDaoImpl extends BaseDao<KtfRole> implements RoleDao {
         return list;
     }
 
-    @CachePut( value = KtfCache.Dashboard.ROLE_VO, key = "#vo.id" )
+    @CachePut( value = KtfCache.Dashboard.ROLE_VO, key = "caches[0].name+'_'+#vo.id" )
     @Override
     public RoleVO saveNotNull( RoleVO vo ) {
         KtfRole entity = new KtfRole();
@@ -89,7 +87,7 @@ public class RoleDaoImpl extends BaseDao<KtfRole> implements RoleDao {
         return vo;
     }
 
-    @CacheEvict( value = KtfCache.Dashboard.ROLE_VO, key = "#vo.id" )
+    @CacheEvict( value = KtfCache.Dashboard.ROLE_VO, key = "caches[0].name+'_'+#vo.id" )
     @Override
     public RoleVO updateNotNull( RoleVO vo ) {
         KtfRole entity = new KtfRole();

@@ -17,9 +17,6 @@ import com.kivi.framework.persist.mapper.KtfDeptMapperEx;
 import com.kivi.framework.persist.model.KtfDept;
 import com.kivi.framework.util.Convert;
 import com.kivi.framework.util.kit.BeanKit;
-import com.kivi.framework.vo.KtfNoticeVO;
-import com.kivi.framework.vo.page.PageInfoKtf;
-import com.kivi.framework.vo.page.PageReqVO;
 import com.kivi.framework.vo.web.DeptVO;
 import com.kivi.framework.vo.web.ZTreeNode;
 
@@ -55,7 +52,7 @@ public class DeptDaoImpl extends BaseDao<KtfDept> implements DeptDao {
         return list;
     }
 
-    @CachePut( value = KtfCache.Dashboard.DEPT, key = "#dept.id" )
+    @CachePut( value = KtfCache.Dashboard.DEPT, key = "caches[0].name+'_'+#dept.id" )
     @Override
     public DeptVO saveNotNull( DeptVO dept ) {
         KtfDept entity = new KtfDept();
@@ -69,7 +66,7 @@ public class DeptDaoImpl extends BaseDao<KtfDept> implements DeptDao {
         return dept;
     }
 
-    @CacheEvict( value = KtfCache.Dashboard.DEPT, key = "#dept.id" )
+    @CacheEvict( value = KtfCache.Dashboard.DEPT, key = "caches[0].name+'_'+#dept.id" )
     @Override
     public DeptVO updateNotNull( DeptVO dept ) {
 
@@ -80,29 +77,32 @@ public class DeptDaoImpl extends BaseDao<KtfDept> implements DeptDao {
         return dept;
     }
 
-    @Cacheable( value = KtfCache.Dashboard.DEPT, key = "#id" )
+    @Cacheable( value = KtfCache.Dashboard.DEPT, key = "caches[0].name+'_'+#id" )
     @Override
     public DeptVO getDept( Long id ) {
         KtfDept entity = super.selectByKey(id);
+        if (entity == null)
+            return null;
 
         DeptVO dept = new DeptVO();
         BeanKit.copyProperties(entity, dept);
         return dept;
     }
 
+    @Override
+    public List<DeptVO> listSubDept( Long pid ) {
 
-	@Override
-	public List<DeptVO> listSubDept(Long pid) {
-		
-		Example example = new Example(KtfDept.class);
+        Example example = new Example(KtfDept.class);
         example.createCriteria().andLike("pids", "%[" + pid + "]%");
 
         List<KtfDept> depts = super.selectByExample(example);
-        
-        List<DeptVO> result = depts.stream().map(r->{return Convert.convertObject(r, DeptVO.class);})
-        		.collect(Collectors.toList());
 
-		return result;
-	}
+        List<DeptVO> result = depts.stream().map(r-> {
+            return Convert.convertObject(r, DeptVO.class);
+        })
+                .collect(Collectors.toList());
+
+        return result;
+    }
 
 }

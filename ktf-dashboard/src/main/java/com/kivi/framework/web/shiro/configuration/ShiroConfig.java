@@ -126,7 +126,8 @@ public class ShiroConfig {
      * Shiro的过滤器链
      */
     @Bean
-    public ShiroFilterFactoryBean shiroFilter( DefaultWebSecurityManager securityManager ) {
+    public ShiroFilterFactoryBean shiroFilter( DefaultWebSecurityManager securityManager,
+            KtfProperties ktfProperties ) {
         ShiroFilterFactoryBean shiroFilter = new ShiroFilterFactoryBean();
         shiroFilter.setSecurityManager(securityManager);
         /**
@@ -153,6 +154,7 @@ public class ShiroConfig {
         hashMap.put("/login", "anon");
         hashMap.put("/global/sessionError", "anon");
         hashMap.put("/kaptcha", "anon");
+        hashMap.putAll(ktfProperties.getShiro().getFilters().getAnonMap("anon"));
         hashMap.put("/**", "user");
         shiroFilter.setFilterChainDefinitionMap(hashMap);
         return shiroFilter;

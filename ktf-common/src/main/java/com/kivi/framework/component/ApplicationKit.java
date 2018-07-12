@@ -1,6 +1,7 @@
 package com.kivi.framework.component;
 
 import java.io.IOException;
+import java.util.HashSet;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.web.ServerProperties;
@@ -10,6 +11,7 @@ import org.springframework.core.io.Resource;
 import org.springframework.stereotype.Component;
 
 import com.kivi.framework.exception.ToolBoxException;
+import com.kivi.framework.service.ISessionNotify;
 import com.kivi.framework.util.IdWalker;
 
 /**
@@ -22,12 +24,14 @@ import com.kivi.framework.util.IdWalker;
 public class ApplicationKit {
 
     @Autowired
-    private ApplicationContext applicationContext;
+    private ApplicationContext             applicationContext;
 
     @Autowired
-    private Environment        env;
+    private Environment                    env;
 
-    private static IdWalker    idWalker = new IdWalker();
+    private static HashSet<ISessionNotify> sessionNotifySet = new HashSet<>();
+
+    private static IdWalker                idWalker         = new IdWalker();
 
     public static ApplicationKit me() {
 
@@ -68,6 +72,14 @@ public class ApplicationKit {
         }
 
         return resources;
+    }
+
+    public void sessionCreated( String id ) {
+
+    }
+
+    public void sessionDestroyed( String id ) {
+        sessionNotifySet.stream().forEach(notify-> notify.onDestroyed(id));
     }
 
 }

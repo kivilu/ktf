@@ -4,7 +4,9 @@ import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.MediaType;
@@ -25,36 +27,18 @@ import springfox.documentation.spring.web.json.Json;
  *
  */
 @Configuration
+@ConditionalOnProperty(
+                        prefix = "spring.http.converters",
+                        name = "preferred-json-mapper",
+                        havingValue = "fastjson",
+                        matchIfMissing = false )
 public class FastJsonHttpMessageConverterConfiguration {
 
     protected FastJsonHttpMessageConverterConfiguration() {
 
     }
 
-    // @Bean
-    public FastJsonHttpMessageConverter4 fastJsonHttpMessageConverter() {
-        FastJsonHttpMessageConverter4 converter = new FastJsonHttpMessageConverter4();
-        FastJsonConfig fastJsonConfig = new FastJsonConfig();
-        fastJsonConfig.setSerializerFeatures(
-                SerializerFeature.PrettyFormat,
-                SerializerFeature.WriteMapNullValue);
-        fastJsonConfig.setDateFormat("yyyy-MM-dd HH:mm:ss");
-        ValueFilter valueFilter = new ValueFilter() {
-            @Override
-            public Object process( Object o, String s, Object o1 ) {
-                if (null == o1) {
-                    o1 = "";
-                }
-                return o1;
-            }
-        };
-        fastJsonConfig.setSerializeFilters(valueFilter);
-        converter.setFastJsonConfig(fastJsonConfig);
-        return converter;
-    }
-
     @Bean
-    // @ConditionalOnMissingBean({ FastJsonHttpMessageConverter4.class })
     public FastJsonHttpMessageConverter4 fastJsonHttpMessageConverter4() {
         FastJsonHttpMessageConverter4 converter = new FastJsonHttpMessageConverter4();
 
@@ -71,6 +55,7 @@ public class FastJsonHttpMessageConverterConfiguration {
         serializeConfig.put(BigInteger.class, ToStringSerializer.instance);
         serializeConfig.put(Long.class, ToStringSerializer.instance);
         serializeConfig.put(Long.TYPE, ToStringSerializer.instance);
+        serializeConfig.put(Map.class, ToStringSerializer.instance);
         serializeConfig.put(Json.class, SwaggerJsonSerializer.instance);
         serializeConfig.put(Date.class, DateCodec.instance);
 

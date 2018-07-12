@@ -6,7 +6,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.kivi.framework.component.SpringContextHolder;
-import com.kivi.framework.db.dao.IDaoEx;
+import com.kivi.framework.db.dao.IDao;
 import com.kivi.framework.log.constant.enums.LogStatus;
 import com.kivi.framework.log.constant.enums.LogType;
 import com.kivi.framework.util.ToolUtil;
@@ -23,9 +23,9 @@ public class LogTaskFactory {
 
     private static Logger logger          = LoggerFactory.getLogger(LogTaskFactory.class);
     @SuppressWarnings( "rawtypes" )
-    private static IDaoEx loginLogDao     = SpringContextHolder.getBean("loginLogDaoImpl");
+    private static IDao   loginLogDao     = SpringContextHolder.getBean("loginLogDaoImpl");
     @SuppressWarnings( "rawtypes" )
-    private static IDaoEx operationLogDao = SpringContextHolder.getBean("operationLogDaoImpl");
+    private static IDao   operationLogDao = SpringContextHolder.getBean("ktfOperationLogDaoImpl");
 
     public static TimerTask loginLog( final String userId, final String ip ) {
         return new TimerTask() {

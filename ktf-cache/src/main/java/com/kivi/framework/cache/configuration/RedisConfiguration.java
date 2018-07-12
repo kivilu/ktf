@@ -29,6 +29,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.kivi.framework.cache.redis.factory.KtfRedisCacheManager;
 import com.kivi.framework.cache.redis.serializer.FastJson2JsonRedisSerializer;
 import com.kivi.framework.cache.redis.serializer.Fst2JsonRedisSerializer;
+import com.kivi.framework.cache.redis.serializer.KtfStringRedisSerializer;
 import com.kivi.framework.properties.KtfProperties;
 
 @Configuration
@@ -121,7 +122,11 @@ public class RedisConfiguration extends CachingConfigurerSupport {
         om.setVisibility(PropertyAccessor.ALL, JsonAutoDetect.Visibility.ANY);
         om.enableDefaultTyping(ObjectMapper.DefaultTyping.NON_FINAL);
         jackson2JsonRedisSerializer.setObjectMapper(om);
-        template.setKeySerializer(template.getKeySerializer());
+
+        KtfStringRedisSerializer keySerializer = new KtfStringRedisSerializer();
+
+        // template.setKeySerializer(template.getKeySerializer());
+        template.setKeySerializer(keySerializer);
         template.setValueSerializer(jackson2JsonRedisSerializer);
 
         template.setDefaultSerializer(jackson2JsonRedisSerializer);
@@ -136,7 +141,10 @@ public class RedisConfiguration extends CachingConfigurerSupport {
     private void setFastJson2JsonRedisSerializer( RedisTemplate<?, ?> template ) {
         FastJson2JsonRedisSerializer<Object> fastJson2JsonRedisSerializer = new FastJson2JsonRedisSerializer<>(
                 Object.class);
-        template.setKeySerializer(template.getKeySerializer());
+
+        KtfStringRedisSerializer keySerializer = new KtfStringRedisSerializer();
+        // template.setKeySerializer(template.getKeySerializer());
+        template.setKeySerializer(keySerializer);
         template.setValueSerializer(fastJson2JsonRedisSerializer);
 
         template.setDefaultSerializer(fastJson2JsonRedisSerializer);
@@ -151,7 +159,9 @@ public class RedisConfiguration extends CachingConfigurerSupport {
     private void setFst2JsonRedisSerializer( RedisTemplate<?, ?> template ) {
         Fst2JsonRedisSerializer<Object> fst2JsonRedisSerializer = new Fst2JsonRedisSerializer<>(Object.class);
 
-        template.setKeySerializer(template.getKeySerializer());
+        KtfStringRedisSerializer keySerializer = new KtfStringRedisSerializer();
+        // template.setKeySerializer(template.getKeySerializer());
+        template.setKeySerializer(keySerializer);
         template.setValueSerializer(fst2JsonRedisSerializer);
         template.setDefaultSerializer(fst2JsonRedisSerializer);
         template.setHashKeySerializer(template.getKeySerializer());
@@ -161,7 +171,6 @@ public class RedisConfiguration extends CachingConfigurerSupport {
     /**
      * 自定义key. 此方法将会根据类名+方法名+所有参数的值生成唯一的一个key
      */
-    @Bean
     @Override
     public KeyGenerator keyGenerator() {
         log.trace("RedisConfiguration.keyGenerator()");

@@ -101,9 +101,9 @@ public class KftWebMvcConfigurer extends WebMvcConfigurerAdapter {
     @Bean
     public JdkRegexpMethodPointcut druidStatPointcut() {
         JdkRegexpMethodPointcut druidStatPointcut = new JdkRegexpMethodPointcut();
-        String patterns = "com.stylefeng.guns.modular.*.service.*";
+        String pattern1 = "com.kivi.*.*.service.*";
         // 可以set多个
-        druidStatPointcut.setPatterns(patterns);
+        druidStatPointcut.setPatterns(pattern1);
         return druidStatPointcut;
     }
 

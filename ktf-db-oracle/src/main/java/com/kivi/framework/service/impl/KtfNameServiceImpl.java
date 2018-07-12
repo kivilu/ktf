@@ -41,8 +41,8 @@ import com.kivi.framework.util.kit.StrKit;
  * @author Eric
  *
  */
-//@Service( "ktfNameService" )
-//@DependsOn( value = { "springContextHolder", "tk.mybatis.mapper.autoconfigure.MapperAutoConfiguration" } )
+@Service( "ktfNameService" )
+@DependsOn( value = { "springContextHolder", "tk.mybatis.mapper.autoconfigure.MapperAutoConfiguration" } )
 public class KtfNameServiceImpl extends BaseDao<KtfServiceName> implements KtfNameService {
 
     private static final Logger           log                  = LoggerFactory.getLogger(KtfNameServiceImpl.class);

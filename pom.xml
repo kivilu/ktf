@@ -141,5 +141,7 @@
 		<module>ktf-dashboard</module>
 		<module>ktf-dashboard-ora</module>
 		<module>ktf-file-parser</module>
+		<module>ktf-echarts</module>
+		<module>ktf-admin</module>
 	</modules>
 </project>

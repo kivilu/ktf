@@ -15,7 +15,7 @@ import com.kivi.framework.vo.KtfSysParamVO;
 @Service
 public class KtfSysParamServiceImpl extends BaseDao<KtfSysParam> implements KtfSysParamService {
 
-    @Cacheable( value = KtfCache.SysParam.PARAM_STR, key = "#customCode+#bizCode+#paramCode" )
+    @Cacheable( value = KtfCache.SysParam.PARAM_STR, key = "caches[0].name+'_'+#customCode+#bizCode+#paramCode" )
     @Override
     public String getParamVal( String customCode, String bizCode, String paramCode ) {
         KtfSysParam entity = new KtfSysParam();
@@ -30,14 +30,14 @@ public class KtfSysParamServiceImpl extends BaseDao<KtfSysParam> implements KtfS
         return result.getParamValue();
     }
 
-    @Cacheable( value = KtfCache.SysParam.PARAM_INT, key = "#customCode+#bizCode+#paramCode" )
+    @Cacheable( value = KtfCache.SysParam.PARAM_INT, key = "caches[0].name+'_'+#customCode+#bizCode+#paramCode" )
     @Override
     public Integer getParamValInt( String customCode, String bizCode, String paramCode ) {
         String val = this.getParamVal(customCode, bizCode, paramCode);
         return Integer.parseInt(val);
     }
 
-    @Cacheable( value = KtfCache.SysParam.PARAM_LONG, key = "#customCode+#bizCode+#paramCode" )
+    @Cacheable( value = KtfCache.SysParam.PARAM_LONG, key = "caches[0].name+'_'+#customCode+#bizCode+#paramCode" )
     @Override
     public Long getParamValLong( String customCode, String bizCode, String paramCode ) {
         String val = this.getParamVal(customCode, bizCode, paramCode);

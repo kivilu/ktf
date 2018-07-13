@@ -13,6 +13,7 @@ import javax.annotation.PostConstruct;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.context.annotation.DependsOn;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.support.EncodedResource;
 import org.springframework.core.io.support.PropertiesLoaderUtils;
@@ -50,6 +51,8 @@ import com.kivi.framework.util.kit.StrKit;
  *
  */
 @Component( "errorKit" )
+@DependsOn(
+            value = { "springContextHolder" } )
 public class ErrorKit {
 
     private static final Logger                    log              = LoggerFactory.getLogger(ErrorKit.class);

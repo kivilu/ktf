@@ -106,7 +106,7 @@
 		    <artifactId>jodd-bean</artifactId>
 		    <version>${jodd.version}</version>
 		</dependency>
-        
+                
 	</dependencies>
 
 	<build>

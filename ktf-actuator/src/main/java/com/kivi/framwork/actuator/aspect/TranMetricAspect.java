@@ -15,12 +15,14 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.actuate.metrics.CounterService;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
 
+import com.alibaba.fastjson.JSON;
 import com.kivi.framework.constant.GlobalErrorConst;
-import com.kivi.framework.dto.BaseRsp;
 import com.kivi.framework.util.kit.StrKit;
 import com.kivi.framwork.actuator.annotation.TranMetric;
+import com.kivi.framwork.actuator.annotation.enums.MetircStep;
 import com.kivi.framwork.actuator.annotation.enums.MetircType;
 
 /**
@@ -90,39 +92,42 @@ public class TranMetricAspect {
      * @param annotation
      */
     private void beforeProcess( TranMetric annotation ) {
-        MetircType[] types = annotation.type();
+        MetircStep step = annotation.step();
 
-        for (MetircType type : types) {
-            counter(annotation.value(), type);
+        if (MetircStep.OneStep.ordinal() == step.ordinal()) {
+            counter(annotation.value(), MetircType.Total);
+            counter(annotation.value(), MetircType.Processing, false);
+        }
+        else if (MetircStep.Before.ordinal() == step.ordinal()) {
+            counter(annotation.value(), MetircType.Total);
+            counter(annotation.value(), MetircType.Queued);
+        }
+        else if (MetircStep.Doing.ordinal() == step.ordinal()) {
+            counter(annotation.value(), MetircType.Processing);
         }
     }
 
     private void afterProcess( TranMetric annotation, Object result ) {
-        BaseRsp<?> rspObj = null;
-        if (result instanceof BaseRsp<?>) {
-            rspObj = BaseRsp.class.cast(result);
-        }
-
-        MetircType[] types = annotation.type();
-        for (MetircType type : types) {
-            if (MetircType.Processing.compareTo(type) == 0)
-                counter(annotation.value(), MetircType.Done);
-
-            if (rspObj != null) {
-                if (MetircType.Success.compareTo(type) == 0 && GlobalErrorConst.SUCCESS.equals(rspObj.getRspCode()))
-                    counter(annotation.value(), MetircType.Success);
-
-                if (MetircType.Failure.compareTo(type) == 0 && !GlobalErrorConst.SUCCESS.equals(rspObj.getRspCode()))
-                    counter(annotation.value(), MetircType.Failure);
+        MetircStep step = annotation.step();
+        if (MetircStep.OneStep.ordinal() == step.ordinal() || MetircStep.Before.ordinal() == step.ordinal()) {
+            String rspJson = null;
+            if (result instanceof ResponseEntity<?>) {
+                Object obj = ((ResponseEntity<?>) result).getBody();
+                rspJson = JSON.toJSONString(obj);
             }
+            if (rspJson == null || StrKit.containsIgnoreCase(rspJson, GlobalErrorConst.SUCCESS))
+                counter(annotation.value(), MetircType.Success);
+            else
+                counter(annotation.value(), MetircType.Failure);
         }
+
     }
 
     private void throwingProcess( TranMetric annotation ) {
         counter(annotation.value(), MetircType.Throwing);
     }
 
-    private void counter( String name, MetircType type ) {
+    private void counter( String name, MetircType type, boolean isQueued ) {
         if (MetircType.Total.compareTo(type) == 0) {
             counterService.increment(StrKit.join(".", name, type.name()));
         }
@@ -131,16 +136,28 @@ public class TranMetricAspect {
         }
         else if (MetircType.Processing.compareTo(type) == 0) {
             counterService.increment(StrKit.join(".", name, type.name()));
-            counterService.decrement(StrKit.join(".", name, MetircType.Queued.name()));
+            if (isQueued)
+                counterService.decrement(StrKit.join(".", name, MetircType.Queued.name()));
         }
-        else if (MetircType.Done.compareTo(type) == 0) {
+        else if (MetircType.Success.compareTo(type) == 0) {
+            counterService.increment(StrKit.join(".", name, type.name()));
+            counterService.decrement(StrKit.join(".", name, MetircType.Processing.name()));
+
+        }
+        else if (MetircType.Failure.compareTo(type) == 0) {
+            counterService.increment(StrKit.join(".", name, type.name()));
+            counterService.decrement(StrKit.join(".", name, MetircType.Processing.name()));
+
+        }
+        else if (MetircType.Throwing.compareTo(type) == 0) {
             counterService.increment(StrKit.join(".", name, type.name()));
             counterService.decrement(StrKit.join(".", name, MetircType.Processing.name()));
         }
-        else {
-            counterService.increment(StrKit.join(".", name, type.name()));
-        }
 
+    }
+
+    private void counter( String name, MetircType type ) {
+        counter(name, type, true);
     }
 
 }

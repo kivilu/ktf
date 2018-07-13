@@ -9,7 +9,7 @@ import lombok.Setter;
 @Setter
 @Getter
 @Configuration
-@ConfigurationProperties( prefix = "spring.task.pool" )
+@ConfigurationProperties( prefix = "ktf.task.pool" )
 public class TaskThreadPoolConfig {
     private int corePoolSize            = 7;
     private int maxPoolSize             = 42;

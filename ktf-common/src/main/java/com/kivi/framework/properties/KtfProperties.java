@@ -18,7 +18,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @Configuration
-@ConfigurationProperties( prefix = "framework" )
+@ConfigurationProperties( prefix = "ktf" )
 public class KtfProperties {
     private Common  common;
     private Cache   cache;

@@ -7,8 +7,6 @@ public enum MetircType {
     Queued,
     /** 处理中数量 */
     Processing,
-    /** 处理完成数量 */
-    Done,
     /** 异常数量 */
     Throwing,
     /** 成功交易数量 */

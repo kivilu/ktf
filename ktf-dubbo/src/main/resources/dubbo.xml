@@ -25,6 +25,6 @@
           dispather="all" serialization="kryo"/> 
     
     <import resource="classpath:dubbo/dubbo-provider-*.xml"/>
-    <import resource="classpath:dubbo/dubbo-consumer-*.xml"/>
+    <import resource="classpath*:dubbo/dubbo-consumer-*.xml"/>
     
 </beans>

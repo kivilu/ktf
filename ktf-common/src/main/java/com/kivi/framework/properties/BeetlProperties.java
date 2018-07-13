@@ -21,13 +21,13 @@ import lombok.Setter;
 @Configuration
 @ConfigurationProperties( prefix = BeetlProperties.BEETLCONF_PREFIX )
 @ConditionalOnProperty(
-                        prefix = "framework.beetl",
+                        prefix = "ktf.beetl",
                         name = "enabled",
                         havingValue = "true",
                         matchIfMissing = false )
 public class BeetlProperties {
 
-    public static final String BEETLCONF_PREFIX = "framework.beetl";
+    public static final String BEETLCONF_PREFIX = "ktf.beetl";
 
     private String             delimiterStatementStart;
 

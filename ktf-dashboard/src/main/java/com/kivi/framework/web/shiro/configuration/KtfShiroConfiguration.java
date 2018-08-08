@@ -38,8 +38,8 @@ import org.springframework.context.annotation.DependsOn;
 import org.springframework.context.annotation.Scope;
 import org.springframework.data.redis.core.RedisTemplate;
 
+import com.kivi.framework.component.KtfProperties;
 import com.kivi.framework.constant.enums.shiro.TokenAuthType;
-import com.kivi.framework.properties.KtfProperties;
 import com.kivi.framework.web.shiro.cache.ShiroRedisSessionDAO;
 import com.kivi.framework.web.shiro.factory.ShiroFactroy;
 import com.kivi.framework.web.shiro.filter.AdminFormAuthFilter;

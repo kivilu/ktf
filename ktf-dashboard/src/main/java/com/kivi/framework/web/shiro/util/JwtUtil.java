@@ -7,7 +7,7 @@ import javax.crypto.spec.SecretKeySpec;
 
 import org.springframework.util.Base64Utils;
 
-import com.kivi.framework.properties.KtfProperties;
+import com.kivi.framework.component.KtfProperties;
 
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.JwtBuilder;

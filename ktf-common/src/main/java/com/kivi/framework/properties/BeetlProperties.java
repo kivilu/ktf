@@ -18,16 +18,16 @@ import lombok.Setter;
  */
 @Setter
 @Getter
-@Configuration
-@ConfigurationProperties( prefix = BeetlProperties.BEETLCONF_PREFIX )
+@Configuration( BeetlProperties.BEAN_NAME )
+@ConfigurationProperties( prefix = BeetlProperties.PREFIX )
 @ConditionalOnProperty(
-                        prefix = "ktf.beetl",
+                        prefix = BeetlProperties.PREFIX,
                         name = "enabled",
                         havingValue = "true",
                         matchIfMissing = false )
-public class BeetlProperties {
-
-    public static final String BEETLCONF_PREFIX = "ktf.beetl";
+public class BeetlProperties implements IKtfProperties {
+    public static final String BEAN_NAME = "beetlProperties";
+    public static final String PREFIX    = "ktf.beetl";
 
     private String             delimiterStatementStart;
 
@@ -66,6 +66,23 @@ public class BeetlProperties {
             properties.setProperty("RESOURCE.autoCheck", resourceAutoCheck);
         }
         return properties;
+    }
+
+    @Override
+    public String prefix() {
+        return PREFIX;
+    }
+
+    @Override
+    public String toString() {
+        return "BeetlProperties [delimiterStatementStart=" + delimiterStatementStart + ", delimiterStatementEnd=" +
+                delimiterStatementEnd + ", resourceTagroot=" + resourceTagroot + ", resourceTagsuffix=" +
+                resourceTagsuffix + ", resourceAutoCheck=" + resourceAutoCheck + ", prefix=" + prefix + "]";
+    }
+
+    @Override
+    public String beanName() {
+        return BEAN_NAME;
     }
 
 }

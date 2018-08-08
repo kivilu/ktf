@@ -30,7 +30,7 @@ import com.kivi.framework.cache.redis.factory.KtfRedisCacheManager;
 import com.kivi.framework.cache.redis.serializer.FastJson2JsonRedisSerializer;
 import com.kivi.framework.cache.redis.serializer.Fst2JsonRedisSerializer;
 import com.kivi.framework.cache.redis.serializer.KtfStringRedisSerializer;
-import com.kivi.framework.properties.KtfProperties;
+import com.kivi.framework.component.KtfProperties;
 
 @Configuration
 @Import( CacheProperties.class )

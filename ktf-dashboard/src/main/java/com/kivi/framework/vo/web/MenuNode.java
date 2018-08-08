@@ -5,10 +5,10 @@ import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 
+import com.kivi.framework.component.KtfProperties;
 import com.kivi.framework.component.SpringContextHolder;
 import com.kivi.framework.constant.Constant;
 import com.kivi.framework.constant.state.IsMenu;
-import com.kivi.framework.properties.KtfProperties;
 
 /**
  */

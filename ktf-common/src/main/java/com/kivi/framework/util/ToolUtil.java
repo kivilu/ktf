@@ -18,8 +18,8 @@ import java.util.Map.Entry;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.kivi.framework.component.KtfProperties;
 import com.kivi.framework.component.SpringContextHolder;
-import com.kivi.framework.properties.KtfProperties;
 import com.kivi.framework.util.kit.CollectionKit;
 import com.kivi.framework.util.kit.DateTimeKit;
 import com.kivi.framework.util.kit.ObjectKit;

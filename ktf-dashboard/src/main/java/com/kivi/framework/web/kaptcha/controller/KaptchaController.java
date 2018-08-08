@@ -19,7 +19,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.google.code.kaptcha.Constants;
 import com.google.code.kaptcha.Producer;
-import com.kivi.framework.properties.KtfProperties;
+import com.kivi.framework.component.KtfProperties;
 import com.kivi.framework.util.FileUtil;
 
 /**

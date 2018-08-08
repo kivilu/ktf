@@ -9,20 +9,19 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.scheduling.annotation.AsyncConfigurer;
 import org.springframework.scheduling.annotation.EnableAsync;
 
-import com.kivi.framework.properties.TaskThreadPoolConfig;
+import com.ctrip.framework.apollo.spring.annotation.EnableApolloConfig;
+import com.kivi.framework.properties.KtfTaskPoolProperties;
 import com.kivi.framework.task.KtfAsyncUncaughtExceptionHandler;
 import com.kivi.framework.task.KtfThreadPoolTaskExecutor;
 import com.kivi.framework.task.RejectedPolicy;
 
 @Configuration
 @EnableAsync
+@EnableApolloConfig
 public class KtfConfiguration implements AsyncConfigurer {
 
-    // private static final Logger log =
-    // LoggerFactory.getLogger(KtfConfiguration.class);
-
     @Autowired
-    private TaskThreadPoolConfig config;
+    private KtfTaskPoolProperties config;
 
     @Bean( "ktfThreadPool" )
     @Override

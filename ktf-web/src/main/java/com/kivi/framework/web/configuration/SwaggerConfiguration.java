@@ -13,7 +13,7 @@ import org.springframework.web.context.request.async.DeferredResult;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 
-import com.kivi.framework.properties.KtfProperties;
+import com.kivi.framework.component.KtfProperties;
 import com.kivi.framework.util.kit.CollectionKit;
 import com.kivi.framework.web.constant.WebConst;
 

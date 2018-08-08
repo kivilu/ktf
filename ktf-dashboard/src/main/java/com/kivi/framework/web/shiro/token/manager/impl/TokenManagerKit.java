@@ -5,9 +5,9 @@ import javax.annotation.PostConstruct;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import com.kivi.framework.component.KtfProperties;
 import com.kivi.framework.component.SpringContextHolder;
 import com.kivi.framework.constant.enums.shiro.TokenAuthType;
-import com.kivi.framework.properties.KtfProperties;
 import com.kivi.framework.util.kit.DateTimeKit;
 import com.kivi.framework.web.shiro.token.StatelessToken;
 import com.kivi.framework.web.shiro.token.helper.TokenCacheFactory;

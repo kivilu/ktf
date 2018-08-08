@@ -23,13 +23,13 @@ import org.springframework.stereotype.Service;
 
 import com.alibaba.fastjson.JSON;
 import com.kivi.framework.component.ApplicationKit;
+import com.kivi.framework.component.KtfProperties;
 import com.kivi.framework.constant.GlobalErrorConst;
 import com.kivi.framework.db.dao.BaseDao;
 import com.kivi.framework.enums.KtfServiceStatus;
 import com.kivi.framework.exception.AppException;
 import com.kivi.framework.persist.mapper.KtfServiceNameMapperEx;
 import com.kivi.framework.persist.model.KtfServiceName;
-import com.kivi.framework.properties.KtfProperties;
 import com.kivi.framework.service.KtfNameService;
 import com.kivi.framework.util.CommonUtils;
 import com.kivi.framework.util.kit.DateTimeKit;

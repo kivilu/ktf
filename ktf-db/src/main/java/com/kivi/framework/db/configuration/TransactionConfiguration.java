@@ -17,7 +17,7 @@ import org.springframework.transaction.interceptor.TransactionAttribute;
 import org.springframework.transaction.interceptor.TransactionAttributeSource;
 import org.springframework.transaction.interceptor.TransactionInterceptor;
 
-import com.kivi.framework.properties.KtfProperties;
+import com.kivi.framework.component.KtfProperties;
 import com.kivi.framework.util.kit.StrKit;
 
 @Configuration

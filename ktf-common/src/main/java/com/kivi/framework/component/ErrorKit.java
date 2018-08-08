@@ -21,7 +21,6 @@ import org.springframework.stereotype.Component;
 
 import com.kivi.framework.constant.Constant;
 import com.kivi.framework.constant.GlobalErrorConst;
-import com.kivi.framework.properties.KtfProperties;
 import com.kivi.framework.util.kit.CollectionKit;
 import com.kivi.framework.util.kit.StrKit;
 

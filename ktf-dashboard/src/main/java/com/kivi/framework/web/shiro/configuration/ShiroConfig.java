@@ -22,7 +22,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.DependsOn;
 
-import com.kivi.framework.properties.KtfProperties;
+import com.kivi.framework.component.KtfProperties;
 import com.kivi.framework.web.shiro.factory.ShiroFactroy;
 import com.kivi.framework.web.shiro.realm.ShiroDbRealm;
 

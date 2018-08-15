@@ -2,8 +2,7 @@ package com.kivi.framework.dto.warapper;
 
 import java.io.Serializable;
 
-import lombok.Getter;
-import lombok.Setter;
+import lombok.Data;
 
 /**
  * DTO包装类
@@ -11,8 +10,7 @@ import lombok.Setter;
  * @author Eric
  *
  */
-@Setter
-@Getter
+@Data
 public class WarpperDTO<T, K> implements Serializable {
     /**
      * 
@@ -38,6 +36,11 @@ public class WarpperDTO<T, K> implements Serializable {
      * 异步响应对象
      */
     private K                 deferred;
+
+    /**
+     * 参数
+     */
+    private String[]          params;
 
     /**
      * DTO

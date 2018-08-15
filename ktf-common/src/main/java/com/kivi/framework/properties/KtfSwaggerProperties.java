@@ -6,11 +6,9 @@ import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Configuration;
 
-import lombok.Getter;
-import lombok.Setter;
+import lombok.Data;
 
-@Setter
-@Getter
+@Data
 @Configuration( KtfSwaggerProperties.BEAN_NAME )
 @ConfigurationProperties( prefix = KtfSwaggerProperties.PREFIX )
 @ConditionalOnProperty(
@@ -28,6 +26,8 @@ public class KtfSwaggerProperties implements IKtfProperties {
     private String             version              = "1.0.0";
     private String             termsOfServiceUrl;
     private Boolean            authorizationEnabled = true;
+    private String             license;
+    private String             licenseUrl;
 
     public String getTitleUTF8() {
         String utf8 = title;
@@ -53,13 +53,6 @@ public class KtfSwaggerProperties implements IKtfProperties {
         }
 
         return utf8;
-    }
-
-    @Override
-    public String toString() {
-        return "KtfSwaggerProperties [enabled=" + enabled + ", title=" + title + ", description=" + description +
-                ", version=" + version + ", termsOfServiceUrl=" + termsOfServiceUrl + ", authorizationEnabled=" +
-                authorizationEnabled + "]";
     }
 
     @Override

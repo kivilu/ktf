@@ -8,11 +8,9 @@ import org.hibernate.validator.constraints.NotEmpty;
 
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.Data;
 
-@Setter
-@Getter
+@Data
 @ApiModel( value = "BaseReq", description = "接口请求基础Bean" )
 public class BaseReq<T> implements Serializable {
 

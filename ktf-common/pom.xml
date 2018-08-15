@@ -57,7 +57,6 @@
 			<groupId>io.springfox</groupId>
 			<artifactId>springfox-swagger2</artifactId>
 			<version>${springfox-swagger2-version}</version>
-			<optional>true</optional>
 		</dependency>
 		<!-- /swagger -->
 		

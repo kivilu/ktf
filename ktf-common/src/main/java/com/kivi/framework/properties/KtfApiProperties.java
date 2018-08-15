@@ -4,11 +4,9 @@ import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Configuration;
 
-import lombok.Getter;
-import lombok.Setter;
+import lombok.Data;
 
-@Setter
-@Getter
+@Data
 @Configuration( KtfApiProperties.BEAN_NAME )
 @ConfigurationProperties( prefix = KtfApiProperties.PREFIX )
 @ConditionalOnProperty(
@@ -20,12 +18,15 @@ public class KtfApiProperties implements IKtfProperties {
     public static final String BEAN_NAME = "ktfApiProperties";
     public static final String PREFIX    = "ktf.api";
 
-    private Long               timeout   = 30000L;
+    /**
+     * KTF-API配置是否启用，true:启用，false：关闭
+     */
+    private Boolean            enabled;
 
-    @Override
-    public String toString() {
-        return "Api [timeout=" + timeout + "]";
-    }
+    /**
+     * 超时时间
+     */
+    private Long               timeout   = 30000L;
 
     @Override
     public String prefix() {

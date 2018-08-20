@@ -16,7 +16,7 @@ import com.kivi.framework.web.beetl.BeetlConfiguration;
  */
 @Configuration
 @ConditionalOnProperty(
-                        prefix = "framework.beetl",
+                        prefix = "ktf.beetl",
                         name = "enabled",
                         havingValue = "true",
                         matchIfMissing = false )

@@ -32,7 +32,7 @@ import com.kivi.framework.web.shiro.realm.ShiroDbRealm;
  */
 @Configuration
 @ConditionalOnProperty(
-                        prefix = "framework.shiro",
+                        prefix = "ktf.shiro",
                         name = "enabled",
                         havingValue = "true",
                         matchIfMissing = false )

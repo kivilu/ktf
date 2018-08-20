@@ -20,56 +20,15 @@ public class KtfDubboProperties implements IKtfProperties {
     public static final String BEAN_NAME = "ktfDubboProperties";
     public static final String PREFIX    = "ktf.dubbo";
 
-    private Application        application;
-    private Registry           registry;
-    private Protocol           protocol;
-
-    @Getter
-    @Setter
-    public static class Application {
-        private String name;
-
-        @Override
-        public String toString() {
-            return "Application [name=" + name + "]";
-        }
-
-    }
-
-    @Getter
-    @Setter
-    public static class Registry {
-        private String address;
-        private String protocol;
-
-        @Override
-        public String toString() {
-            return "Registry [address=" + address + ", protocol=" + protocol + "]";
-        }
-
-    }
-
-    @Getter
-    @Setter
-    public static class Protocol {
-        private String  name;
-        private Integer port;
-        private String  threadpool;
-        private Integer threads;
-
-        @Override
-        public String toString() {
-            return "Protocol [name=" + name + ", port=" + port + ", threadpool=" + threadpool + ", threads=" + threads +
-                    "]";
-        }
-
-    }
-
-    @Override
-    public String toString() {
-        return "KtfDubboProperties [application=" + application.toString() + ", registry=" + registry.toString() +
-                ", protocol=" + protocol.toString() + "]";
-    }
+    private Boolean            enabled;
+    /**
+     * Dubbo Service 扫描包，多个包名直接采用“,”分割
+     */
+    private String             scanBasePackages;
+    /**
+     * dubbo启用Kryo和FST序列化工具时注册的类，多个类名之间使用“,”分割
+     */
+    private String             serializeClasses;
 
     @Override
     public String prefix() {

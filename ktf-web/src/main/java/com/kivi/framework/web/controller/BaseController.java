@@ -14,11 +14,11 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 
+import com.kivi.framework.component.ApplicationKit;
 import com.kivi.framework.component.KtfProperties;
 import com.kivi.framework.component.SpringContextHolder;
 import com.kivi.framework.constant.enums.Order;
 import com.kivi.framework.service.ITimeoutService;
-import com.kivi.framework.service.KtfNameService;
 import com.kivi.framework.util.FileUtil;
 import com.kivi.framework.util.kit.StrKit;
 import com.kivi.framework.vo.page.PageInfoBT;
@@ -146,8 +146,7 @@ public class BaseController {
     }
 
     protected String msgId() {
-        KtfNameService ktfNameService = SpringContextHolder.getBean(KtfNameService.class);
-        return ktfNameService.getUniqueqId();
+        return String.valueOf(ApplicationKit.me().nextId());
     }
 
     protected KtfDeferredResult newDeferredResult() {

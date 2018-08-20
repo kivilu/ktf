@@ -24,7 +24,7 @@ import com.kivi.framework.cache.redis.redission.RedisSet;
 import com.kivi.framework.constant.KiviFramework;
 
 @Configuration
-@ConditionalOnProperty(prefix = "framework.redisson", name = {
+@ConditionalOnProperty(prefix = "ktf.redisson", name = {
 		"enabled" }, havingValue = "true", matchIfMissing = false)
 public class RedissonConfiguration {
 

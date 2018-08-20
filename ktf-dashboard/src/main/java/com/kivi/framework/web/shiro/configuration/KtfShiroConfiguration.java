@@ -63,7 +63,7 @@ import com.kivi.framework.web.shiro.util.JwtUtil;
 /*
  * @Configuration
  * 
- * @ConditionalOnProperty( prefix = "framework.shiro", name = "enabled",
+ * @ConditionalOnProperty( prefix = "ktf.shiro", name = "enabled",
  * havingValue = "true", matchIfMissing = false )
  * 
  * @DependsOn( "springContextHolder" )

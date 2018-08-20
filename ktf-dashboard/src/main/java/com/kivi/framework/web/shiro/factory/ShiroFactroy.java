@@ -31,7 +31,7 @@ import com.kivi.framework.web.shiro.token.helper.TokenCacheFactory;
 import com.kivi.framework.web.shiro.vo.ShiroUserVO;
 
 @Component
-@ConditionalOnProperty( prefix = "framework.shiro", name = "enabled", havingValue = "true", matchIfMissing = false )
+@ConditionalOnProperty( prefix = "ktf.shiro", name = "enabled", havingValue = "true", matchIfMissing = false )
 @Transactional( readOnly = true )
 public class ShiroFactroy implements IShiro {
 

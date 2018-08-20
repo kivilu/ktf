@@ -14,7 +14,7 @@ import com.kivi.framework.constant.KiviFramework;
 @Retention( RetentionPolicy.RUNTIME )
 @PropertySource( value = { KiviFramework.FRAMWORK_PLACEHOLDER } )
 @ComponentScan(
-                basePackages = { KiviFramework.BasePackages.KTF_COMPONENT_SCAN, KiviFramework.BasePackages.COMPONENT_SCAN } )
+                basePackages = { KiviFramework.BasePackages.KTF_COMPONENT_SCAN, KiviFramework.BasePackages.COMPONENT_SCAN, "com.deepoove.swagger.dubbo.config", "com.deepoove.swagger.dubbo.web" } )
 public @interface EnableKiviFramework {
 
 }

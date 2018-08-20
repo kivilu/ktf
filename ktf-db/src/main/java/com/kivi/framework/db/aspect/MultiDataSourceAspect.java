@@ -25,7 +25,7 @@ import com.kivi.framework.db.mutidatesource.DataSourceContextHolder;
  */
 @Aspect
 @Component
-@ConditionalOnProperty(prefix = "framework.common", name = "muti-datasource-open", havingValue = "true", matchIfMissing = false)
+@ConditionalOnProperty(prefix = "ktf.common", name = "muti-datasource-open", havingValue = "true", matchIfMissing = false)
 public class MultiDataSourceAspect implements Ordered {
 	
 	private Logger log = LoggerFactory.getLogger(this.getClass());

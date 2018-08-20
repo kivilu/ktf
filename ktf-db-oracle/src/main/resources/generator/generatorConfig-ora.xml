@@ -15,6 +15,15 @@
             <property name="mappers" value="com.kivi.framework.db.util.MyMapper"/>
         </plugin>
         
+        <!-- 表格对应Java bean类型实现java.io.Serializable接口，添加默认的serialVersionUID -->
+        <plugin type="org.mybatis.generator.plugins.SerializablePlugin">
+            <property name="suppressJavaInterface " value="true" />
+        </plugin>
+        <!-- 自动生成toString方法 -->
+        <plugin type="org.mybatis.generator.plugins.ToStringPlugin"/>
+        <!-- 自动生成equals方法和hashcode方法 -->
+        <plugin type="org.mybatis.generator.plugins.EqualsHashCodePlugin"/>
+        
         <commentGenerator>
 			<property name="suppressDate" value="true" />
 			<property name="suppressAllComments" value="false" />

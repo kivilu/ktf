@@ -13,7 +13,7 @@ import org.springframework.web.context.request.async.DeferredResult;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 
-import com.kivi.framework.component.KtfProperties;
+import com.kivi.framework.properties.KtfSwaggerProperties;
 import com.kivi.framework.util.kit.CollectionKit;
 import com.kivi.framework.web.constant.WebConst;
 
@@ -31,9 +31,6 @@ import springfox.documentation.service.SecurityReference;
 import springfox.documentation.spi.DocumentationType;
 import springfox.documentation.spi.service.contexts.SecurityContext;
 import springfox.documentation.spring.web.plugins.Docket;
-import springfox.documentation.swagger.web.ApiKeyVehicle;
-import springfox.documentation.swagger.web.SecurityConfiguration;
-import springfox.documentation.swagger.web.UiConfiguration;
 import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
 /**
@@ -42,14 +39,14 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 @Configuration
 @EnableSwagger2
 @ConditionalOnProperty(
-                        prefix = "framework.swagger",
+                        prefix = KtfSwaggerProperties.PREFIX,
                         name = "enabled",
                         havingValue = "true",
                         matchIfMissing = false )
 public class SwaggerConfiguration extends WebMvcConfigurerAdapter {
 
     @Autowired
-    private KtfProperties ktfProperties;
+    private KtfSwaggerProperties ktfSwaggerProperties;
 
     @Override
     public void addResourceHandlers( ResourceHandlerRegistry registry ) {
@@ -62,7 +59,7 @@ public class SwaggerConfiguration extends WebMvcConfigurerAdapter {
      *
      */
     @ConditionalOnProperty(
-                            prefix = "framework.swagger",
+                            prefix = KtfSwaggerProperties.PREFIX,
                             name = "authorization-enabled",
                             havingValue = "true",
                             matchIfMissing = false )
@@ -80,6 +77,7 @@ public class SwaggerConfiguration extends WebMvcConfigurerAdapter {
                 // .groupName("后台接口") // 不理解加上以后/v2/api-docs访问不到
                 .consumes(
                         CollectionKit.newHashSet(MediaType.APPLICATION_JSON_VALUE, MediaType.MULTIPART_FORM_DATA_VALUE))
+                .produces(CollectionKit.newHashSet(MediaType.APPLICATION_JSON_UTF8_VALUE))
                 .genericModelSubstitutes(DeferredResult.class).genericModelSubstitutes(ResponseEntity.class)
                 .globalOperationParameters(pars).useDefaultResponseMessages(false).securitySchemes(securitySchemes())
                 .securityContexts(securityContexts()).forCodeGeneration(true).enableUrlTemplating(true).pathMapping("/")// base，最终调用接口后会和paths拼接在一
@@ -88,7 +86,7 @@ public class SwaggerConfiguration extends WebMvcConfigurerAdapter {
     }
 
     @ConditionalOnProperty(
-                            prefix = "framework.swagger",
+                            prefix = KtfSwaggerProperties.PREFIX,
                             name = "authorization-enabled",
                             havingValue = "false",
                             matchIfMissing = false )
@@ -99,6 +97,7 @@ public class SwaggerConfiguration extends WebMvcConfigurerAdapter {
                 // .groupName("后台接口") // 不理解加上以后/v2/api-docs访问不到
                 .consumes(
                         CollectionKit.newHashSet(MediaType.APPLICATION_JSON_VALUE, MediaType.MULTIPART_FORM_DATA_VALUE))
+                .produces(CollectionKit.newHashSet(MediaType.APPLICATION_JSON_UTF8_VALUE))
                 .genericModelSubstitutes(DeferredResult.class).genericModelSubstitutes(ResponseEntity.class)
                 .useDefaultResponseMessages(false).forCodeGeneration(true).enableUrlTemplating(true).pathMapping("/")// base，最终调用接口后会和paths拼接在一
                 .apiInfo(buildApiInfo()).select().apis(RequestHandlerSelectors.withMethodAnnotation(ApiOperation.class))
@@ -106,12 +105,12 @@ public class SwaggerConfiguration extends WebMvcConfigurerAdapter {
     }
 
     private ApiInfo buildApiInfo() {
-        return new ApiInfoBuilder().title(ktfProperties.getSwagger().getTitleUTF8())// 大标题
-                .description(ktfProperties.getSwagger().getDescriptionUTF8())// 详细描述
-                .version(ktfProperties.getSwagger().getVersion())// 版本
-                .termsOfServiceUrl(ktfProperties.getSwagger().getTermsOfServiceUrl())
-                .license("The Apache License, Version 2.0")
-                .licenseUrl("http://www.apache.org/licenses/LICENSE-2.0.html").build();
+        return new ApiInfoBuilder().title(ktfSwaggerProperties.getTitleUTF8())// 大标题
+                .description(ktfSwaggerProperties.getDescriptionUTF8())// 详细描述
+                .version(ktfSwaggerProperties.getVersion())// 版本
+                .termsOfServiceUrl(ktfSwaggerProperties.getTermsOfServiceUrl())
+                .license(ktfSwaggerProperties.getLicense())
+                .licenseUrl(ktfSwaggerProperties.getLicenseUrl()).build();
     }
 
     private List<ApiKey> securitySchemes() {
@@ -129,29 +128,6 @@ public class SwaggerConfiguration extends WebMvcConfigurerAdapter {
         AuthorizationScope[] authorizationScopes = new AuthorizationScope[1];
         authorizationScopes[0] = authorizationScope;
         return CollectionKit.newArrayList(new SecurityReference("mykey", authorizationScopes));
-    }
-
-    @Bean
-    SecurityConfiguration security() {
-        return new SecurityConfiguration("test-app-client-id", "test-app-client-secret", "test-app-realm", "test-app",
-                "mykey", ApiKeyVehicle.HEADER, "api_key",
-                "," /* scope separator */);
-    }
-
-    @Bean
-    UiConfiguration uiConfig() {
-        return new UiConfiguration("validatorUrl", // url
-                "none", // docExpansion => none | list
-                "alpha", // apiSorter => alpha
-                "schema", // defaultModelRendering => schema
-                UiConfiguration.Constants.DEFAULT_SUBMIT_METHODS, true, // enableJsonEditor
-                                                                        // =>
-                                                                        // true
-                                                                        // |
-                                                                        // false
-                true, // showRequestHeaders => true | false
-                120000L); // requestTimeout => in milliseconds, defaults to null
-                          // (uses jquery xh timeout)
     }
 
 }

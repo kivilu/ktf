@@ -11,7 +11,7 @@ import com.kivi.framework.constant.GlobalErrorConst;
 import com.kivi.framework.exception.AppException;
 
 @Component
-@ConditionalOnProperty( prefix = "framework.shiro", name = "enabled", havingValue = "true", matchIfMissing = false )
+@ConditionalOnProperty( prefix = "ktf.shiro", name = "enabled", havingValue = "true", matchIfMissing = false )
 @DependsOn( "springContextHolder" )
 public class TokenCacheFactory {
 

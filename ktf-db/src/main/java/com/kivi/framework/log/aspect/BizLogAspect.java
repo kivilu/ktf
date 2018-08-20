@@ -29,7 +29,7 @@ import com.kivi.framework.util.kit.StrKit;
  */
 @Aspect
 @Component
-public class LogAspect {
+public class BizLogAspect {
 
     private Logger                     log           = LoggerFactory.getLogger(this.getClass());
 

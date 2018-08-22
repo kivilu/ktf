@@ -15,11 +15,51 @@ import javax.crypto.spec.SecretKeySpec;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import jodd.util.Base64;
+
 /*
  * remark:使用AES算法对文件或者字符串进行加密，
  */
 public class AESUtil {
-    private static final Logger logger = LoggerFactory.getLogger(AESUtil.class);
+    private static final Logger logger        = LoggerFactory.getLogger(AESUtil.class);
+
+    public static final String  AES_CBC_PKCS5 = "AES/CBC/PKCS5Padding";
+    public static final String  AES_ECB_PKCS5 = "AES/ECB/PKCS5Padding";
+    public static final String  AES_CBC_PKCS7 = "AES/CBC/PKCS7Padding";
+    public static final String  AES_ECB_PKCS7 = "AES/ECB/PKCS7Padding";
+
+    private final String        aesAlg;
+
+    private AESUtil( String aesAlg ) {
+        this.aesAlg = aesAlg;
+    }
+
+    public static AESUtil ctx( String aesAlg ) {
+        return new AESUtil(aesAlg);
+    }
+
+    /**
+     * AES 解密
+     * 
+     * @param base64Key
+     * @param base64Content
+     * @param base64Iv
+     * @return
+     */
+    public String decodeAES( String base64Key, String base64Content, String base64Iv ) throws Exception {
+        byte[] key = Base64.decode(base64Key);
+        byte[] iv = Base64.decode(base64Iv);
+        byte[] content = Base64.decode(base64Content);
+
+        SecretKey secretKey = new SecretKeySpec(key, "AES");
+
+        IvParameterSpec ivps = new IvParameterSpec(iv);
+        Cipher cipher = Cipher.getInstance(this.aesAlg);
+        cipher.init(Cipher.DECRYPT_MODE, secretKey, ivps);
+        byte[] tgtBytes = cipher.doFinal(content);
+
+        return new String(tgtBytes, "UTF-8");
+    }
 
     /**
      * AES加密
@@ -30,6 +70,7 @@ public class AESUtil {
      *            待加密信息
      */
     public static byte[] encodeAES( byte[] key, byte[] content ) throws Exception {
+
         // 不是16的倍数的，补足
         int base = 16;
         if (key.length % base != 0) {
@@ -42,7 +83,7 @@ public class AESUtil {
 
         SecretKey secretKey = new SecretKeySpec(key, "AES");
         IvParameterSpec iv = new IvParameterSpec(new byte[] { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 });
-        Cipher cipher = Cipher.getInstance("AES/CBC/PKCS5Padding");
+        Cipher cipher = Cipher.getInstance(AES_CBC_PKCS5);
         cipher.init(Cipher.ENCRYPT_MODE, secretKey, iv);
         byte[] tgtBytes = cipher.doFinal(content);
         return tgtBytes;
@@ -68,7 +109,7 @@ public class AESUtil {
         }
 
         SecretKey secretKey = new SecretKeySpec(key, "AES");
-        Cipher cipher = Cipher.getInstance("AES/ECB/PKCS5Padding");
+        Cipher cipher = Cipher.getInstance(AES_ECB_PKCS5);
         cipher.init(Cipher.ENCRYPT_MODE, secretKey);
         byte[] tgtBytes = cipher.doFinal(content);
         return tgtBytes;
@@ -97,7 +138,7 @@ public class AESUtil {
 
         SecretKey secretKey = new SecretKeySpec(key, "AES");
         IvParameterSpec iv = new IvParameterSpec(new byte[] { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 });
-        Cipher cipher = Cipher.getInstance("AES/CBC/PKCS5Padding");
+        Cipher cipher = Cipher.getInstance(AES_CBC_PKCS5);
         cipher.init(Cipher.DECRYPT_MODE, secretKey, iv);
         byte[] tgtBytes = cipher.doFinal(content);
         return tgtBytes;
@@ -116,7 +157,7 @@ public class AESUtil {
 
         SecretKey secretKey = new SecretKeySpec(key, "AES");
 
-        Cipher cipher = Cipher.getInstance("AES/ECB/PKCS5Padding");
+        Cipher cipher = Cipher.getInstance(AES_ECB_PKCS5);
         cipher.init(Cipher.DECRYPT_MODE, secretKey);
         byte[] tgtBytes = cipher.doFinal(content);
         return tgtBytes;

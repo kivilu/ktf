@@ -43,6 +43,9 @@ public interface KtfCache {
     // 文件上传缓存
     public final static String UPLOAD_CACHE               = "ktf.upload";
 
+    // KTF TOKEN
+    public final static String KTF_TOKEN                  = "ktf.token";
+
     public interface Dashboard {
         // 根据ID缓存
         public final static String USER_BY_ID      = "KTF.Admin.User.Id";

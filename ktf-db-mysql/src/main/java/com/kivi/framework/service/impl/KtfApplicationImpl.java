@@ -28,8 +28,8 @@ import com.kivi.framework.constant.GlobalErrorConst;
 import com.kivi.framework.db.dao.BaseDao;
 import com.kivi.framework.enums.KtfServiceStatus;
 import com.kivi.framework.exception.AppException;
-import com.kivi.framework.persist.mapper.KtfServiceNameMapperEx;
-import com.kivi.framework.persist.model.KtfServiceName;
+import com.kivi.framework.persist.mapper.KtfApplicationMapperEx;
+import com.kivi.framework.persist.model.KtfApplication;
 import com.kivi.framework.service.KtfNameService;
 import com.kivi.framework.util.CommonUtils;
 import com.kivi.framework.util.kit.DateTimeKit;
@@ -41,9 +41,9 @@ import com.kivi.framework.util.kit.StrKit;
  */
 @Service( "ktfNameService" )
 @DependsOn( value = { "springContextHolder", "tk.mybatis.mapper.autoconfigure.MapperAutoConfiguration" } )
-public class KtfNameServiceImpl extends BaseDao<KtfServiceName> implements KtfNameService {
+public class KtfApplicationImpl extends BaseDao<KtfApplication> implements KtfNameService {
 
-    private static final Logger           log                  = LoggerFactory.getLogger(KtfNameServiceImpl.class);
+    private static final Logger           log                  = LoggerFactory.getLogger(KtfApplicationImpl.class);
 
     // 状态更新周期5分钟
     private static final int              STATUS_UPDATE_SECOND = 5 * 60;
@@ -52,17 +52,17 @@ public class KtfNameServiceImpl extends BaseDao<KtfServiceName> implements KtfNa
 
     private static String                 seqPrefix            = "";
 
-    private KtfServiceName                serviceName          = null;
+    private KtfApplication                application          = null;
 
-    private List<KtfServiceName>          servicelist          = null;
+    private List<KtfApplication>          servicelist          = null;
 
     @Autowired
     private KtfProperties                 ktfProperties;
 
     @Autowired
-    private KtfServiceNameMapperEx        ktfServiceNameMapperEx;
+    private KtfApplicationMapperEx        ktfApplicationMapperEx;
 
-    public KtfNameServiceImpl() {
+    public KtfApplicationImpl() {
 
     }
 
@@ -81,20 +81,20 @@ public class KtfNameServiceImpl extends BaseDao<KtfServiceName> implements KtfNa
         File fmyid = new File(myidPath);
         if (!fmyid.exists()) {
             // myid不存在，需要注册
-            KtfServiceName entity = null;
-            entity = new KtfServiceName();
+            KtfApplication entity = null;
+            entity = new KtfApplication();
             entity.setName(ApplicationKit.me().getAppcationName());
             entity.setHost(CommonUtils.geLocaltHostIp());
             entity.setPort(ApplicationKit.me().getServerPort());
 
-            // 注册service
-            serviceName = this.registService(entity);
+            // 注册application
+            application = this.registService(entity);
 
             // 写入myid文件
-            JSON.writeJSONString(new FileOutputStream(fmyid), serviceName);
+            JSON.writeJSONString(new FileOutputStream(fmyid), application);
         }
         else {
-            serviceName = JSON.parseObject(new FileInputStream(fmyid), KtfServiceName.class);
+            application = JSON.parseObject(new FileInputStream(fmyid), KtfApplication.class);
 
             this.updateServiceStatus(KtfServiceStatus.online);
         }
@@ -113,14 +113,14 @@ public class KtfNameServiceImpl extends BaseDao<KtfServiceName> implements KtfNa
 
     @Override
     public int index() {
-        String name = serviceName.getName();
-        List<Short> list = ktfServiceNameMapperEx.listServiceSlotId(name);
-        int pos = list.indexOf(serviceName.getSlotId());
+        String name = application.getName();
+        List<Short> list = ktfApplicationMapperEx.listApplicationSlotId(name);
+        int pos = list.indexOf(application.getSlotId());
         return pos;
     }
 
     public int count( String name ) {
-        KtfServiceName entity = new KtfServiceName();
+        KtfApplication entity = new KtfApplication();
         entity.setName(name);
 
         return super.count(entity);
@@ -128,8 +128,8 @@ public class KtfNameServiceImpl extends BaseDao<KtfServiceName> implements KtfNa
 
     @Override
     public int countOnline() {
-        KtfServiceName entity = new KtfServiceName();
-        entity.setName(serviceName.getName());
+        KtfApplication entity = new KtfApplication();
+        entity.setName(application.getName());
         entity.setStatus(KtfServiceStatus.online.getCode());
 
         return super.count(entity);
@@ -137,52 +137,52 @@ public class KtfNameServiceImpl extends BaseDao<KtfServiceName> implements KtfNa
 
     @Override
     public String nameAndId() {
-        return StrKit.join("-", serviceName.getName(), serviceName.getSid());
+        return StrKit.join("-", application.getName(), application.getSid());
     }
 
     @Override
     public String getUniqueqId() {
-        return StrKit.join("", serviceName.getSlotId(), ApplicationKit.me().nextId());
+        return StrKit.join("", application.getSlotId(), ApplicationKit.me().nextId());
     }
 
-    private List<KtfServiceName> listOnlineService() {
-        KtfServiceName entity = new KtfServiceName();
-        entity.setName(this.serviceName.getName());
+    private List<KtfApplication> listOnlineService() {
+        KtfApplication entity = new KtfApplication();
+        entity.setName(this.application.getName());
         entity.setStatus(KtfServiceStatus.online.getCode());
 
-        List<KtfServiceName> list = super.selectByEntity(entity);
+        List<KtfApplication> list = super.selectByEntity(entity);
 
         return list;
     }
 
-    private KtfServiceName registService( KtfServiceName sname ) {
-        if (StrKit.isBlank(sname.getName())) {
+    private KtfApplication registService( KtfApplication app ) {
+        if (StrKit.isBlank(app.getName())) {
             log.error("应用service的名称为空");
             throw new AppException(GlobalErrorConst.E_PARAM_IS_NULL);
         }
 
-        sname.setSid(UUID.randomUUID().toString());
-        sname.setSlotId((short) this.count(sname.getName()));
-        sname.setStatus(KtfServiceStatus.online.getCode());
-        sname.setGmtCreate(DateTimeKit.date());
-        sname.setGmtUpdate(sname.getGmtCreate());
+        app.setSid(UUID.randomUUID().toString());
+        app.setSlotId((short) this.count(app.getName()));
+        app.setStatus(KtfServiceStatus.online.getCode());
+        app.setGmtCreate(DateTimeKit.date());
+        app.setGmtUpdate(app.getGmtCreate());
 
-        return super.saveNotNull(sname);
+        return super.saveNotNull(app);
     }
 
     private void updateServiceStatus( KtfServiceStatus status ) {
 
-        KtfServiceName updateEntity = new KtfServiceName();
-        updateEntity.setId(this.serviceName.getId());
+        KtfApplication updateEntity = new KtfApplication();
+        updateEntity.setId(this.application.getId());
         updateEntity.setStatus(status.getCode());
         updateEntity.setGmtUpdate(DateTimeKit.date());
 
         super.updateNotNull(updateEntity);
     }
 
-    private void updateServiceStatus( Integer id, KtfServiceStatus status ) {
+    private void updateServiceStatus( Long id, KtfServiceStatus status ) {
 
-        KtfServiceName updateEntity = new KtfServiceName();
+        KtfApplication updateEntity = new KtfApplication();
         updateEntity.setId(id);
         updateEntity.setStatus(status.getCode());
         updateEntity.setGmtUpdate(DateTimeKit.date());
@@ -200,9 +200,9 @@ public class KtfNameServiceImpl extends BaseDao<KtfServiceName> implements KtfNa
             updateServiceStatus(KtfServiceStatus.online);
 
             servicelist = listOnlineService();
-            Iterator<KtfServiceName> it = servicelist.iterator();
+            Iterator<KtfApplication> it = servicelist.iterator();
             while (it.hasNext()) {
-                KtfServiceName s = it.next();
+                KtfApplication s = it.next();
                 long minute = DateTimeKit.diff(s.getGmtUpdate(), DateTimeKit.date(), DateTimeKit.SECOND_MS);
                 if (minute > STATUS_UPDATE_SECOND) {
                     updateServiceStatus(s.getId(), KtfServiceStatus.offline);

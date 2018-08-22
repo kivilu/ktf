@@ -1,21 +1,17 @@
 package com.kivi.framework.persist.model;
 
+import java.io.Serializable;
 import java.util.Date;
 import javax.persistence.*;
 
-@Table(name = "ktf_service_name")
-public class KtfServiceName extends BaseModel {
+@Table(name = "ktf_application")
+public class KtfApplication extends BaseModel implements Serializable {
     /**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
-
-	/**
      * 主键id
      */
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    private Long id;
 
     /**
      * service唯一标签
@@ -23,7 +19,7 @@ public class KtfServiceName extends BaseModel {
     private String sid;
 
     /**
-     * 名称
+     * service名字
      */
     private String name;
 
@@ -40,13 +36,19 @@ public class KtfServiceName extends BaseModel {
     /**
      * 服务地址
      */
-    private String uri;
+    private String url;
 
     /**
-     * 业务类型
+     * 通信密钥
      */
-    @Column(name = "biz_type")
-    private String bizType;
+    @Column(name = "auth_key")
+    private String authKey;
+
+    /**
+     * 业务代码
+     */
+    @Column(name = "biz_code")
+    private String bizCode;
 
     /**
      * 服务序号
@@ -55,28 +57,29 @@ public class KtfServiceName extends BaseModel {
     private Short slotId;
 
     /**
-     * 服务状态，00：离线，01：在线
+     * 状态，00：离线 01：在线
      */
     private String status;
 
     /**
-     * 创建时间
+     * 是否为内部服务器，0：否，1是
      */
+    private Byte internal;
+
     @Column(name = "gmt_create")
     private Date gmtCreate;
 
-    /**
-     * 更新时间
-     */
     @Column(name = "gmt_update")
     private Date gmtUpdate;
+
+    private static final long serialVersionUID = 1L;
 
     /**
      * 获取主键id
      *
      * @return id - 主键id
      */
-    public Integer getId() {
+    public Long getId() {
         return id;
     }
 
@@ -85,7 +88,7 @@ public class KtfServiceName extends BaseModel {
      *
      * @param id 主键id
      */
-    public void setId(Integer id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -108,18 +111,18 @@ public class KtfServiceName extends BaseModel {
     }
 
     /**
-     * 获取名称
+     * 获取service名字
      *
-     * @return name - 名称
+     * @return name - service名字
      */
     public String getName() {
         return name;
     }
 
     /**
-     * 设置名称
+     * 设置service名字
      *
-     * @param name 名称
+     * @param name service名字
      */
     public void setName(String name) {
         this.name = name;
@@ -164,37 +167,55 @@ public class KtfServiceName extends BaseModel {
     /**
      * 获取服务地址
      *
-     * @return uri - 服务地址
+     * @return url - 服务地址
      */
-    public String getUri() {
-        return uri;
+    public String getUrl() {
+        return url;
     }
 
     /**
      * 设置服务地址
      *
-     * @param uri 服务地址
+     * @param url 服务地址
      */
-    public void setUri(String uri) {
-        this.uri = uri;
+    public void setUrl(String url) {
+        this.url = url;
     }
 
     /**
-     * 获取业务类型
+     * 获取通信密钥
      *
-     * @return biz_type - 业务类型
+     * @return auth_key - 通信密钥
      */
-    public String getBizType() {
-        return bizType;
+    public String getAuthKey() {
+        return authKey;
     }
 
     /**
-     * 设置业务类型
+     * 设置通信密钥
      *
-     * @param bizType 业务类型
+     * @param authKey 通信密钥
      */
-    public void setBizType(String bizType) {
-        this.bizType = bizType;
+    public void setAuthKey(String authKey) {
+        this.authKey = authKey;
+    }
+
+    /**
+     * 获取业务代码
+     *
+     * @return biz_code - 业务代码
+     */
+    public String getBizCode() {
+        return bizCode;
+    }
+
+    /**
+     * 设置业务代码
+     *
+     * @param bizCode 业务代码
+     */
+    public void setBizCode(String bizCode) {
+        this.bizCode = bizCode;
     }
 
     /**
@@ -216,54 +237,64 @@ public class KtfServiceName extends BaseModel {
     }
 
     /**
-     * 获取服务状态，00：离线，01：在线
+     * 获取状态，00：离线 01：在线
      *
-     * @return status - 服务状态，00：离线，01：在线
+     * @return status - 状态，00：离线 01：在线
      */
     public String getStatus() {
         return status;
     }
 
     /**
-     * 设置服务状态，00：离线，01：在线
+     * 设置状态，00：离线 01：在线
      *
-     * @param status 服务状态，00：离线，01：在线
+     * @param status 状态，00：离线 01：在线
      */
     public void setStatus(String status) {
         this.status = status;
     }
 
     /**
-     * 获取创建时间
+     * 获取是否为内部服务器，0：否，1是
      *
-     * @return gmt_create - 创建时间
+     * @return internal - 是否为内部服务器，0：否，1是
+     */
+    public Byte getInternal() {
+        return internal;
+    }
+
+    /**
+     * 设置是否为内部服务器，0：否，1是
+     *
+     * @param internal 是否为内部服务器，0：否，1是
+     */
+    public void setInternal(Byte internal) {
+        this.internal = internal;
+    }
+
+    /**
+     * @return gmt_create
      */
     public Date getGmtCreate() {
         return gmtCreate;
     }
 
     /**
-     * 设置创建时间
-     *
-     * @param gmtCreate 创建时间
+     * @param gmtCreate
      */
     public void setGmtCreate(Date gmtCreate) {
         this.gmtCreate = gmtCreate;
     }
 
     /**
-     * 获取更新时间
-     *
-     * @return gmt_update - 更新时间
+     * @return gmt_update
      */
     public Date getGmtUpdate() {
         return gmtUpdate;
     }
 
     /**
-     * 设置更新时间
-     *
-     * @param gmtUpdate 更新时间
+     * @param gmtUpdate
      */
     public void setGmtUpdate(Date gmtUpdate) {
         this.gmtUpdate = gmtUpdate;
@@ -280,12 +311,15 @@ public class KtfServiceName extends BaseModel {
         sb.append(", name=").append(name);
         sb.append(", host=").append(host);
         sb.append(", port=").append(port);
-        sb.append(", uri=").append(uri);
-        sb.append(", bizType=").append(bizType);
+        sb.append(", url=").append(url);
+        sb.append(", authKey=").append(authKey);
+        sb.append(", bizCode=").append(bizCode);
         sb.append(", slotId=").append(slotId);
         sb.append(", status=").append(status);
+        sb.append(", internal=").append(internal);
         sb.append(", gmtCreate=").append(gmtCreate);
         sb.append(", gmtUpdate=").append(gmtUpdate);
+        sb.append(", serialVersionUID=").append(serialVersionUID);
         sb.append("]");
         return sb.toString();
     }
@@ -301,16 +335,18 @@ public class KtfServiceName extends BaseModel {
         if (getClass() != that.getClass()) {
             return false;
         }
-        KtfServiceName other = (KtfServiceName) that;
+        KtfApplication other = (KtfApplication) that;
         return (this.getId() == null ? other.getId() == null : this.getId().equals(other.getId()))
             && (this.getSid() == null ? other.getSid() == null : this.getSid().equals(other.getSid()))
             && (this.getName() == null ? other.getName() == null : this.getName().equals(other.getName()))
             && (this.getHost() == null ? other.getHost() == null : this.getHost().equals(other.getHost()))
             && (this.getPort() == null ? other.getPort() == null : this.getPort().equals(other.getPort()))
-            && (this.getUri() == null ? other.getUri() == null : this.getUri().equals(other.getUri()))
-            && (this.getBizType() == null ? other.getBizType() == null : this.getBizType().equals(other.getBizType()))
+            && (this.getUrl() == null ? other.getUrl() == null : this.getUrl().equals(other.getUrl()))
+            && (this.getAuthKey() == null ? other.getAuthKey() == null : this.getAuthKey().equals(other.getAuthKey()))
+            && (this.getBizCode() == null ? other.getBizCode() == null : this.getBizCode().equals(other.getBizCode()))
             && (this.getSlotId() == null ? other.getSlotId() == null : this.getSlotId().equals(other.getSlotId()))
             && (this.getStatus() == null ? other.getStatus() == null : this.getStatus().equals(other.getStatus()))
+            && (this.getInternal() == null ? other.getInternal() == null : this.getInternal().equals(other.getInternal()))
             && (this.getGmtCreate() == null ? other.getGmtCreate() == null : this.getGmtCreate().equals(other.getGmtCreate()))
             && (this.getGmtUpdate() == null ? other.getGmtUpdate() == null : this.getGmtUpdate().equals(other.getGmtUpdate()));
     }
@@ -324,10 +360,12 @@ public class KtfServiceName extends BaseModel {
         result = prime * result + ((getName() == null) ? 0 : getName().hashCode());
         result = prime * result + ((getHost() == null) ? 0 : getHost().hashCode());
         result = prime * result + ((getPort() == null) ? 0 : getPort().hashCode());
-        result = prime * result + ((getUri() == null) ? 0 : getUri().hashCode());
-        result = prime * result + ((getBizType() == null) ? 0 : getBizType().hashCode());
+        result = prime * result + ((getUrl() == null) ? 0 : getUrl().hashCode());
+        result = prime * result + ((getAuthKey() == null) ? 0 : getAuthKey().hashCode());
+        result = prime * result + ((getBizCode() == null) ? 0 : getBizCode().hashCode());
         result = prime * result + ((getSlotId() == null) ? 0 : getSlotId().hashCode());
         result = prime * result + ((getStatus() == null) ? 0 : getStatus().hashCode());
+        result = prime * result + ((getInternal() == null) ? 0 : getInternal().hashCode());
         result = prime * result + ((getGmtCreate() == null) ? 0 : getGmtCreate().hashCode());
         result = prime * result + ((getGmtUpdate() == null) ? 0 : getGmtUpdate().hashCode());
         return result;

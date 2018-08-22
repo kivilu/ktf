@@ -1,21 +1,17 @@
 package com.kivi.framework.persist.model;
 
+import java.io.Serializable;
 import java.util.Date;
 import javax.persistence.*;
 
 @Table(name = "ktf_error_code")
-public class KtfErrorCode extends BaseModel {
+public class KtfErrorCode extends BaseModel implements Serializable {
     /**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
-
-	/**
-     * 主键id
+     * 自增Id
      */
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    private Long id;
 
     /**
      * 错误代码
@@ -59,21 +55,23 @@ public class KtfErrorCode extends BaseModel {
     @Column(name = "gmt_update")
     private Date gmtUpdate;
 
+    private static final long serialVersionUID = 1L;
+
     /**
-     * 获取主键id
+     * 获取自增Id
      *
-     * @return id - 主键id
+     * @return id - 自增Id
      */
-    public Integer getId() {
+    public Long getId() {
         return id;
     }
 
     /**
-     * 设置主键id
+     * 设置自增Id
      *
-     * @param id 主键id
+     * @param id 自增Id
      */
-    public void setId(Integer id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -217,6 +215,7 @@ public class KtfErrorCode extends BaseModel {
         sb.append(", errGroup=").append(errGroup);
         sb.append(", gmtCreate=").append(gmtCreate);
         sb.append(", gmtUpdate=").append(gmtUpdate);
+        sb.append(", serialVersionUID=").append(serialVersionUID);
         sb.append("]");
         return sb.toString();
     }

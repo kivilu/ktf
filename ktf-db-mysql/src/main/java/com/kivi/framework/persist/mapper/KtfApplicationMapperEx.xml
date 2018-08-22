@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.kivi.framework.persist.mapper.KtfServiceNameMapperEx">
-  <resultMap id="BaseResultMap" type="com.kivi.framework.persist.model.KtfServiceName">
+<mapper namespace="com.kivi.framework.persist.mapper.KtfApplicationMapperEx">
+  <resultMap id="BaseResultMap" type="com.kivi.framework.persist.model.KtfApplication">
     <!--
       WARNING - @mbg.generated
     -->
@@ -10,15 +10,17 @@
     <result column="name" jdbcType="VARCHAR" property="name" />
     <result column="host" jdbcType="VARCHAR" property="host" />
     <result column="port" jdbcType="INTEGER" property="port" />
-    <result column="uri" jdbcType="VARCHAR" property="uri" />
-    <result column="biz_type" jdbcType="VARCHAR" property="bizType" />
+    <result column="url" jdbcType="VARCHAR" property="url" />
+    <result column="auth_key" jdbcType="VARCHAR" property="authKey" />
+    <result column="biz_code" jdbcType="VARCHAR" property="bizCode" />
     <result column="slot_id" jdbcType="SMALLINT" property="slotId" />
     <result column="status" jdbcType="VARCHAR" property="status" />
+    <result column="internal" jdbcType="TINYINT" property="internal" />
     <result column="gmt_create" jdbcType="TIMESTAMP" property="gmtCreate" />
     <result column="gmt_update" jdbcType="TIMESTAMP" property="gmtUpdate" />
   </resultMap>
   
-  <select id="listServiceSlotId" parameterType="java.lang.String" resultType="java.lang.Short">
+  <select id="listApplicationSlotId" parameterType="java.lang.String" resultType="java.lang.Short">
   		select slot_id from ktf_service_name 
   		<where>
   			<if test="name!=null">name=#{name} and</if>
@@ -26,4 +28,5 @@
   		</where>
   		order by slot_id
   </select>
+  
 </mapper>

@@ -4,7 +4,7 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.Param;
 
-public interface KtfServiceNameMapperEx {
+public interface KtfApplicationMapperEx {
 
-    List<Short> listServiceSlotId( @Param( "name" ) String name );
+    List<Short> listApplicationSlotId( @Param( "name" ) String name );
 }

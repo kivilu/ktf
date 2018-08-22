@@ -57,7 +57,25 @@
                              type="XMLMAPPER">
         </javaClientGenerator>
 
-        <table tableName="KTF_%">
+        <table tableName="KTF_ERROR_CODE">
+            <generatedKey column="id" sqlStatement="Mysql" identity="true"/>
+             <columnOverride column="gmt_%" javaType="java.util.Date"
+                jdbcType="TIMESTAMP"></columnOverride>
+        </table>
+        
+        <table tableName="KTF_NOTICE">
+            <generatedKey column="id" sqlStatement="Mysql" identity="true"/>
+             <columnOverride column="gmt_%" javaType="java.util.Date"
+                jdbcType="TIMESTAMP"></columnOverride>
+        </table>
+        
+        <table tableName="KTF_APPLICATION">
+            <generatedKey column="id" sqlStatement="Mysql" identity="true"/>
+             <columnOverride column="gmt_%" javaType="java.util.Date"
+                jdbcType="TIMESTAMP"></columnOverride>
+        </table>
+        
+        <table tableName="KTF_SYS_PARAM">
             <generatedKey column="id" sqlStatement="Mysql" identity="true"/>
              <columnOverride column="gmt_%" javaType="java.util.Date"
                 jdbcType="TIMESTAMP"></columnOverride>

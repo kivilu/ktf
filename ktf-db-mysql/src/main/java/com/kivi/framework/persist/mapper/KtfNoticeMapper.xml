@@ -8,14 +8,9 @@
     <id column="id" jdbcType="BIGINT" property="id" />
     <result column="title" jdbcType="VARCHAR" property="title" />
     <result column="type" jdbcType="INTEGER" property="type" />
-    <result column="status" jdbcType="SMALLINT" property="status" />
-    <result column="count" jdbcType="SMALLINT" property="count" />
-    <result column="max_count" jdbcType="SMALLINT" property="maxCount" />
-    <result column="url" jdbcType="VARCHAR" property="url" />
-    <result column="msg_id" jdbcType="VARCHAR" property="msgId" />
     <result column="gmt_create" jdbcType="TIMESTAMP" property="gmtCreate" />
     <result column="gmt_update" jdbcType="TIMESTAMP" property="gmtUpdate" />
-    <result column="creater" jdbcType="BIGINT" property="creater" />
+    <result column="creater" jdbcType="INTEGER" property="creater" />
     <result column="content" jdbcType="LONGVARCHAR" property="content" />
   </resultMap>
 </mapper>

@@ -4,12 +4,12 @@ import com.kivi.framework.constant.GlobalErrorConst;
 import com.kivi.framework.dto.BaseRsp;
 import com.kivi.framework.service.ITimeoutService;
 
-public class KtfTimeoutRunnable implements Runnable {
+public class KtfTimeoutRunnable<T> implements Runnable {
 
-    private final KtfDeferredResult deferredResult;
+    private final KtfAsyncResult<T> deferredResult;
     private final ITimeoutService   timeoutService;
 
-    public KtfTimeoutRunnable( KtfDeferredResult deferredResult, ITimeoutService timeoutService ) {
+    public KtfTimeoutRunnable( KtfAsyncResult<T> deferredResult, ITimeoutService timeoutService ) {
         this.deferredResult = deferredResult;
         this.timeoutService = timeoutService;
     }
@@ -24,7 +24,7 @@ public class KtfTimeoutRunnable implements Runnable {
         if (timeoutService != null)
             timeoutService.onTimeout(deferredResult.getMsgId());
 
-        deferredResult.setResultObject(rsp);
+        deferredResult.setErrorResult(rsp);
     }
 
 }

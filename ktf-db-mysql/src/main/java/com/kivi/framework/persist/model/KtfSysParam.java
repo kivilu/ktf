@@ -1,87 +1,80 @@
 package com.kivi.framework.persist.model;
 
+import java.io.Serializable;
 import java.util.Date;
+import javax.persistence.*;
 
-import javax.persistence.Column;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
-
-@Table( name = "ktf_sys_param" )
-public class KtfSysParam extends BaseModel {
-    /**
-     * 
-     */
-    private static final long serialVersionUID = 1L;
-
+@Table(name = "ktf_sys_param")
+public class KtfSysParam extends BaseModel implements Serializable {
     /**
      * 主键ID
      */
     @Id
-    @Column( name = "ID" )
-    @GeneratedValue( strategy = GenerationType.IDENTITY )
-    private Integer           id;
+    @Column(name = "ID")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer id;
 
     /**
      * 父ID
      */
-    @Column( name = "PID" )
-    private Integer           pid;
+    @Column(name = "PID")
+    private Integer pid;
 
     /**
      * 客户代码
      */
-    @Column( name = "custom_code" )
-    private String            customCode;
+    @Column(name = "custom_code")
+    private String customCode;
 
     /**
      * 业务代码
      */
-    @Column( name = "biz_code" )
-    private String            bizCode;
+    @Column(name = "biz_code")
+    private String bizCode;
 
     /**
      * 参数代码
      */
-    @Column( name = "param_code" )
-    private String            paramCode;
+    @Column(name = "param_code")
+    private String paramCode;
 
     /**
      * 参数名称
      */
-    @Column( name = "param_name" )
-    private String            paramName;
+    @Column(name = "param_name")
+    private String paramName;
 
     /**
      * 参数类型，0：字符串，1：数字，2：金额，默认：0
      */
-    @Column( name = "param_type" )
-    private String            paramType;
+    @Column(name = "param_type")
+    private String paramType;
 
     /**
      * 参数值
      */
-    @Column( name = "param_value" )
-    private String            paramValue;
+    @Column(name = "param_value")
+    private String paramValue;
 
     /**
      * 上次更新用户
      */
-    @Column( name = "LAST_UPDATE_USER" )
-    private String            lastUpdateUser;
+    @Column(name = "LAST_UPDATE_USER")
+    private String lastUpdateUser;
 
     /**
      * 创建时间
      */
-    @Column( name = "gmt_create" )
-    private Date              gmtCreate;
+    @Column(name = "gmt_create")
+    private Date gmtCreate;
 
     /**
      * 更新时间
      */
-    @Column( name = "gmt_update" )
-    private Date              gmtUpdate;
+    @Column(name = "gmt_update")
+    private Date gmtUpdate;
+
+    private static final long serialVersionUID = 1L;
 
     /**
      * 获取主键ID
@@ -95,10 +88,9 @@ public class KtfSysParam extends BaseModel {
     /**
      * 设置主键ID
      *
-     * @param id
-     *            主键ID
+     * @param id 主键ID
      */
-    public void setId( Integer id ) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
@@ -114,10 +106,9 @@ public class KtfSysParam extends BaseModel {
     /**
      * 设置父ID
      *
-     * @param pid
-     *            父ID
+     * @param pid 父ID
      */
-    public void setPid( Integer pid ) {
+    public void setPid(Integer pid) {
         this.pid = pid;
     }
 
@@ -133,10 +124,9 @@ public class KtfSysParam extends BaseModel {
     /**
      * 设置客户代码
      *
-     * @param customCode
-     *            客户代码
+     * @param customCode 客户代码
      */
-    public void setCustomCode( String customCode ) {
+    public void setCustomCode(String customCode) {
         this.customCode = customCode;
     }
 
@@ -152,10 +142,9 @@ public class KtfSysParam extends BaseModel {
     /**
      * 设置业务代码
      *
-     * @param bizCode
-     *            业务代码
+     * @param bizCode 业务代码
      */
-    public void setBizCode( String bizCode ) {
+    public void setBizCode(String bizCode) {
         this.bizCode = bizCode;
     }
 
@@ -171,10 +160,9 @@ public class KtfSysParam extends BaseModel {
     /**
      * 设置参数代码
      *
-     * @param paramCode
-     *            参数代码
+     * @param paramCode 参数代码
      */
-    public void setParamCode( String paramCode ) {
+    public void setParamCode(String paramCode) {
         this.paramCode = paramCode;
     }
 
@@ -190,10 +178,9 @@ public class KtfSysParam extends BaseModel {
     /**
      * 设置参数名称
      *
-     * @param paramName
-     *            参数名称
+     * @param paramName 参数名称
      */
-    public void setParamName( String paramName ) {
+    public void setParamName(String paramName) {
         this.paramName = paramName;
     }
 
@@ -209,10 +196,9 @@ public class KtfSysParam extends BaseModel {
     /**
      * 设置参数类型，0：字符串，1：数字，2：金额，默认：0
      *
-     * @param paramType
-     *            参数类型，0：字符串，1：数字，2：金额，默认：0
+     * @param paramType 参数类型，0：字符串，1：数字，2：金额，默认：0
      */
-    public void setParamType( String paramType ) {
+    public void setParamType(String paramType) {
         this.paramType = paramType;
     }
 
@@ -228,10 +214,9 @@ public class KtfSysParam extends BaseModel {
     /**
      * 设置参数值
      *
-     * @param paramValue
-     *            参数值
+     * @param paramValue 参数值
      */
-    public void setParamValue( String paramValue ) {
+    public void setParamValue(String paramValue) {
         this.paramValue = paramValue;
     }
 
@@ -247,10 +232,9 @@ public class KtfSysParam extends BaseModel {
     /**
      * 设置上次更新用户
      *
-     * @param lastUpdateUser
-     *            上次更新用户
+     * @param lastUpdateUser 上次更新用户
      */
-    public void setLastUpdateUser( String lastUpdateUser ) {
+    public void setLastUpdateUser(String lastUpdateUser) {
         this.lastUpdateUser = lastUpdateUser;
     }
 
@@ -266,10 +250,9 @@ public class KtfSysParam extends BaseModel {
     /**
      * 设置创建时间
      *
-     * @param gmtCreate
-     *            创建时间
+     * @param gmtCreate 创建时间
      */
-    public void setGmtCreate( Date gmtCreate ) {
+    public void setGmtCreate(Date gmtCreate) {
         this.gmtCreate = gmtCreate;
     }
 
@@ -285,10 +268,9 @@ public class KtfSysParam extends BaseModel {
     /**
      * 设置更新时间
      *
-     * @param gmtUpdate
-     *            更新时间
+     * @param gmtUpdate 更新时间
      */
-    public void setGmtUpdate( Date gmtUpdate ) {
+    public void setGmtUpdate(Date gmtUpdate) {
         this.gmtUpdate = gmtUpdate;
     }
 
@@ -309,12 +291,13 @@ public class KtfSysParam extends BaseModel {
         sb.append(", lastUpdateUser=").append(lastUpdateUser);
         sb.append(", gmtCreate=").append(gmtCreate);
         sb.append(", gmtUpdate=").append(gmtUpdate);
+        sb.append(", serialVersionUID=").append(serialVersionUID);
         sb.append("]");
         return sb.toString();
     }
 
     @Override
-    public boolean equals( Object that ) {
+    public boolean equals(Object that) {
         if (this == that) {
             return true;
         }
@@ -325,26 +308,17 @@ public class KtfSysParam extends BaseModel {
             return false;
         }
         KtfSysParam other = (KtfSysParam) that;
-        return (this.getId() == null ? other.getId() == null : this.getId().equals(other.getId())) &&
-                (this.getPid() == null ? other.getPid() == null : this.getPid().equals(other.getPid())) &&
-                (this.getCustomCode() == null ? other.getCustomCode() == null
-                        : this.getCustomCode().equals(other.getCustomCode())) &&
-                (this.getBizCode() == null ? other.getBizCode() == null
-                        : this.getBizCode().equals(other.getBizCode())) &&
-                (this.getParamCode() == null ? other.getParamCode() == null
-                        : this.getParamCode().equals(other.getParamCode())) &&
-                (this.getParamName() == null ? other.getParamName() == null
-                        : this.getParamName().equals(other.getParamName())) &&
-                (this.getParamType() == null ? other.getParamType() == null
-                        : this.getParamType().equals(other.getParamType())) &&
-                (this.getParamValue() == null ? other.getParamValue() == null
-                        : this.getParamValue().equals(other.getParamValue())) &&
-                (this.getLastUpdateUser() == null ? other.getLastUpdateUser() == null
-                        : this.getLastUpdateUser().equals(other.getLastUpdateUser())) &&
-                (this.getGmtCreate() == null ? other.getGmtCreate() == null
-                        : this.getGmtCreate().equals(other.getGmtCreate())) &&
-                (this.getGmtUpdate() == null ? other.getGmtUpdate() == null
-                        : this.getGmtUpdate().equals(other.getGmtUpdate()));
+        return (this.getId() == null ? other.getId() == null : this.getId().equals(other.getId()))
+            && (this.getPid() == null ? other.getPid() == null : this.getPid().equals(other.getPid()))
+            && (this.getCustomCode() == null ? other.getCustomCode() == null : this.getCustomCode().equals(other.getCustomCode()))
+            && (this.getBizCode() == null ? other.getBizCode() == null : this.getBizCode().equals(other.getBizCode()))
+            && (this.getParamCode() == null ? other.getParamCode() == null : this.getParamCode().equals(other.getParamCode()))
+            && (this.getParamName() == null ? other.getParamName() == null : this.getParamName().equals(other.getParamName()))
+            && (this.getParamType() == null ? other.getParamType() == null : this.getParamType().equals(other.getParamType()))
+            && (this.getParamValue() == null ? other.getParamValue() == null : this.getParamValue().equals(other.getParamValue()))
+            && (this.getLastUpdateUser() == null ? other.getLastUpdateUser() == null : this.getLastUpdateUser().equals(other.getLastUpdateUser()))
+            && (this.getGmtCreate() == null ? other.getGmtCreate() == null : this.getGmtCreate().equals(other.getGmtCreate()))
+            && (this.getGmtUpdate() == null ? other.getGmtUpdate() == null : this.getGmtUpdate().equals(other.getGmtUpdate()));
     }
 
     @Override

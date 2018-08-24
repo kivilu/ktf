@@ -15,7 +15,7 @@ import lombok.Setter;
                         prefix = KtfCacheProperties.PREFIX,
                         name = "enabled",
                         havingValue = "true",
-                        matchIfMissing = false )
+                        matchIfMissing = true )
 public class KtfCacheProperties implements IKtfProperties {
     public static final String BEAN_NAME  = "ktfCacheProperties";
     public static final String PREFIX     = "ktf.cache";

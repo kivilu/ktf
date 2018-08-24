@@ -1,6 +1,5 @@
 package com.kivi.framework.properties;
 
-import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Configuration;
 
@@ -9,11 +8,6 @@ import lombok.Data;
 @Data
 @Configuration( KtfApiProperties.BEAN_NAME )
 @ConfigurationProperties( prefix = KtfApiProperties.PREFIX )
-@ConditionalOnProperty(
-                        prefix = KtfApiProperties.PREFIX,
-                        name = "enabled",
-                        havingValue = "true",
-                        matchIfMissing = false )
 public class KtfApiProperties implements IKtfProperties {
     public static final String BEAN_NAME = "ktfApiProperties";
     public static final String PREFIX    = "ktf.api";

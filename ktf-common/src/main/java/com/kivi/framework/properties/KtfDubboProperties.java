@@ -21,6 +21,11 @@ public class KtfDubboProperties implements IKtfProperties {
     public static final String PREFIX    = "ktf.dubbo";
 
     private Boolean            enabled;
+
+    /**
+     * 是否开启Restful接口
+     */
+    private Boolean            restEnabled;
     /**
      * Dubbo Service 扫描包，多个包名直接采用“,”分割
      */

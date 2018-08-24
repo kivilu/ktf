@@ -1,0 +1,8 @@
+#NOTE: This is an Aether internal implementation file, its format can be changed without prior notice.
+#Fri Aug 24 10:57:41 CST 2018
+file\://D\:\\git_repository\\ktf\\ktf-db-oracle/lib/.lastUpdated=1535079450518
+@default-Eclipse\ Paho\ Repo-https\://repo.eclipse.org/content/repositories/paho-releases/.lastUpdated=1535079450462
+file\://D\:\\git_repository\\ktf\\ktf-db-oracle/lib/.error=
+@default-central-https\://repo.maven.apache.org/maven2/.lastUpdated=1535079461570
+https\://repo.eclipse.org/content/repositories/paho-releases/.error=Could not transfer artifact com.oracle\:ojdbc6\:pom\:11.2.0.1.0 from/to Eclipse Paho Repo (https\://repo.eclipse.org/content/repositories/paho-releases/)\: connect timed out
+https\://repo.maven.apache.org/maven2/.error=Could not transfer artifact com.oracle\:ojdbc6\:pom\:11.2.0.1.0 from/to central (https\://repo.maven.apache.org/maven2)\: repo.maven.apache.org

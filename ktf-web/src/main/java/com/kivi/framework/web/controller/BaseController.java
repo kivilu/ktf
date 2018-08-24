@@ -24,6 +24,7 @@ import com.kivi.framework.util.kit.StrKit;
 import com.kivi.framework.vo.page.PageInfoBT;
 import com.kivi.framework.vo.page.PageReqVO;
 import com.kivi.framework.web.async.KtfAsyncResult;
+import com.kivi.framework.web.async.KtfAsyncTimeoutRunnable;
 import com.kivi.framework.web.async.KtfDeferredResult;
 import com.kivi.framework.web.async.KtfTimeoutRunnable;
 import com.kivi.framework.web.constant.tips.SuccessTip;
@@ -167,7 +168,7 @@ public class BaseController {
         ITimeoutService timeoutService = SpringContextHolder.getBean(ITimeoutService.class);
 
         KtfAsyncResult<T> result = new KtfAsyncResult<T>(msgId(), ktfProperties.getApi().getTimeout());
-        result.onTimeout(new KtfTimeoutRunnable<T>(result, timeoutService));
+        result.onTimeout(new KtfAsyncTimeoutRunnable<T>(result, timeoutService));
 
         return result;
     }

@@ -25,15 +25,15 @@ public class KtfTokenServiceImpl implements KtfTokenService {
         return generate(seeds);
     }
 
-    @CachePut( value = KtfCache.KTF_TOKEN, key = "caches[0].name+'_'+#key" )
+    @CachePut( value = KtfCache.KTF_TOKEN, key = "caches[0].name+'_'+#name+#key" )
     @Override
-    public <T> T cache( String key, T obj ) {
+    public <T> T cache( String name, String key, T obj ) {
         return obj;
     }
 
-    @Cacheable( value = KtfCache.KTF_TOKEN, key = "caches[0].name+'_'+#key" )
+    @Cacheable( value = KtfCache.KTF_TOKEN, key = "caches[0].name+'_'+#name+#key" )
     @Override
-    public <T> T cache( String key ) {
+    public <T> T cache( String name, String key ) {
         return null;
     }
 

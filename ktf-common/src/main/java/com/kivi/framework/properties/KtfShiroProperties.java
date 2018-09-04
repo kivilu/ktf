@@ -41,21 +41,7 @@ public class KtfShiroProperties implements IKtfProperties {
     public static class Token {
         private TokenAuthType authType = TokenAuthType.JWT;
         private Long          ttl      = 1800L;
-        private Jwt           jwt;
 
-        @Getter
-        @Setter
-        public static class Jwt {
-            private String issuer     = "kivi";
-            private String secretSeed = "kivi.jwt";
-            private String signAlg    = "sha256";
-
-            @Override
-            public String toString() {
-                return "Jwt [issuer=" + issuer + ", secretSeed=" + secretSeed + ", signAlg=" + signAlg + "]";
-            }
-
-        }
     }
 
     @Getter

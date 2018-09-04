@@ -4,8 +4,8 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.Param;
 
-import com.kivi.framework.vo.web.DeptVO;
-import com.kivi.framework.vo.web.ZTreeNode;
+import com.kivi.framework.vo.DeptVO;
+import com.kivi.framework.vo.ZTreeNode;
 
 public interface KtfDeptMapperEx {
 

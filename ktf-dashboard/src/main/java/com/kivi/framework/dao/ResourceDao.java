@@ -3,9 +3,9 @@ package com.kivi.framework.dao;
 import java.util.List;
 import java.util.Set;
 
-import com.kivi.framework.vo.web.MenuNode;
-import com.kivi.framework.vo.web.ResourceVO;
-import com.kivi.framework.vo.web.ZTreeNode;
+import com.kivi.framework.vo.MenuNode;
+import com.kivi.framework.vo.ResourceVO;
+import com.kivi.framework.vo.ZTreeNode;
 
 /**
  */

@@ -3,9 +3,9 @@ package com.kivi.framework.dao;
 import java.util.List;
 import java.util.Map;
 
+import com.kivi.framework.vo.DictVO;
 import com.kivi.framework.vo.page.PageInfoKtf;
 import com.kivi.framework.vo.page.PageReqVO;
-import com.kivi.framework.vo.web.DictVO;
 
 public interface DictDao {
 

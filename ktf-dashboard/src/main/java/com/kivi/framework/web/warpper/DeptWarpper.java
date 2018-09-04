@@ -4,7 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.kivi.framework.util.kit.ObjectKit;
-import com.kivi.framework.vo.web.DeptVO;
+import com.kivi.framework.vo.DeptVO;
 import com.kivi.framework.web.constant.WebConst;
 import com.kivi.framework.web.constant.factory.ConstantFactory;
 

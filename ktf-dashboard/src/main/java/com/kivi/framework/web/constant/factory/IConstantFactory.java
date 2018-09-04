@@ -2,8 +2,8 @@ package com.kivi.framework.web.constant.factory;
 
 import java.util.List;
 
-import com.kivi.framework.vo.web.DictVO;
-import com.kivi.framework.vo.web.UserVO;
+import com.kivi.framework.vo.DictVO;
+import com.kivi.framework.vo.UserVO;
 
 /**
  * 常量生产工厂的接口

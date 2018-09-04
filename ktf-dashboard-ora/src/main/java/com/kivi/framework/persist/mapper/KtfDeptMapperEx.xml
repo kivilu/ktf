@@ -17,7 +17,7 @@
     <result column="VERSION" jdbcType="NUMERIC" property="version" />
   </resultMap>
   
-  <select id="tree" resultType="com.kivi.framework.vo.web.ZTreeNode">
+  <select id="tree" resultType="com.kivi.framework.vo.ZTreeNode">
         select id,pid as pId,simplename as name,
         (
 	        CASE

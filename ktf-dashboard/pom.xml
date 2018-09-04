@@ -105,14 +105,6 @@
 		</dependency>
 		<!-- /swagger2 -->
 		
-		<!-- jwt -->
-		<dependency>
-		    <groupId>io.jsonwebtoken</groupId>
-		    <artifactId>jjwt</artifactId>
-		    <version>0.9.0</version>
-		    <optional>true</optional>
-		</dependency>
-		<!-- /jwt -->
 
   </dependencies>
   

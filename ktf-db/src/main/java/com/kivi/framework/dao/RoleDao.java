@@ -2,8 +2,8 @@ package com.kivi.framework.dao;
 
 import java.util.List;
 
-import com.kivi.framework.vo.web.RoleVO;
-import com.kivi.framework.vo.web.ZTreeNode;
+import com.kivi.framework.vo.RoleVO;
+import com.kivi.framework.vo.ZTreeNode;
 
 public interface RoleDao {
 
@@ -14,6 +14,15 @@ public interface RoleDao {
      * @return
      */
     RoleVO getRoleByPk( Long id );
+
+    /**
+     * 根据角色名称
+     * 
+     * @param name
+     *            角色名称
+     * @return
+     */
+    RoleVO getRoleByName( String name );
 
     /**
      * 保存角色

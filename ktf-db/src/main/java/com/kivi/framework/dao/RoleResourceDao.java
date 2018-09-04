@@ -1,6 +1,6 @@
 package com.kivi.framework.dao;
 
-import com.kivi.framework.vo.web.RoleResourceVO;
+import com.kivi.framework.vo.RoleResourceVO;
 
 /**
  */

@@ -40,6 +40,18 @@
            transactionalMode="off">
     </cache>
     
+    <cache name="KTF.Admin.RoleVO"
+    	   maxElementsInMemory="50000"
+           eternal="false"
+            timeToIdleSeconds="3600"
+            timeToLiveSeconds="3600"
+            overflowToDisk="true"
+            diskPersistent="false"
+           diskExpiryThreadIntervalSeconds="120"
+           memoryStoreEvictionPolicy="LFU"
+           transactionalMode="off">
+    </cache>
+    
 </ehcache>
 
  <!--

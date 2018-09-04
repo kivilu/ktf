@@ -1,9 +1,9 @@
 package com.kivi.framework.dao;
 
 import com.kivi.framework.db.datascope.DataScope;
+import com.kivi.framework.vo.UserVO;
 import com.kivi.framework.vo.page.PageInfoKtf;
 import com.kivi.framework.vo.page.PageReqVO;
-import com.kivi.framework.vo.web.UserVO;
 
 public interface UserDao {
 

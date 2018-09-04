@@ -5,7 +5,7 @@ import java.util.Map;
 
 import org.apache.ibatis.annotations.Param;
 
-import com.kivi.framework.vo.web.DictVO;
+import com.kivi.framework.vo.DictVO;
 
 public interface KtfDictMapperEx {
 

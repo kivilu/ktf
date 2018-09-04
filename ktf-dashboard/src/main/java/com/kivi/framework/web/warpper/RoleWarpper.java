@@ -3,7 +3,7 @@ package com.kivi.framework.web.warpper;
 import java.util.List;
 import java.util.Map;
 
-import com.kivi.framework.vo.web.RoleVO;
+import com.kivi.framework.vo.RoleVO;
 import com.kivi.framework.web.constant.WebConst;
 import com.kivi.framework.web.constant.factory.ConstantFactory;
 

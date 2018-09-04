@@ -11,7 +11,7 @@ import com.kivi.framework.db.dao.BaseDao;
 import com.kivi.framework.persist.model.KtfUserRole;
 import com.kivi.framework.util.Convert;
 import com.kivi.framework.vo.KtfNoticeVO;
-import com.kivi.framework.vo.web.UserRoleVO;
+import com.kivi.framework.vo.UserRoleVO;
 
 import tk.mybatis.mapper.entity.Example;
 

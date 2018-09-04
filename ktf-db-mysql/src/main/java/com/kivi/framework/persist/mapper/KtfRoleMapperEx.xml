@@ -5,15 +5,15 @@
     <!--
       WARNING - @mbg.generated
     -->
-   <id column="ID" jdbcType="NUMERIC" property="id" />
-    <result column="NUM" jdbcType="NUMERIC" property="num" />
-    <result column="PID" jdbcType="NUMERIC" property="pid" />
-    <result column="NAME" jdbcType="VARCHAR" property="name" />
-    <result column="DEPT_ID" jdbcType="NUMERIC" property="deptId" />
-    <result column="TIPS" jdbcType="VARCHAR" property="tips" />
-    <result column="GMT_CREATE" jdbcType="TIMESTAMP" property="gmtCreate" />
-    <result column="GMT_UPDATE" jdbcType="TIMESTAMP" property="gmtUpdate" />
-    <result column="VERSION" jdbcType="NUMERIC" property="version" />
+   <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="num" jdbcType="INTEGER" property="num" />
+    <result column="pid" jdbcType="INTEGER" property="pid" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="dept_id" jdbcType="INTEGER" property="deptId" />
+    <result column="tips" jdbcType="VARCHAR" property="tips" />
+    <result column="gmt_create" jdbcType="TIMESTAMP" property="gmtCreate" />
+    <result column="gmt_update" jdbcType="TIMESTAMP" property="gmtUpdate" />
+    <result column="version" jdbcType="INTEGER" property="version" />
   </resultMap>
   
    <sql id="Base_Column_List">

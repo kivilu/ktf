@@ -2,7 +2,7 @@ package com.kivi.framework.dao;
 
 import java.util.List;
 
-import com.kivi.framework.vo.web.UserRoleVO;
+import com.kivi.framework.vo.UserRoleVO;
 
 /**
  */

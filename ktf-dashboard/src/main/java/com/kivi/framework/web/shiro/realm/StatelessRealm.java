@@ -12,7 +12,7 @@ import org.apache.shiro.realm.AuthorizingRealm;
 import org.apache.shiro.subject.PrincipalCollection;
 
 import com.kivi.framework.util.kit.ObjectKit;
-import com.kivi.framework.vo.web.UserVO;
+import com.kivi.framework.vo.UserVO;
 import com.kivi.framework.web.shiro.factory.IShiro;
 import com.kivi.framework.web.shiro.factory.ShiroFactroy;
 import com.kivi.framework.web.shiro.token.StatelessToken;

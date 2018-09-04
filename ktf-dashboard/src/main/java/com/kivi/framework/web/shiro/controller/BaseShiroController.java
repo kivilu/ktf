@@ -9,7 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import com.kivi.framework.constant.GlobalErrorConst;
 import com.kivi.framework.exception.AppException;
-import com.kivi.framework.vo.web.LoginVO;
+import com.kivi.framework.vo.LoginVO;
 import com.kivi.framework.web.controller.BaseController;
 import com.kivi.framework.web.shiro.token.StatelessToken;
 import com.kivi.framework.web.shiro.token.manager.TokenManager;

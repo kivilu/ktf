@@ -4,7 +4,7 @@ import java.util.Set;
 
 import org.apache.shiro.authc.SimpleAuthenticationInfo;
 
-import com.kivi.framework.vo.web.UserVO;
+import com.kivi.framework.vo.UserVO;
 import com.kivi.framework.web.shiro.vo.ShiroUserVO;
 
 /**

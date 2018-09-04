@@ -63,6 +63,17 @@
                 jdbcType="TIMESTAMP"></columnOverride>
         </table>
         
+         <table tableName="KTF_ROLE">
+            <generatedKey column="id" sqlStatement="Mysql" identity="true"/>
+             <columnOverride column="gmt_%" javaType="java.util.Date"
+                jdbcType="TIMESTAMP"></columnOverride>
+        </table>
+        <table tableName="KTF_ROLE_RESOURCE">
+            <generatedKey column="id" sqlStatement="Mysql" identity="true"/>
+             <columnOverride column="gmt_%" javaType="java.util.Date"
+                jdbcType="TIMESTAMP"></columnOverride>
+        </table>
+        
         <table tableName="KTF_NOTICE">
             <generatedKey column="id" sqlStatement="Mysql" identity="true"/>
              <columnOverride column="gmt_%" javaType="java.util.Date"

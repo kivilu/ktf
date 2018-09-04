@@ -2,8 +2,8 @@ package com.kivi.framework.dao;
 
 import java.util.List;
 
-import com.kivi.framework.vo.web.DeptVO;
-import com.kivi.framework.vo.web.ZTreeNode;
+import com.kivi.framework.vo.DeptVO;
+import com.kivi.framework.vo.ZTreeNode;
 
 public interface DeptDao {
 

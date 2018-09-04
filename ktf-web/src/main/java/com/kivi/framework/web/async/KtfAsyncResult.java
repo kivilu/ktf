@@ -6,6 +6,9 @@ import org.springframework.web.context.request.async.DeferredResult;
 
 import com.alibaba.fastjson.JSON;
 
+import io.swagger.annotations.ApiModel;
+
+@ApiModel( value = "KtfAsyncResult", description = "异步响应对象" )
 public class KtfAsyncResult<T> extends DeferredResult<String> {
     private static final Logger log = LoggerFactory.getLogger(KtfAsyncResult.class);
 
@@ -34,7 +37,7 @@ public class KtfAsyncResult<T> extends DeferredResult<String> {
         return super.setErrorResult(result);
     }
 
-    public boolean setResultObject( Object result ) {
+    public boolean setResultObject( T result ) {
 
         String json = JSON.toJSONString(result);
         log.trace("响应结果：{}", json);

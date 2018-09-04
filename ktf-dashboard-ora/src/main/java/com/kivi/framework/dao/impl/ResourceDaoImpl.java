@@ -19,9 +19,9 @@ import com.kivi.framework.util.Convert;
 import com.kivi.framework.util.kit.BeanKit;
 import com.kivi.framework.util.kit.DateTimeKit;
 import com.kivi.framework.vo.KtfNoticeVO;
-import com.kivi.framework.vo.web.MenuNode;
-import com.kivi.framework.vo.web.ResourceVO;
-import com.kivi.framework.vo.web.ZTreeNode;
+import com.kivi.framework.vo.MenuNode;
+import com.kivi.framework.vo.ResourceVO;
+import com.kivi.framework.vo.ZTreeNode;
 
 @Repository
 public class ResourceDaoImpl extends BaseDao<KtfResource> implements ResourceDao {

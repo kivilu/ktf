@@ -24,7 +24,7 @@ public interface KtfTokenService {
      * @param key
      * @return
      */
-    <T> T cache( String name, String key, T obj );
+    <T> T cache( String key, T value );
 
     /**
      * 缓存对象
@@ -32,5 +32,13 @@ public interface KtfTokenService {
      * @param key
      * @return
      */
-    <T> T cache( String name, String key );
+    <T> T cache( String key );
+
+    /**
+     * 删除缓存
+     * 
+     * @param name
+     * @param key
+     */
+    void evict( String key );
 }

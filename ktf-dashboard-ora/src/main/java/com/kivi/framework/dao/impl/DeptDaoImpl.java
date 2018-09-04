@@ -17,8 +17,8 @@ import com.kivi.framework.persist.mapper.KtfDeptMapperEx;
 import com.kivi.framework.persist.model.KtfDept;
 import com.kivi.framework.util.Convert;
 import com.kivi.framework.util.kit.BeanKit;
-import com.kivi.framework.vo.web.DeptVO;
-import com.kivi.framework.vo.web.ZTreeNode;
+import com.kivi.framework.vo.DeptVO;
+import com.kivi.framework.vo.ZTreeNode;
 
 import tk.mybatis.mapper.entity.Example;
 

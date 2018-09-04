@@ -23,7 +23,7 @@ import com.kivi.framework.constant.enums.KtfStatus;
 import com.kivi.framework.dao.ResourceDao;
 import com.kivi.framework.util.Convert;
 import com.kivi.framework.util.kit.CollectionKit;
-import com.kivi.framework.vo.web.UserVO;
+import com.kivi.framework.vo.UserVO;
 import com.kivi.framework.web.constant.factory.ConstantFactory;
 import com.kivi.framework.web.shiro.cache.ShiroRedisCacheManager;
 import com.kivi.framework.web.shiro.token.helper.ITokenCache;

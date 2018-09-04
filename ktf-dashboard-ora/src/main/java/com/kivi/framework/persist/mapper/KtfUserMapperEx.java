@@ -5,7 +5,7 @@ import java.util.List;
 import org.apache.ibatis.annotations.Param;
 
 import com.kivi.framework.db.datascope.DataScope;
-import com.kivi.framework.vo.web.UserVO;
+import com.kivi.framework.vo.UserVO;
 
 public interface KtfUserMapperEx {
 

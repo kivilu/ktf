@@ -149,7 +149,7 @@
         </if>
     </select>
     
-    <select id="menuTreeList" resultType="com.kivi.framework.vo.web.ZTreeNode">
+    <select id="menuTreeList" resultType="com.kivi.framework.vo.ZTreeNode">
        SELECT m1.id AS id,
 	       (CASE
 	         WHEN (m2.id = 0 OR m2.id IS NULL) THEN
@@ -174,7 +174,7 @@
         select resource_id from ktf_role_resource where role_id = #{roleId}
     </select>
     
-    <select id="menuTreeListByMenuIds" resultType="com.kivi.framework.vo.web.ZTreeNode">
+    <select id="menuTreeListByMenuIds" resultType="com.kivi.framework.vo.ZTreeNode">
         SELECT m1.id AS id,
 		       (CASE
 		         WHEN (m2.id = 0 OR m2.id IS NULL) THEN

@@ -2,6 +2,8 @@ package com.kivi.framework.dto.warapper;
 
 import java.io.Serializable;
 
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -13,6 +15,7 @@ import lombok.Setter;
  */
 @Setter
 @Getter
+@ApiModel( value = "WarpperReqDTO", description = "DTO wapper" )
 public class WarpperReqDTO<T> implements Serializable {
     /**
      * 
@@ -22,21 +25,40 @@ public class WarpperReqDTO<T> implements Serializable {
     /**
      * 客户端IP
      */
+    @ApiModelProperty(
+                       position = 1,
+                       value = "客户端IP",
+                       dataType = "String",
+                       example = "127.0.0.1" )
     private String            clientIp;
 
     /**
      * 调用发起应用名称
      */
+    @ApiModelProperty(
+                       position = 2,
+                       value = "调用发起应用名称",
+                       dataType = "String",
+                       example = "" )
     private String            fromAppName;
 
     /**
      * 交易流水号
      */
+    @ApiModelProperty(
+                       position = 3,
+                       value = "交易流水号",
+                       dataType = "String",
+                       example = "" )
     private String            tranSeqId;
 
     /**
      * 请求内容
      */
+    @ApiModelProperty(
+                       position = 4,
+                       value = "请求内容",
+                       dataType = "Object" )
     private T                 reqObject;
 
 }

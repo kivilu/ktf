@@ -1,4 +1,4 @@
-package com.kivi.framework.vo.web;
+package com.kivi.framework.vo;
 
 import java.util.ArrayList;
 import java.util.List;

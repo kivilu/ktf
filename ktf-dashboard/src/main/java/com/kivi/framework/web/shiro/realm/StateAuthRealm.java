@@ -18,7 +18,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.kivi.framework.util.kit.StrKit;
-import com.kivi.framework.vo.web.UserVO;
+import com.kivi.framework.vo.UserVO;
 import com.kivi.framework.web.shiro.factory.IShiro;
 import com.kivi.framework.web.shiro.factory.ShiroFactroy;
 import com.kivi.framework.web.shiro.token.StateAuthToken;

@@ -4,7 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.kivi.framework.constant.state.IsMenu;
-import com.kivi.framework.vo.web.ResourceVO;
+import com.kivi.framework.vo.ResourceVO;
 import com.kivi.framework.web.constant.WebConst;
 import com.kivi.framework.web.constant.factory.ConstantFactory;
 

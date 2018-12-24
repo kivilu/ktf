@@ -40,7 +40,7 @@ public class WarpperDTO<T, K> implements Serializable {
     /**
      * 参数
      */
-    private String[]          params;
+    private Object[]          params;
 
     /**
      * DTO

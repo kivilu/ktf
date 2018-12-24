@@ -67,20 +67,13 @@
 		    <version>${mybatis-tool.version}</version>
 		    <optional>true</optional>
 		</dependency>
-		<dependency>
+		<!-- <dependency>
 			<groupId>org.mybatis.spring.boot</groupId>
 			<artifactId>mybatis-spring-boot-starter</artifactId>
 			<version>${mybatis-spring.version}</version>
 			<optional>true</optional>
-		</dependency>
+		</dependency> -->
 		
-		<!-- pagehelper 分页插件 -->
-		<dependency>
-		    <groupId>com.github.pagehelper</groupId>
-		    <artifactId>pagehelper-spring-boot-starter</artifactId>
-		    <version>${mybatis-pagehelper.version}</version>
-		    <optional>true</optional>
-		</dependency>
 		
 		<!-- netty -->
 		<dependency>

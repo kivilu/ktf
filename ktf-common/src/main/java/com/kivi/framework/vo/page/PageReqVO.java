@@ -24,7 +24,7 @@ public class PageReqVO implements Serializable {
     @ApiModelProperty( value = "记录位置", required = false, dataType = "integer", notes = "记录位置", example = "0" )
     private Integer           offset;
 
-    @ApiModelProperty( value = "排序字段", required = false, dataType = "string", notes = "记录位置", example = "" )
+    @ApiModelProperty( value = "排序字段", required = false, dataType = "String", notes = "记录位置", example = "" )
     private String            sort;
 
     @ApiModelProperty( value = "排序方式", required = false, dataType = "String", notes = "排序方式", example = "asc" )

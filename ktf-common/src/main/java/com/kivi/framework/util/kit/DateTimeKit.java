@@ -124,6 +124,15 @@ public class DateTimeKit {
     }
 
     /**
+     * 当前unix时间
+     * 
+     * @return
+     */
+    public static long currentUnix() {
+        return System.currentTimeMillis() / 1000;
+    }
+
+    /**
      * 当前日期，格式 yyyy-MM-dd
      * 
      * @return 当前日期的标准形式字符串
@@ -232,7 +241,7 @@ public class DateTimeKit {
      * @return Season列表 ，元素类似于 20132
      */
     public static LinkedHashSet<String> yearAndSeasons( Date startDate, Date endDate ) {
-        final LinkedHashSet<String> seasons = new LinkedHashSet<String>();
+        final LinkedHashSet<String> seasons = new LinkedHashSet<>();
         if (startDate == null || endDate == null) {
             return seasons;
         }

@@ -58,4 +58,10 @@ public class KtfError {
     /** 访问外部资源超时 */
     public static final int E_GATEWAY_TIMEOUT     = 504;
 
+    /** 加密处理异常 */
+    public static final int E_CRYPTO              = 505;
+
+    /** NULL异常 */
+    public static final int E_NULL                = 506;
+
 }

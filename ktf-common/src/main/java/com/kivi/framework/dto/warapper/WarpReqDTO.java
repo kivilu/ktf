@@ -16,7 +16,7 @@ import lombok.Setter;
 @Setter
 @Getter
 @ApiModel( value = "WarpperReqDTO", description = "DTO wapper" )
-public class WarpperReqDTO<T> implements Serializable {
+public class WarpReqDTO<T> implements Serializable {
     /**
      * 
      */

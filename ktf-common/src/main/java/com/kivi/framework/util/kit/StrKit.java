@@ -766,7 +766,7 @@ public class StrKit {
         if (str == null) {
             return null;
         }
-        List<String> list = new ArrayList<String>(limit == 0 ? 16 : limit);
+        List<String> list = new ArrayList<>(limit == 0 ? 16 : limit);
         if (limit == 1) {
             list.add(str);
             return list;
@@ -1266,6 +1266,19 @@ public class StrKit {
         return sb.toString();
     }
 
+    public static String join( String conjunction, List<String> texts ) {
+        StringBuilder sb = new StringBuilder();
+
+        texts.forEach(text-> {
+            if (sb.length() == 0)
+                sb.append(text);
+            else
+                sb.append(conjunction).append(text);
+        });
+
+        return sb.toString();
+    }
+
     /**
      * 以 conjunction 为分隔符将多个对象转换为字符串，忽略null
      * 
@@ -1624,6 +1637,16 @@ public class StrKit {
             return defaultValue;
         }
         return str.toString().trim();
+    }
+
+    /**
+     * String-->bytes
+     * 
+     * @param str
+     * @return
+     */
+    public static byte[] toBytes( String str ) {
+        return str.getBytes(Charset.forName("UTF-8"));
     }
 
     /**

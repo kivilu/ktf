@@ -61,6 +61,10 @@ public class ApplicationKit {
         return idWalker.nextId();
     }
 
+    public int nextIntId() {
+        return idWalker.nextIntId();
+    }
+
     public Resource[] getResources( String locationPattern ) {
         Resource[] resources = null;
 

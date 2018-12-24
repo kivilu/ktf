@@ -3,6 +3,7 @@ package com.kivi.framework.util;
 import java.lang.management.ManagementFactory;
 import java.net.InetAddress;
 import java.net.NetworkInterface;
+import java.util.concurrent.atomic.AtomicInteger;
 import java.util.concurrent.atomic.AtomicLong;
 
 /**
@@ -30,33 +31,35 @@ import java.util.concurrent.atomic.AtomicLong;
  */
 public class IdWalker {
     // 时间起始标记点，作为基准，一般取系统的最近时间（一旦确定不能变动）
-    private final static long twepoch            = 1288834974657L;
+    private final static long    twepoch            = 1543576563504L;
+
     // 机器标识位数
-    private final static long workerIdBits       = 5L;
+    private final static long    workerIdBits       = 5L;
     // 数据中心标识位数
-    private final static long datacenterIdBits   = 5L;
+    private final static long    datacenterIdBits   = 5L;
     // 机器ID最大值
-    private final static long maxWorkerId        = -1L ^ (-1L << workerIdBits);
+    private final static long    maxWorkerId        = -1L ^ (-1L << workerIdBits);
     // 数据中心ID最大值
-    private final static long maxDatacenterId    = -1L ^ (-1L << datacenterIdBits);
+    private final static long    maxDatacenterId    = -1L ^ (-1L << datacenterIdBits);
     // 毫秒内自增位
-    private final static long sequenceBits       = 12L;
+    private final static long    sequenceBits       = 12L;
     // 机器ID偏左移12位
-    private final static long workerIdShift      = sequenceBits;
+    private final static long    workerIdShift      = sequenceBits;
     // 数据中心ID左移17位
-    private final static long datacenterIdShift  = sequenceBits + workerIdBits;
+    private final static long    datacenterIdShift  = sequenceBits + workerIdBits;
     // 时间毫秒左移22位
-    private final static long timestampLeftShift = sequenceBits + workerIdBits + datacenterIdBits;
+    private final static long    timestampLeftShift = sequenceBits + workerIdBits + datacenterIdBits;
 
-    private final static long sequenceMask       = -1L ^ (-1L << sequenceBits);
+    private final static long    sequenceMask       = -1L ^ (-1L << sequenceBits);
     /* 上次生产id时间戳 */
-    private static AtomicLong lastTimestamp      = new AtomicLong(-1L);
+    private static AtomicLong    lastTimestamp      = new AtomicLong(-1L);
     // 0，并发控制
-    private static AtomicLong sequence           = new AtomicLong(0L);
+    private static AtomicLong    sequence           = new AtomicLong(0L);
+    private static AtomicInteger sequenceInt        = new AtomicInteger(0);
 
-    private final long        workerId;
+    private final long           workerId;
     // 数据标识id部分
-    private final long        datacenterId;
+    private final long           datacenterId;
 
     public IdWalker() {
         this.datacenterId = getDatacenterId(maxDatacenterId);
@@ -116,6 +119,39 @@ public class IdWalker {
         return nextId;
     }
 
+    /**
+     * 获取下一个ID
+     *
+     * @return
+     */
+    public int nextIntId() {
+        long timestamp = timeGen();
+        int seq = 0;
+        if (timestamp < lastTimestamp.get()) {
+            throw new RuntimeException(String.format(
+                    "Clock moved backwards.  Refusing to generate id for %d milliseconds",
+                    lastTimestamp.addAndGet(0 - timestamp)));
+        }
+
+        if (lastTimestamp.get() == timestamp) {
+            // 当前毫秒内，则+1
+            seq = sequenceInt.incrementAndGet();
+            if ((seq & 0x3fff) == 0) {
+                // 当前毫秒内计数满了，则等待下一秒
+                timestamp = tilNextMillis(lastTimestamp.get());
+            }
+        }
+        else {
+            sequence.set(0L);
+        }
+        lastTimestamp.set(timestamp);
+        // ID偏移组合生成最终的ID，并返回ID
+        int nextId = (0x7FFF & (int) (timestamp - twepoch) << 18) | ((int) datacenterId << 14) |
+                ((int) workerId << 10) | seq;
+
+        return nextId;
+    }
+
     private long tilNextMillis( final long lastTimestamp ) {
         long timestamp = this.timeGen();
         while (timestamp <= lastTimestamp) {
@@ -154,7 +190,7 @@ public class IdWalker {
      * 数据标识id部分
      * </p>
      */
-    protected static long getDatacenterId( long maxDatacenterId ) {
+    public static long getDatacenterId( long maxDatacenterId ) {
         long id = 0L;
         try {
             InetAddress ip = InetAddress.getLocalHost();
@@ -176,9 +212,10 @@ public class IdWalker {
     }
 
     public static void main( String[] args ) {
-        IdWalker idWorker = new IdWalker(31, 31);
-        System.out.println("idWorker=" + idWorker.nextId());
+        // IdWalker idWorker = new IdWalker(15, 15);
+        // System.out.println("idWorker=" + idWorker.nextId());
         IdWalker id = new IdWalker();
+        System.out.println("id=" + id.nextId());
         System.out.println("id=" + id.nextId());
         System.out.println(id.datacenterId);
         System.out.println(id.workerId);

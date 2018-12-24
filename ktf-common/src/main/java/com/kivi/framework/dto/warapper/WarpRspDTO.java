@@ -7,7 +7,7 @@ import lombok.Setter;
 
 @Setter
 @Getter
-public class WarpperRspDTO<T> implements Serializable {
+public class WarpRspDTO<T> implements Serializable {
 
     /**
      * 

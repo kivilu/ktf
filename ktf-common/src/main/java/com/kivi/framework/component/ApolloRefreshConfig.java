@@ -3,13 +3,17 @@ package com.kivi.framework.component;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.cloud.context.scope.refresh.RefreshScope;
 import org.springframework.stereotype.Component;
 
 import com.ctrip.framework.apollo.model.ConfigChangeEvent;
 import com.ctrip.framework.apollo.spring.annotation.ApolloConfigChangeListener;
+import com.ctrip.framework.apollo.spring.annotation.EnableApolloConfig;
 import com.kivi.framework.properties.IKtfProperties;
 
+@ConditionalOnProperty( name = { "ktf.common.apollo-enabled" }, havingValue = "true", matchIfMissing = false )
+@EnableApolloConfig
 @Component
 public class ApolloRefreshConfig {
 

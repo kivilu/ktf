@@ -15,6 +15,9 @@ import javax.crypto.spec.SecretKeySpec;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.kivi.framework.exception.AppException;
+import com.kivi.framework.util.kit.HexKit;
+
 import jodd.util.Base64;
 
 /*
@@ -161,6 +164,32 @@ public class AESUtil {
         cipher.init(Cipher.DECRYPT_MODE, secretKey);
         byte[] tgtBytes = cipher.doFinal(content);
         return tgtBytes;
+    }
+
+    public String encodeECBHex( String key, String content ) {
+        String result = null;
+        try {
+            byte[] encBytes = encodeAESECB(key.getBytes("UTF-8"), content.getBytes("UTF-8"));
+            result = HexKit.binary2Hex(encBytes);
+        }
+        catch (Exception e) {
+            throw new AppException(e);
+        }
+
+        return result;
+    }
+
+    public String decodeECBHex( String key, String content ) {
+        String result = null;
+        try {
+            byte[] plainBytes = decodeAESECB(key.getBytes("UTF-8"), HexKit.hex2Byte(content));
+            result = new String(plainBytes, "UTF-8");
+        }
+        catch (Exception e) {
+            throw new AppException(e);
+        }
+
+        return result;
     }
 
     /**

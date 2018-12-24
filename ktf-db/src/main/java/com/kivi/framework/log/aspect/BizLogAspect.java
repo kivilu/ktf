@@ -15,8 +15,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 
-import com.kivi.framework.dto.warapper.WarpperReqDTO;
-import com.kivi.framework.dto.warapper.WarpperRspDTO;
+import com.kivi.framework.dto.warapper.WarpReqDTO;
+import com.kivi.framework.dto.warapper.WarpRspDTO;
 import com.kivi.framework.log.LogManager;
 import com.kivi.framework.log.annotation.BizLog;
 import com.kivi.framework.log.factory.LogTaskFactory;
@@ -63,11 +63,11 @@ public class BizLogAspect {
         // 获取参数
         Object[] params = joinPoint.getArgs();
         for (Object param : params) {
-            if (param instanceof WarpperReqDTO<?>) {
-                log.info("调用{}服务，调用发起方：{}", annotation.value(), ((WarpperReqDTO<?>) param).getFromAppName());
+            if (param instanceof WarpReqDTO<?>) {
+                log.info("调用{}服务，调用发起方：{}", annotation.value(), ((WarpReqDTO<?>) param).getFromAppName());
             }
-            else if (param instanceof WarpperRspDTO<?>) {
-                log.info("调用{}服务，调用发起方：{}", annotation.value(), ((WarpperRspDTO<?>) param).getFromAppName());
+            else if (param instanceof WarpRspDTO<?>) {
+                log.info("调用{}服务，调用发起方：{}", annotation.value(), ((WarpRspDTO<?>) param).getFromAppName());
             }
         }
 

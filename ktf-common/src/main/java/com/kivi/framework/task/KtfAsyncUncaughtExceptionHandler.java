@@ -13,7 +13,7 @@ public class KtfAsyncUncaughtExceptionHandler implements AsyncUncaughtExceptionH
     @Override
     public void handleUncaughtException( Throwable ex, Method method, Object... params ) {
         log.info("-------------》》》捕获线程异常信息");
-        log.info("Exception message: {}", ex.getMessage());
+        log.info("Exception message: {}", ex.getMessage(), ex);
         log.info("Method name: {} ", method.getName());
         for (Object param : params) {
             log.info("Parameter value: {}", param);

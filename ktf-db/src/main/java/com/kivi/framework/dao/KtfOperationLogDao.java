@@ -1,7 +1,7 @@
 package com.kivi.framework.dao;
 
 import com.kivi.framework.vo.OperationLogVO;
-import com.kivi.framework.vo.page.PageInfoKtf;
+import com.kivi.framework.vo.PageInfoKtf;
 import com.kivi.framework.vo.page.PageReqVO;
 
 public interface KtfOperationLogDao {

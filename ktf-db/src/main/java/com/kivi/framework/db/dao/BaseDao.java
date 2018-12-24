@@ -16,7 +16,7 @@ import com.github.pagehelper.PageInfo;
 import com.kivi.framework.exception.DaoException;
 import com.kivi.framework.util.kit.BeanKit;
 import com.kivi.framework.util.kit.ObjectKit;
-import com.kivi.framework.vo.page.PageInfoKtf;
+import com.kivi.framework.vo.PageInfoKtf;
 import com.kivi.framework.vo.page.PageReqVO;
 
 import tk.mybatis.mapper.common.Mapper;
@@ -102,6 +102,17 @@ public abstract class BaseDao<T> implements IDao<T> {
     }
 
     @Override
+    public int deleteByEntity( T entity ) {
+        return mapper.delete(entity);
+    }
+
+    @Override
+    public int deleteByExample( Object example ) {
+
+        return mapper.deleteByExample(example);
+    }
+
+    @Override
     public T updateAll( T entity ) {
         try {
             int row = mapper.updateByPrimaryKey(entity);
@@ -155,7 +166,7 @@ public abstract class BaseDao<T> implements IDao<T> {
         int page = pageReq.getOffset() / pageReq.getLimit() + 1;
         PageHelper.startPage(page, pageReq.getLimit());
         List<T> list = mapper.selectByExample(example);
-        return new PageInfoKtf<T>(new PageInfo<>(list));
+        return new PageInfoKtf<>(new PageInfo<>(list));
     }
 
     @Override
@@ -163,7 +174,7 @@ public abstract class BaseDao<T> implements IDao<T> {
         int page = pageReq.getOffset() / pageReq.getLimit() + 1;
         PageHelper.startPage(page, pageReq.getLimit());
         List<T> list = this.selectByEntity(entity);
-        return new PageInfoKtf<T>(new PageInfo<>(list));
+        return new PageInfoKtf<>(new PageInfo<>(list));
     }
 
     @Override

@@ -56,6 +56,7 @@ public class FastJsonHttpMessageConverterConfiguration {
         serializeConfig.put(Long.class, ToStringSerializer.instance);
         serializeConfig.put(Long.TYPE, ToStringSerializer.instance);
         serializeConfig.put(Map.class, ToStringSerializer.instance);
+        serializeConfig.put(List.class, ToStringSerializer.instance);
         serializeConfig.put(Json.class, SwaggerJsonSerializer.instance);
         serializeConfig.put(Date.class, DateCodec.instance);
 

@@ -53,6 +53,12 @@ public class WarpReqDTO<T> implements Serializable {
     private String            tranSeqId;
 
     /**
+     * 交易流水号
+     */
+    @ApiModelProperty( hidden = true )
+    private Long              tranUniqueId;
+
+    /**
      * 请求内容
      */
     @ApiModelProperty(

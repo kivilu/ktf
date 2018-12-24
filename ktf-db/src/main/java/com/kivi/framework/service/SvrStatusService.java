@@ -2,8 +2,8 @@ package com.kivi.framework.service;
 
 import com.kivi.framework.dto.SvrStatusReqDTO;
 import com.kivi.framework.dto.SvrStatusRspDTO;
-import com.kivi.framework.dto.warapper.WarpperReqDTO;
-import com.kivi.framework.dto.warapper.WarpperRspDTO;
+import com.kivi.framework.dto.warapper.WarpReqDTO;
+import com.kivi.framework.dto.warapper.WarpRspDTO;
 
 /**
  * 应用服务状态
@@ -19,5 +19,5 @@ public interface SvrStatusService {
      * @param req
      * @return
      */
-    WarpperRspDTO<SvrStatusRspDTO> status( WarpperReqDTO<SvrStatusReqDTO> req );
+    WarpRspDTO<SvrStatusRspDTO> status( WarpReqDTO<SvrStatusReqDTO> req );
 }

@@ -4,7 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.kivi.framework.vo.DictVO;
-import com.kivi.framework.vo.page.PageInfoKtf;
+import com.kivi.framework.vo.PageInfoKtf;
 import com.kivi.framework.vo.page.PageReqVO;
 
 public interface DictDao {

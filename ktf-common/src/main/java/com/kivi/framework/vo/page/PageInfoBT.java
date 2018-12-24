@@ -14,6 +14,10 @@ public class PageInfoBT<T> {
     // 总数
     private long    total;
 
+    public PageInfoBT() {
+
+    }
+
     public PageInfoBT( long total, List<T> page ) {
         this.rows = page;
         this.total = total;

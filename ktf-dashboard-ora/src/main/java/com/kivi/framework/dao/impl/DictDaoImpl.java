@@ -24,7 +24,7 @@ import com.kivi.framework.util.kit.CollectionKit;
 import com.kivi.framework.util.kit.DateTimeKit;
 import com.kivi.framework.util.kit.MutiStrKit;
 import com.kivi.framework.vo.DictVO;
-import com.kivi.framework.vo.page.PageInfoKtf;
+import com.kivi.framework.vo.PageInfoKtf;
 import com.kivi.framework.vo.page.PageReqVO;
 
 import tk.mybatis.mapper.entity.Example;

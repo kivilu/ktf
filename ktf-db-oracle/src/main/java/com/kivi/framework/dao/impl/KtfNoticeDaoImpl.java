@@ -15,7 +15,7 @@ import com.kivi.framework.persist.model.KtfNotice;
 import com.kivi.framework.util.Convert;
 import com.kivi.framework.util.kit.DateTimeKit;
 import com.kivi.framework.vo.KtfNoticeVO;
-import com.kivi.framework.vo.page.PageInfoKtf;
+import com.kivi.framework.vo.PageInfoKtf;
 import com.kivi.framework.vo.page.PageReqVO;
 
 @Repository

@@ -7,15 +7,9 @@ import java.util.Timer;
 import java.util.TimerTask;
 import java.util.concurrent.atomic.AtomicBoolean;
 
-import javax.annotation.PostConstruct;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.DependsOn;
-import org.springframework.stereotype.Component;
 
-import com.kivi.framework.service.ErrorCodeService;
 import com.kivi.framework.util.kit.CollectionKit;
 
 /*
@@ -43,18 +37,18 @@ import com.kivi.framework.util.kit.CollectionKit;
  * @author Eric
  *
  */
-@Component( "errorLoader" )
-@DependsOn( value = { "springContextHolder", "errorKit", "tk.mybatis.mapper.autoconfigure.MapperAutoConfiguration" } )
+//@Component( "errorLoader" )
+//@DependsOn( value = { "springContextHolder", "errorKit", "tk.mybatis.mapper.autoconfigure.MapperAutoConfiguration" } )
 public class ErrorLoader {
 
     private static final Logger  log      = LoggerFactory.getLogger(ErrorLoader.class);
 
     private static AtomicBoolean needLoad = new AtomicBoolean(false);
 
-    @Autowired
-    private ErrorCodeService     errorCodeService;
+    // @Autowired
+    // private ErrorCodeService errorCodeService;
 
-    @PostConstruct
+    // @PostConstruct
     public void init() {
         // 1.从数据库中加载错误码信息
         Map<String, String[]> errorCodeDb = this.loadFromDatabase();
@@ -88,8 +82,8 @@ public class ErrorLoader {
 
     private Map<String, String[]> loadFromDatabase() {
         Map<String, String[]> result = new HashMap<>();
-        if (errorCodeService != null)
-            result = errorCodeService.loadErrorCode();
+        // if (errorCodeService != null)
+        // result = errorCodeService.loadErrorCode();
 
         return result;
     }
@@ -110,7 +104,7 @@ public class ErrorLoader {
 
         if (!errorCodeProp.isEmpty()) {
             log.info("发现有数据库不存在的错误码，开始同步到数据库...");
-            errorCodeService.saveErrorCode(errorCodeProp);
+            // errorCodeService.saveErrorCode(errorCodeProp);
         }
     }
 

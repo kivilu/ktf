@@ -137,18 +137,22 @@ public class BaseController {
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_OCTET_STREAM);
         headers.setContentDispositionFormData("attachment", dfileName);
-        return new ResponseEntity<byte[]>(fileBytes, headers, HttpStatus.CREATED);
+        return new ResponseEntity<>(fileBytes, headers, HttpStatus.CREATED);
     }
 
     /**
      * 把service层的分页信息，封装为bootstrap table通用的分页封装
      */
     protected <T> PageInfoBT<T> packForBT( long total, List<T> list ) {
-        return new PageInfoBT<T>(total, list);
+        return new PageInfoBT<>(total, list);
     }
 
     protected String msgId() {
         return String.valueOf(ApplicationKit.me().nextId());
+    }
+
+    protected Long msgLongId() {
+        return ApplicationKit.me().nextId();
     }
 
     protected KtfDeferredResult newDeferredResult() {
@@ -157,7 +161,7 @@ public class BaseController {
         ITimeoutService timeoutService = SpringContextHolder.getBean(ITimeoutService.class);
 
         KtfDeferredResult result = new KtfDeferredResult(msgId(), ktfProperties.getApi().getTimeout());
-        result.onTimeout(new KtfTimeoutRunnable<String>(result, timeoutService));
+        result.onTimeout(new KtfTimeoutRunnable<>(result, timeoutService));
 
         return result;
     }
@@ -167,8 +171,8 @@ public class BaseController {
 
         ITimeoutService timeoutService = SpringContextHolder.getBean(ITimeoutService.class);
 
-        KtfAsyncResult<T> result = new KtfAsyncResult<T>(msgId(), ktfProperties.getApi().getTimeout());
-        result.onTimeout(new KtfAsyncTimeoutRunnable<T>(result, timeoutService));
+        KtfAsyncResult<T> result = new KtfAsyncResult<>(msgId(), ktfProperties.getApi().getTimeout());
+        result.onTimeout(new KtfAsyncTimeoutRunnable<>(result, timeoutService));
 
         return result;
     }

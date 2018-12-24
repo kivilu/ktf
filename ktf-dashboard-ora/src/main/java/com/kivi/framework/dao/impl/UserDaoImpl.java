@@ -15,8 +15,8 @@ import com.kivi.framework.persist.model.KtfUser;
 import com.kivi.framework.util.Convert;
 import com.kivi.framework.util.kit.BeanKit;
 import com.kivi.framework.util.kit.DateTimeKit;
+import com.kivi.framework.vo.PageInfoKtf;
 import com.kivi.framework.vo.UserVO;
-import com.kivi.framework.vo.page.PageInfoKtf;
 import com.kivi.framework.vo.page.PageReqVO;
 
 @Repository

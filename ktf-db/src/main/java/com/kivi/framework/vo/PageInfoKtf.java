@@ -1,6 +1,7 @@
-package com.kivi.framework.vo.page;
+package com.kivi.framework.vo;
 
 import com.github.pagehelper.PageInfo;
+import com.kivi.framework.vo.page.PageInfoVO;
 
 import lombok.Getter;
 import lombok.Setter;

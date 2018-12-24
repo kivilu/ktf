@@ -5,6 +5,7 @@ import javax.annotation.PostConstruct;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.cache.CacheProperties;
 import org.springframework.boot.autoconfigure.cache.CacheType;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.cache.CacheManager;
 import org.springframework.cache.ehcache.EhCacheCacheManager;
 import org.springframework.context.annotation.DependsOn;
@@ -20,10 +21,9 @@ import com.kivi.framework.component.SpringContextHolder;
 /**
  * 缓存工具类
  */
+@ConditionalOnProperty( name = { "ktf.cache.enabled" }, havingValue = "true", matchIfMissing = false )
 @Component
 @DependsOn( "springContextHolder" )
-// @ConditionalOnBean(value = { RedisConfiguration.class,
-// RedisConfiguration.class })
 public class CacheKit {
 
     private static ICache cacheFactory;

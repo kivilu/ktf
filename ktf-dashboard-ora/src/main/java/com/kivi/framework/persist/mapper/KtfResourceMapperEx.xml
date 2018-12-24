@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.kivi.framework.persist.mapper.KtfResourceMapperEx">
-  <resultMap id="BaseResultMap" type="com.kivi.framework.vo.web.ResourceVO">
+  <resultMap id="BaseResultMap" type="com.kivi.framework.vo.ResourceVO">
     <!--
       WARNING - @mbg.generated
     -->
@@ -22,7 +22,7 @@
     <result column="GMT_UPDATE" jdbcType="TIMESTAMP" property="gmtUpdate" />
   </resultMap>
   
-  <resultMap id="MenuNodeMap" type="com.kivi.framework.vo.web.MenuNode">
+  <resultMap id="MenuNodeMap" type="com.kivi.framework.vo.MenuNode">
     <id column="ID" jdbcType="NUMERIC" property="id" />
     <result column="parent_Id" jdbcType="NUMERIC" property="parentId" />
     <result column="NAME" jdbcType="VARCHAR" property="name" />

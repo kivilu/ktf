@@ -12,14 +12,11 @@ import java.util.TimerTask;
 import java.util.UUID;
 import java.util.concurrent.atomic.AtomicInteger;
 
-import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.DependsOn;
-import org.springframework.stereotype.Service;
 
 import com.alibaba.fastjson.JSON;
 import com.kivi.framework.component.ApplicationKit;
@@ -39,8 +36,9 @@ import com.kivi.framework.util.kit.StrKit;
  * @author Eric
  *
  */
-@Service( "ktfNameService" )
-@DependsOn( value = { "springContextHolder", "tk.mybatis.mapper.autoconfigure.MapperAutoConfiguration" } )
+// @Service( "ktfNameService" )
+// @DependsOn( value = { "springContextHolder",
+// "tk.mybatis.mapper.autoconfigure.MapperAutoConfiguration" } )
 public class KtfApplicationImpl extends BaseDao<KtfApplication> implements KtfNameService {
 
     private static final Logger           log                  = LoggerFactory.getLogger(KtfApplicationImpl.class);
@@ -66,7 +64,7 @@ public class KtfApplicationImpl extends BaseDao<KtfApplication> implements KtfNa
 
     }
 
-    @PostConstruct
+    // @PostConstruct
     private void startup() throws Exception {
         log.info("应用开始启动");
         String path = ktfProperties.getCommon().getSidDir();

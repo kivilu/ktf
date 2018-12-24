@@ -297,7 +297,7 @@ public class MenuNode implements Comparable<MenuNode> {
 
         // 如果关闭了接口文档,则不显示接口文档菜单
         KtfProperties ktfProperties = SpringContextHolder.getBean(KtfProperties.class);
-        if (!ktfProperties.getSwagger().getEnabled()) {
+        if (ktfProperties.getSwagger() != null && !ktfProperties.getSwagger().getEnabled()) {
             List<MenuNode> menuNodesCopy = new ArrayList<>();
             for (MenuNode menuNode : menuNodes) {
                 if (Constant.API_MENU_NAME.equals(menuNode.getName())) {

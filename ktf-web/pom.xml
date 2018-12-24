@@ -15,12 +15,40 @@
        		<artifactId>ktf-common</artifactId>
        		<version>1.0.0</version>
        		<optional>true</optional>
-       	</dependency>
+       		<exclusions>
+       			<exclusion>
+       				<groupId>org.mybatis.spring.boot</groupId>
+       				<artifactId>
+       					mybatis-spring-boot-starter
+       				</artifactId>
+       			</exclusion>
+       		</exclusions>
+  		</dependency>
        	<dependency>
        		<groupId>com.kivi</groupId>
        		<artifactId>ktf-db</artifactId>
        		<version>1.0.0</version>
        		<optional>true</optional>
+       		<exclusions>
+       			<exclusion>
+       				<groupId>org.mybatis.spring.boot</groupId>
+       				<artifactId>
+       					mybatis-spring-boot-starter
+       				</artifactId>
+       			</exclusion>
+       			<exclusion>
+       				<groupId>org.mybatis.spring.boot</groupId>
+       				<artifactId>
+       					mybatis-spring-boot-starter-test
+       				</artifactId>
+       			</exclusion>
+       			<exclusion>
+       				<groupId>tk.mybatis</groupId>
+       				<artifactId>
+       					mapper-spring-boot-starter
+       				</artifactId>
+       			</exclusion>
+       		</exclusions>
        	</dependency>
        	<dependency>
        		<groupId>com.kivi</groupId>

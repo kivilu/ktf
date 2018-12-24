@@ -52,6 +52,7 @@ public class JwtAuthInterceptor implements HandlerInterceptor {
                 String identifier;
                 try {
                     identifier = JwtKit.getIdentifier(jwtToken);
+                    httpServletRequest.setAttribute(WebConst.ATTR_USERACCOUNT, identifier);
                 }
                 catch (JWTDecodeException j) {
                     throw new RuntimeException("401");

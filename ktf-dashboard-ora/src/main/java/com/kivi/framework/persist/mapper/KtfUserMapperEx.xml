@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.kivi.framework.persist.mapper.KtfUserMapperEx">
-  <resultMap id="BaseResultMap" type="com.kivi.framework.vo.web.UserVO">
+  <resultMap id="BaseResultMap" type="com.kivi.framework.vo.UserVO">
     <!--
       WARNING - @mbg.generated
     -->

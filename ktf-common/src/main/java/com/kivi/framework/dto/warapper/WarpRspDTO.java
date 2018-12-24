@@ -25,6 +25,11 @@ public class WarpRspDTO<T> implements Serializable {
     private String            tranSeqId;
 
     /**
+     * 交易唯一序列号
+     */
+    private Long              tranUniqueId;
+
+    /**
      * 参数
      */
     private Object[]          params;

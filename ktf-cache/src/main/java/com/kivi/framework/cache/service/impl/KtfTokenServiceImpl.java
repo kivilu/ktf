@@ -40,7 +40,7 @@ public class KtfTokenServiceImpl implements KtfTokenService {
     @Cacheable( value = KtfCache.KTF_TOKEN, key = "caches[0].name+'_'+#key" )
     @Override
     public <T> T cache( String key ) {
-        log.info("缓存：name={}, key={}_{}不存在", KtfCache.KTF_TOKEN);
+        log.info("缓存：name={}, key={}_{}不存在", KtfCache.KTF_TOKEN, KtfCache.KTF_TOKEN, key);
         return null;
     }
 

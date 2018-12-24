@@ -133,6 +133,32 @@ public class DateTimeKit {
     }
 
     /**
+     * unix时间戳转成Date
+     * 
+     * @param time
+     * @return
+     */
+    public static Date unixTime( int time ) {
+        long msTime = time < 0 ? 0 : time;
+        return date(msTime * 1000);
+    }
+
+    /**
+     * Date转成Unix时间戳
+     * 
+     * @param time
+     * @return
+     */
+    public static int unixTime( Date time ) {
+        if (time == null)
+            return -1;
+
+        long msTime = time.getTime();
+
+        return (int) (msTime / 1000);
+    }
+
+    /**
      * 当前日期，格式 yyyy-MM-dd
      * 
      * @return 当前日期的标准形式字符串

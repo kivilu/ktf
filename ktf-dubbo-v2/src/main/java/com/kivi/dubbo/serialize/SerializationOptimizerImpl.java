@@ -16,13 +16,12 @@ import com.kivi.framework.dto.BaseRsp;
 import com.kivi.framework.dto.PagerDTO;
 import com.kivi.framework.dto.SvrStatusReqDTO;
 import com.kivi.framework.dto.SvrStatusRspDTO;
+import com.kivi.framework.dto.warapper.WarpReqDTO;
+import com.kivi.framework.dto.warapper.WarpRspDTO;
 import com.kivi.framework.dto.warapper.WarpperDTO;
-import com.kivi.framework.dto.warapper.WarpperReqDTO;
-import com.kivi.framework.dto.warapper.WarpperRspDTO;
 import com.kivi.framework.properties.KtfDubboProperties;
 import com.kivi.framework.util.kit.StrKit;
 import com.kivi.framework.vo.page.PageInfoBT;
-import com.kivi.framework.vo.page.PageInfoKtf;
 import com.kivi.framework.vo.page.PageInfoVO;
 import com.kivi.framework.vo.page.PageReqVO;
 
@@ -31,11 +30,11 @@ public class SerializationOptimizerImpl implements SerializationOptimizer {
 
     @Override
     public Collection<Class> getSerializableClasses() {
-        List<Class> classes = new LinkedList<Class>();
+        List<Class> classes = new LinkedList<>();
 
         classes.add(WarpperDTO.class);
-        classes.add(WarpperReqDTO.class);
-        classes.add(WarpperRspDTO.class);
+        classes.add(WarpReqDTO.class);
+        classes.add(WarpRspDTO.class);
         classes.add(BaseReq.class);
         classes.add(BaseRsp.class);
         classes.add(BaseReqDTO.class);
@@ -44,9 +43,10 @@ public class SerializationOptimizerImpl implements SerializationOptimizer {
         classes.add(SvrStatusReqDTO.class);
         classes.add(SvrStatusRspDTO.class);
         classes.add(PageInfoBT.class);
-        classes.add(PageInfoKtf.class);
         classes.add(PageInfoVO.class);
         classes.add(PageReqVO.class);
+        classes.add(byte.class);
+        classes.add(Byte.class);
 
         KtfDubboProperties ktfDubboProperties = SpringContextHolder.getBeanNoAssert(KtfDubboProperties.class);
         if (ktfDubboProperties == null) {

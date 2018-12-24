@@ -4,7 +4,7 @@ import java.util.List;
 
 import org.springframework.stereotype.Repository;
 
-import com.kivi.framework.vo.page.PageInfoKtf;
+import com.kivi.framework.vo.PageInfoKtf;
 import com.kivi.framework.vo.page.PageReqVO;
 
 /**
@@ -20,6 +20,10 @@ public interface IDao<T> {
     T saveNotNull( T entity );
 
     int delete( Object key );
+
+    int deleteByEntity( T entity );
+
+    int deleteByExample( Object example );
 
     T updateAll( T entity );
 

@@ -3,7 +3,7 @@ package com.kivi.framework.dao;
 import java.util.List;
 
 import com.kivi.framework.vo.KtfNoticeVO;
-import com.kivi.framework.vo.page.PageInfoKtf;
+import com.kivi.framework.vo.PageInfoKtf;
 import com.kivi.framework.vo.page.PageReqVO;
 
 public interface KtfNoticeDao {

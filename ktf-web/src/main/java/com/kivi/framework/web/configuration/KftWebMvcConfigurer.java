@@ -26,6 +26,11 @@ public class KftWebMvcConfigurer extends WebMvcConfigurerAdapter {
     public void addResourceHandlers( ResourceHandlerRegistry registry ) {
 
         registry.addResourceHandler("/webjars/**").addResourceLocations("classpath:/META-INF/resources/webjars/");
+
+        if (!registry.hasMappingForPattern("/static/**")) {
+            registry.addResourceHandler("/static/**").addResourceLocations("classpath:/static/");
+        }
+
         super.addResourceHandlers(registry);
     }
 

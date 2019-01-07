@@ -27,7 +27,9 @@ import com.kivi.framework.web.async.KtfAsyncResult;
 import com.kivi.framework.web.async.KtfAsyncTimeoutRunnable;
 import com.kivi.framework.web.async.KtfDeferredResult;
 import com.kivi.framework.web.async.KtfTimeoutRunnable;
+import com.kivi.framework.web.constant.WebConst;
 import com.kivi.framework.web.constant.tips.SuccessTip;
+import com.kivi.framework.web.jwt.JwtUser;
 import com.kivi.framework.web.util.kit.HttpKit;
 import com.kivi.framework.web.warpper.BaseControllerWarpper;
 
@@ -64,6 +66,14 @@ public class BaseController {
 
     protected void setAttr( String name, Object value ) {
         HttpKit.getRequest().setAttribute(name, value);
+    }
+
+    protected Object getAttr( String name ) {
+        return HttpKit.getRequest().getAttribute(name);
+    }
+
+    protected JwtUser getJwtUser() {
+        return (JwtUser) HttpKit.getRequest().getAttribute(WebConst.ATTR_USERACCOUNT);
     }
 
     protected Integer getSystemInvokCount() {

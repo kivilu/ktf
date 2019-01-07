@@ -19,16 +19,14 @@ public class JwtKit {
      * 
      * @param identifier
      *            用户标识
-     * @param password
-     *            用户密码
      * @return
      * @throws Exception
      */
-    public static String create( String identifier, String token, Date expiresAt ) throws Exception {
+    public static String create( JwtUser jwtUser, String token, Date expiresAt ) throws Exception {
 
         long nowMillis = System.currentTimeMillis();
 
-        Builder builder = JWT.create().withAudience(identifier).withExpiresAt(expiresAt)
+        Builder builder = JWT.create().withIssuer("kTF").withAudience(jwtUser.audience()).withExpiresAt(expiresAt)
                 .withIssuedAt(DateTimeKit.date(nowMillis));
 
         return builder.sign(Algorithm.HMAC256(token));
@@ -53,9 +51,10 @@ public class JwtKit {
      * @return
      * @throws Exception
      */
-    public static String getIdentifier( String jwt ) throws Exception {
+    public static JwtUser getIdentifier( String jwt ) throws Exception {
         List<String> auds = JWT.decode(jwt).getAudience();
-        return (auds == null || auds.isEmpty()) ? null : auds.get(0);
+
+        return JwtUser.audience(auds);
     }
 
     public static void main( String[] args ) {

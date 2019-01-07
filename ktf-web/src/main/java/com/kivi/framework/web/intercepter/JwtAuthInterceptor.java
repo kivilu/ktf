@@ -18,6 +18,7 @@ import com.kivi.framework.web.annotation.LoginToken;
 import com.kivi.framework.web.annotation.PassToken;
 import com.kivi.framework.web.constant.WebConst;
 import com.kivi.framework.web.jwt.JwtKit;
+import com.kivi.framework.web.jwt.JwtUser;
 
 public class JwtAuthInterceptor implements HandlerInterceptor {
 
@@ -49,10 +50,10 @@ public class JwtAuthInterceptor implements HandlerInterceptor {
                     throw new KtfException(KtfError.E_UNAUTHORIZED, "用户尚未登录，请重新登录");
                 }
                 // 获取 token中的identifier
-                String identifier;
+                JwtUser jwtUser = null;
                 try {
-                    identifier = JwtKit.getIdentifier(jwtToken);
-                    httpServletRequest.setAttribute(WebConst.ATTR_USERACCOUNT, identifier);
+                    jwtUser = JwtKit.getIdentifier(jwtToken);
+                    httpServletRequest.setAttribute(WebConst.ATTR_USERACCOUNT, jwtUser);
                 }
                 catch (JWTDecodeException j) {
                     throw new RuntimeException("401");
@@ -60,7 +61,7 @@ public class JwtAuthInterceptor implements HandlerInterceptor {
 
                 KtfTokenService tokenService = SpringContextHolder.getBean(KtfTokenService.class);
 
-                String token = tokenService.cache(identifier);
+                String token = tokenService.cache(jwtUser.getIdentifier());
                 if (token == null) {
                     throw new KtfException(KtfError.E_UNAUTHORIZED, "登录状态已过期，请重新登录");
                 }

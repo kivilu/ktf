@@ -128,8 +128,8 @@ public class DateTimeKit {
      * 
      * @return
      */
-    public static long currentUnix() {
-        return System.currentTimeMillis() / 1000;
+    public static int currentUnix() {
+        return (int) (System.currentTimeMillis() / 1000);
     }
 
     /**

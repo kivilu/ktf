@@ -14,28 +14,40 @@ public class WarpRspDTO<T> implements Serializable {
      */
     private static final long serialVersionUID = 1L;
 
+    public WarpRspDTO() {
+        this(null, null);
+    }
+
+    public WarpRspDTO( Long tranUniqueId ) {
+        this(tranUniqueId, null);
+    }
+
+    public WarpRspDTO( Long tranUniqueId, T rspObject ) {
+        this.rspObject = rspObject;
+    }
+
     /**
      * 调用响应应用名称
      */
-    private String            fromAppName;
+    private String   fromAppName;
 
     /**
      * 交易流水号
      */
-    private String            tranSeqId;
+    private String   tranSeqId;
 
     /**
      * 交易唯一序列号
      */
-    private Long              tranUniqueId;
+    private Long     tranUniqueId;
 
     /**
      * 参数
      */
-    private Object[]          params;
+    private Object[] params;
 
     /**
      * 响应内容
      */
-    private T                 rspObject;
+    private T        rspObject;
 }

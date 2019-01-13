@@ -12,14 +12,14 @@ import io.swagger.annotations.ApiModel;
 public class KtfAsyncResult<T> extends DeferredResult<String> {
     private static final Logger log = LoggerFactory.getLogger(KtfAsyncResult.class);
 
-    protected final String      msgId;
+    protected final Long        msgId;
 
-    public KtfAsyncResult( String msgId ) {
+    public KtfAsyncResult( Long msgId ) {
         super();
         this.msgId = msgId;
     }
 
-    public KtfAsyncResult( String msgId, Long timeout ) {
+    public KtfAsyncResult( Long msgId, Long timeout ) {
         super(timeout);
         this.msgId = msgId;
     }
@@ -45,7 +45,7 @@ public class KtfAsyncResult<T> extends DeferredResult<String> {
         return super.setResult(json);
     }
 
-    public String getMsgId() {
+    public Long getMsgId() {
         return msgId;
     }
 

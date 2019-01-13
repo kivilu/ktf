@@ -72,4 +72,14 @@ public class JwtUser implements Serializable {
 
         return builder.toString();
     }
+
+    @Override
+    public String toString() {
+        StringBuilder builder = new StringBuilder();
+        builder
+                .append("id=").append(id).append(", ")
+                .append("identifier").append(identifier);
+        return builder.toString();
+    }
+
 }

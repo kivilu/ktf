@@ -35,6 +35,11 @@ public class KtfDubboProperties implements IKtfProperties {
      */
     private String             serializeClasses;
 
+    /**
+     * dubbo超时时间
+     */
+    private int                timeout   = 30000;
+
     @Override
     public String prefix() {
         return PREFIX;

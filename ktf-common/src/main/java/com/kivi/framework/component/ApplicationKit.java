@@ -57,6 +57,10 @@ public class ApplicationKit {
         return name;
     }
 
+    public String getEnvProperty( String key ) {
+        return env.getProperty(key);
+    }
+
     public long nextId() {
         return idWalker.nextId();
     }

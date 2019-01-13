@@ -22,6 +22,18 @@ public class WarpReqDTO<T> implements Serializable {
      */
     private static final long serialVersionUID = 1L;
 
+    public WarpReqDTO() {
+        this(null, null);
+    }
+
+    public WarpReqDTO( Long tranUniqueId ) {
+        this(tranUniqueId, null);
+    }
+
+    public WarpReqDTO( Long tranUniqueId, T reqObject ) {
+        this.reqObject = reqObject;
+    }
+
     /**
      * 客户端IP
      */
@@ -30,7 +42,7 @@ public class WarpReqDTO<T> implements Serializable {
                        value = "客户端IP",
                        dataType = "String",
                        example = "127.0.0.1" )
-    private String            clientIp;
+    private String clientIp;
 
     /**
      * 调用发起应用名称
@@ -40,7 +52,7 @@ public class WarpReqDTO<T> implements Serializable {
                        value = "调用发起应用名称",
                        dataType = "String",
                        example = "" )
-    private String            fromAppName;
+    private String fromAppName;
 
     /**
      * 交易流水号
@@ -50,13 +62,13 @@ public class WarpReqDTO<T> implements Serializable {
                        value = "交易流水号",
                        dataType = "String",
                        example = "" )
-    private String            tranSeqId;
+    private String tranSeqId;
 
     /**
      * 交易流水号
      */
     @ApiModelProperty( hidden = true )
-    private Long              tranUniqueId;
+    private Long   tranUniqueId;
 
     /**
      * 请求内容
@@ -65,6 +77,6 @@ public class WarpReqDTO<T> implements Serializable {
                        position = 4,
                        value = "请求内容",
                        dataType = "Object" )
-    private T                 reqObject;
+    private T      reqObject;
 
 }

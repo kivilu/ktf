@@ -4,11 +4,11 @@ import com.alibaba.fastjson.JSON;
 
 public class KtfDeferredResult extends KtfAsyncResult<String> {
 
-    public KtfDeferredResult( String msgId ) {
+    public KtfDeferredResult( Long msgId ) {
         super(msgId);
     }
 
-    public KtfDeferredResult( String msgId, Long timeout ) {
+    public KtfDeferredResult( Long msgId, Long timeout ) {
         super(msgId, timeout);
     }
 

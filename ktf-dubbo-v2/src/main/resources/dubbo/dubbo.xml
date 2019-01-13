@@ -25,10 +25,29 @@
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
 	http://code.alibabatech.com/schema/dubbo http://code.alibabatech.com/schema/dubbo/dubbo.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
 
+   <!-- 提供方应用信息，用于计算依赖关系 -->  
+   <!-- <dubbo:application name="${dubbo.application.name}"  /> -->
+  
+    <!-- 注册中心服务地址 -->  
+    <!-- <dubbo:registry protocol="${dubbo.registry.protocol}" address="${dubbo.registry.address}" /> -->
     
-   <dubbo:protocol name="rest" port="${dubbo.protocol.rest.port}" 
+    <!-- 服务提供者缺省值配置 -->
+    <!-- <dubbo:provider iothreads="5" threadpool="cached" threads="500" /> -->
+    
+    <!-- 消费者公共配置 -->
+    <!-- <dubbo:consumer check="false" /> -->
+  
+    <!-- 用dubbo协议在30001 -->  
+    <!-- <dubbo:protocol name="${dubbo.protocol.name}" port="${dubbo.protocol.port}" 
+          dispather="all" serialization="kryo"/>  -->
+    
+   <!-- <dubbo:protocol name="rest" port="${dubbo.protocol.rest.port}" 
           contextpath="${dubbo.protocol.rest.contextpath}" 
-          server="${dubbo.protocol.rest.server}"/>
+          server="${dubbo.protocol.rest.server}"/> -->
+          
+          
+    <import resource="classpath:dubbo/dubbo-provider-*.xml"/>
+    <import resource="classpath*:dubbo/dubbo-consumer-*.xml"/>
 
 
 </beans>

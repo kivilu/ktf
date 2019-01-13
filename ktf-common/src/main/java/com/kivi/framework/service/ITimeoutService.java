@@ -7,5 +7,5 @@ public interface ITimeoutService {
      * @param msgId
      *            消息唯一ID
      */
-    void onTimeout( String msgId );
+    void onTimeout( Long msgId );
 }

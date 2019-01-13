@@ -157,11 +157,7 @@ public class BaseController {
         return new PageInfoBT<>(total, list);
     }
 
-    protected String msgId() {
-        return String.valueOf(ApplicationKit.me().nextId());
-    }
-
-    protected Long msgLongId() {
+    protected Long msgId() {
         return ApplicationKit.me().nextId();
     }
 

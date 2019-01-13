@@ -1,6 +1,5 @@
 package com.kivi.dubbo.configuration;
 
-import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.ImportResource;
 
@@ -10,9 +9,9 @@ import com.alibaba.dubbo.config.ProtocolConfig;
 import com.alibaba.dubbo.config.ProviderConfig;
 import com.alibaba.dubbo.config.RegistryConfig;
 
-@ConditionalOnProperty( prefix = "ktf.dubbo", name = "rest-enabled", havingValue = "true", matchIfMissing = false )
+//@ConditionalOnProperty( prefix = "ktf.dubbo", name = "rest-enabled", havingValue = "true", matchIfMissing = false )
 @Configuration
-@ImportResource( { "classpath:dubbo/dubbo-rest.xml" } )
+@ImportResource( { "classpath:dubbo/dubbo.xml" } )
 public class KtfDubboConfiguration {
 
     // @Bean

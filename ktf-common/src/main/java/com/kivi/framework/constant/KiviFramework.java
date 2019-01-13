@@ -9,7 +9,7 @@ public interface KiviFramework {
     /**
      * dubbo属性文件
      */
-    // public static final String DUBBO_PLACEHOLDER = "${ktf.dubbo-file}";
+    public static final String DUBBO_PLACEHOLDER    = "${ktf.dubbo-file}";
 
     /** redisson 配置文件 */
     public static final String REDISSON_CONFIG      = "${ktf.redisson.config-file}";

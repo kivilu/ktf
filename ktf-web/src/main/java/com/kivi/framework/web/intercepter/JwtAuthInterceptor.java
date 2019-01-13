@@ -49,7 +49,7 @@ public class JwtAuthInterceptor implements HandlerInterceptor {
                 if (jwtToken == null) {
                     throw new KtfException(KtfError.E_UNAUTHORIZED, "用户尚未登录，请重新登录");
                 }
-                // 获取 token中的identifier
+                // 获取 token中的JwtUser
                 JwtUser jwtUser = null;
                 try {
                     jwtUser = JwtKit.getIdentifier(jwtToken);
@@ -61,7 +61,7 @@ public class JwtAuthInterceptor implements HandlerInterceptor {
 
                 KtfTokenService tokenService = SpringContextHolder.getBean(KtfTokenService.class);
 
-                String token = tokenService.cache(jwtUser.getIdentifier());
+                String token = tokenService.cache(jwtUser.getId().toString());
                 if (token == null) {
                     throw new KtfException(KtfError.E_UNAUTHORIZED, "登录状态已过期，请重新登录");
                 }

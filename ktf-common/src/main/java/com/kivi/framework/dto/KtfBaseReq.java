@@ -30,14 +30,13 @@ public class KtfBaseReq<T> implements Serializable {
     @Size( max = 8, message = "版本号长度最大为8" )
     private String            version;
 
-    @ApiModelProperty(
-                       position = 2,
-                       value = "请求流水号 ",
-                       required = false,
-                       dataType = "String",
-                       notes = "请求流水号",
-                       example = "yyyymmddhhmmss000001" )
-    @Size( max = 30, message = "请求流水号长度最大为30" )
+    /*
+     * @ApiModelProperty( position = 2, value = "请求流水号 ", required = false,
+     * dataType = "String", notes = "请求流水号", example = "yyyymmddhhmmss000001" )
+     * 
+     * @Size( max = 30, message = "请求流水号长度最大为30" )
+     */
+    @ApiModelProperty( hidden = true )
     private String            reqSeqId;
 
     @ApiModelProperty(

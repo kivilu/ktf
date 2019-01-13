@@ -4,6 +4,8 @@ import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Configuration;
 
+import com.kivi.framework.component.ApplicationKit;
+
 import lombok.Getter;
 import lombok.Setter;
 
@@ -28,6 +30,10 @@ public class KtfCacheProperties implements IKtfProperties {
      * 缓存失效时间
      */
     private int                expiration = 3600;
+
+    public String cacheType() {
+        return ApplicationKit.me().getEnvProperty("spring.cache.type");
+    }
 
     @Override
     public String prefix() {

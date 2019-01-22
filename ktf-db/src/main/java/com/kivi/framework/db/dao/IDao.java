@@ -67,6 +67,15 @@ public interface IDao<T> {
     /**
      * 分页查询
      * 
+     * @param example
+     * @param pageReq
+     * @return
+     */
+    PageInfoKtf<T> selectPageByExample( Object example, PageReqVO pageReq );
+
+    /**
+     * 分页查询
+     * 
      * @return
      */
     PageInfoKtf<T> selectByPage( T entity, PageReqVO pageReq );

@@ -6,7 +6,7 @@
     <version>1.0.0</version>
   </parent>
   <artifactId>ktf-dubbo-v2</artifactId>
-  <description>基于dubbo2.6.5集成</description>
+  <description>基于dubbo2.6.4集成</description>
   
   <properties>
   		<dubbo-spring-boot-starter.version>0.1.1</dubbo-spring-boot-starter.version>
@@ -45,7 +45,7 @@
        		</exclusions>
   		</dependency>
   
-  	    <dependency>
+  	    <!-- <dependency>
 	    	<groupId>com.alibaba.boot</groupId>
 	    	<artifactId>dubbo-spring-boot-starter</artifactId>
 	    	<version>${dubbo-spring-boot-starter.version}</version>
@@ -55,7 +55,7 @@
 	    			<artifactId>dubbo</artifactId>
 	    		</exclusion>
 	    	</exclusions>
-  		</dependency>
+  		</dependency> -->
   		
   		<dependency>
   			<groupId>com.alibaba</groupId>
@@ -109,10 +109,10 @@
 		    </exclusions>
 		</dependency> 
 
-    	<dependency>
+    	<!-- <dependency>
             <groupId>org.jboss.resteasy</groupId>
             <artifactId>resteasy-jackson-provider</artifactId>
-        </dependency>
+        </dependency> -->
         
         <dependency>
 		    <groupId>org.apache.curator</groupId>
@@ -132,7 +132,7 @@
 		  <version>${swagger-dubbo.version}</version>
 		</dependency> -->
         
-        <dependency>
+       <!--  <dependency>
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-starter-netflix-hystrix</artifactId>
             <version>${netflix-hystrix.version}</version>
@@ -143,7 +143,7 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>
             <scope>test</scope>
-        </dependency>
+        </dependency> -->
   
   </dependencies>
   

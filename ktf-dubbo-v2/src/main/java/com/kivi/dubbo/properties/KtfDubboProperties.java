@@ -1,8 +1,15 @@
-package com.kivi.framework.properties;
+package com.kivi.dubbo.properties;
 
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Configuration;
+
+import com.alibaba.dubbo.config.ApplicationConfig;
+import com.alibaba.dubbo.config.ConsumerConfig;
+import com.alibaba.dubbo.config.ProtocolConfig;
+import com.alibaba.dubbo.config.ProviderConfig;
+import com.alibaba.dubbo.config.RegistryConfig;
+import com.kivi.framework.properties.IKtfProperties;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -15,17 +22,17 @@ import lombok.Setter;
                         prefix = KtfDubboProperties.PREFIX,
                         name = "enabled",
                         havingValue = "true",
-                        matchIfMissing = false )
+                        matchIfMissing = true )
 public class KtfDubboProperties implements IKtfProperties {
     public static final String BEAN_NAME = "ktfDubboProperties";
-    public static final String PREFIX    = "ktf.dubbo";
+    public static final String PREFIX    = "dubbo";
 
     private Boolean            enabled;
 
     /**
      * 是否开启Restful接口
      */
-    private Boolean            restEnabled;
+    // private Boolean restEnabled;
     /**
      * Dubbo Service 扫描包，多个包名直接采用“,”分割
      */
@@ -39,6 +46,16 @@ public class KtfDubboProperties implements IKtfProperties {
      * dubbo超时时间
      */
     private int                timeout   = 30000;
+
+    private ApplicationConfig  application;
+
+    private RegistryConfig     registry;
+
+    private ProtocolConfig     protocol;
+
+    private ProviderConfig     provider;
+
+    private ConsumerConfig     consumer;
 
     @Override
     public String prefix() {

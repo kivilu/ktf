@@ -8,6 +8,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.alibaba.dubbo.common.serialize.support.SerializationOptimizer;
+import com.kivi.dubbo.properties.KtfDubboProperties;
 import com.kivi.framework.component.SpringContextHolder;
 import com.kivi.framework.dto.BaseReq;
 import com.kivi.framework.dto.BaseReqDTO;
@@ -19,7 +20,6 @@ import com.kivi.framework.dto.SvrStatusRspDTO;
 import com.kivi.framework.dto.warapper.WarpReqDTO;
 import com.kivi.framework.dto.warapper.WarpRspDTO;
 import com.kivi.framework.dto.warapper.WarpperDTO;
-import com.kivi.framework.properties.KtfDubboProperties;
 import com.kivi.framework.util.kit.StrKit;
 import com.kivi.framework.vo.page.PageInfoBT;
 import com.kivi.framework.vo.page.PageInfoVO;

@@ -11,8 +11,7 @@ import com.alibaba.dubbo.config.spring.context.annotation.EnableDubbo;
 @Inherited
 @Retention( RetentionPolicy.RUNTIME )
 @Target( { ElementType.TYPE } )
-@EnableDubbo( scanBasePackages = { "com.kivi", "${ktf.dubbo.scan-base-packages}" } )
-// @EnableDubboSwagger
-public @interface KtfEnableDubbo {
+@EnableDubbo( scanBasePackages = { "com.kivi", "${dubbo.scan-base-packages}" } )
+public @interface EnableKtfDubbo {
 
 }

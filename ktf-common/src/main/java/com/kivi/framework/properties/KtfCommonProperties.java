@@ -27,7 +27,12 @@ public class KtfCommonProperties implements IKtfProperties {
     private String             sidDir                  = "/app/sid";
     private Boolean            kaptchaOpen             = false;
     private String             fileUploadPath          = "/app/upload";
-    private Boolean            apolloEnabled           = true;
+    private Boolean            enableApollo            = true;
+
+    /**
+     * 测试是否开启
+     */
+    private Boolean            enableTest              = false;
 
     public String getFileUploadPath() {
         if (!StrKit.endWith(fileUploadPath, "/", true))

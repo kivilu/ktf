@@ -2,9 +2,12 @@ package com.kivi.framework.web.vo;
 
 import java.io.Serializable;
 
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 import org.hibernate.validator.constraints.NotBlank;
+
+import com.kivi.framework.constant.enums.UserType;
 
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
@@ -47,5 +50,14 @@ public class PasswordResetVO implements Serializable {
                        example = "2wq4" )
     @Size( max = 6, message = "验证码长度为6" )
     private String            smsCode;
+
+    @ApiModelProperty(
+                       position = 4,
+                       value = "用户类型",
+                       required = true,
+                       dataType = "com.kivi.framework.constant.enums.UserType",
+                       example = "ADMIN" )
+    @NotNull( message = "UserType不能为空" )
+    private UserType          userType;
 
 }

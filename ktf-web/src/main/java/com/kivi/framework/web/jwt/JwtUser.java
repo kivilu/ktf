@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.apache.commons.lang3.ArrayUtils;
 
+import com.kivi.framework.constant.enums.UserType;
 import com.kivi.framework.util.kit.ByteStringKit;
 import com.kivi.framework.util.kit.StrKit;
 
@@ -26,6 +27,9 @@ public class JwtUser implements Serializable {
     // 用户标识
     @Builder.Default
     private String            identifier       = "";
+
+    // 用户类型
+    private UserType          userType;
 
     public String[] audience() {
         String[] result = new String[2];

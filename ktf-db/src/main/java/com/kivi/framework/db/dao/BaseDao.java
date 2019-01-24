@@ -162,7 +162,10 @@ public abstract class BaseDao<T> implements IDao<T> {
         return mapper.selectByExample(example);
     }
 
+    @Override
     public PageInfoKtf<T> selectPageByExample( Object example, PageReqVO pageReq ) {
+        if (pageReq == null)
+            pageReq = new PageReqVO();
         int page = pageReq.getOffset() / pageReq.getLimit() + 1;
         PageHelper.startPage(page, pageReq.getLimit());
         List<T> list = mapper.selectByExample(example);

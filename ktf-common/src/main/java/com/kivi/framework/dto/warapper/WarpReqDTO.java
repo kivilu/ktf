@@ -31,6 +31,7 @@ public class WarpReqDTO<T> implements Serializable {
     }
 
     public WarpReqDTO( Long tranUniqueId, T reqObject ) {
+        this.tranUniqueId = tranUniqueId;
         this.reqObject = reqObject;
     }
 

@@ -24,6 +24,7 @@ public class KtfException extends RuntimeException {
 
     public KtfException( int code, String tips ) {
         super(tips);
+        this.tips = tips;
         this.code = code;
     }
 

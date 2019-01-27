@@ -6,6 +6,7 @@ import java.util.List;
 import org.apache.commons.lang3.ArrayUtils;
 
 import com.kivi.framework.constant.enums.UserType;
+import com.kivi.framework.util.NumUtil;
 import com.kivi.framework.util.kit.ByteStringKit;
 import com.kivi.framework.util.kit.StrKit;
 
@@ -48,6 +49,9 @@ public class JwtUser implements Serializable {
     }
 
     private static String encode( final String identifier ) {
+        if (!NumUtil.isNum(identifier))
+            return identifier;
+
         String data = padding(identifier);
 
         byte[] bdata = ByteStringKit.toBytes(data, ByteStringKit.HEX);
@@ -57,6 +61,9 @@ public class JwtUser implements Serializable {
     }
 
     private static String decode( final String identifier ) {
+        if (!NumUtil.isNum(identifier))
+            return identifier;
+
         byte[] rdata = ByteStringKit.toBytes(identifier, ByteStringKit.BASE64);
         ArrayUtils.reverse(rdata);
 

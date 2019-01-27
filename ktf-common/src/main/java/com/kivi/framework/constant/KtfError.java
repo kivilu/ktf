@@ -64,4 +64,7 @@ public class KtfError {
     /** NULL异常 */
     public static final int E_NULL                = 506;
 
+    /** RPC调用异常 */
+    public static final int E_RPC_FAIL            = 507;
+
 }

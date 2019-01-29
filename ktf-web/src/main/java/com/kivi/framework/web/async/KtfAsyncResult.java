@@ -9,7 +9,7 @@ import com.alibaba.fastjson.JSON;
 import io.swagger.annotations.ApiModel;
 
 @ApiModel( value = "KtfAsyncResult", description = "异步响应对象" )
-public class KtfAsyncResult<T> extends DeferredResult<String> {
+public class KtfAsyncResult<T> extends DeferredResult<T> {
     private static final Logger log = LoggerFactory.getLogger(KtfAsyncResult.class);
 
     protected final Long        msgId;
@@ -25,24 +25,21 @@ public class KtfAsyncResult<T> extends DeferredResult<String> {
     }
 
     @Override
-    public boolean setResult( String result ) {
-        log.trace("响应结果：{}", result);
-        return super.setResult(result);
-    }
-
-    @Override
     public boolean setErrorResult( Object result ) {
         if (log.isTraceEnabled())
             log.trace("响应结果：{}", JSON.toJSONString(result));
         return super.setErrorResult(result);
     }
 
-    public boolean setResultObject( T result ) {
+    @Override
+    public boolean setResult( T result ) {
 
-        String json = JSON.toJSONString(result);
-        log.trace("响应结果：{}", json);
+        if (log.isTraceEnabled()) {
+            String json = JSON.toJSONString(result);
+            log.trace("响应结果：{}", json);
+        }
 
-        return super.setResult(json);
+        return super.setResult(result);
     }
 
     public Long getMsgId() {

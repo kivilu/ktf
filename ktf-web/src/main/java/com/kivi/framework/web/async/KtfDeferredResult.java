@@ -13,8 +13,8 @@ public class KtfDeferredResult extends KtfAsyncResult<String> {
     }
 
     @Override
-    public boolean setResultObject( String result ) {
-        return super.setResultObject(result);
+    public boolean setResult( String result ) {
+        return super.setResult(result);
     }
 
     public boolean setResultRawObject( Object result ) {

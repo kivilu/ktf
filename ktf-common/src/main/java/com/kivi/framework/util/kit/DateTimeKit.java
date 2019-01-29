@@ -37,6 +37,11 @@ public class DateTimeKit {
     /** 标准日期时间格式，精确到毫秒,yyyy-MM-dd HH:mm:ss.SSS */
     public final static String                   NORM_DATETIME_MS_PATTERN     = "yyyy-MM-dd HH:mm:ss.SSS";
 
+    /**
+     * ISO 日期时间格式
+     */
+    public final static String                   ISO_DATETIME_PATTERN         = "yyyyMMdd'T'HHmmssZ";
+
     /** 紧凑日期时间格式，精确到秒 ，yyyyMMddHHmmss */
     public final static String                   COMPACT_DATETIME_PATTERN     = "yyyyMMddHHmmss";
 

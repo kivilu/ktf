@@ -42,12 +42,13 @@ public class FastJsonHttpMessageConverterConfiguration {
     public FastJsonHttpMessageConverter4 fastJsonHttpMessageConverter4() {
         FastJsonHttpMessageConverter4 converter = new FastJsonHttpMessageConverter4();
 
-        List<MediaType> supportedMediaTypes = new ArrayList<MediaType>();
+        List<MediaType> supportedMediaTypes = new ArrayList<>();
         supportedMediaTypes.add(MediaType.parseMediaType("text/html;charset=UTF-8"));
         supportedMediaTypes.add(MediaType.parseMediaType("application/json"));
 
         FastJsonConfig fastJsonConfig = new FastJsonConfig();
-        fastJsonConfig.setSerializerFeatures(SerializerFeature.PrettyFormat, SerializerFeature.WriteMapNullValue,
+        fastJsonConfig.setSerializerFeatures(SerializerFeature.QuoteFieldNames, SerializerFeature.PrettyFormat,
+                SerializerFeature.WriteMapNullValue,
                 SerializerFeature.WriteNullStringAsEmpty, SerializerFeature.WriteNullListAsEmpty,
                 SerializerFeature.DisableCircularReferenceDetect);
 

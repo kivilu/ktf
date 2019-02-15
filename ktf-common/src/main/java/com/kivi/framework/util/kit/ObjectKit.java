@@ -13,27 +13,37 @@ import java.util.Set;
  * 
  */
 public class ObjectKit {
-	
-	/**
+
+    /**
      * 比较两个对象是否相等。<br>
      * 相同的条件有两个，满足其一即可：<br>
      * 1. obj1 == null && obj2 == null; 2. obj1.equals(obj2)
      *
-     * @param obj1 对象1
-     * @param obj2 对象2
+     * @param obj1
+     *            对象1
+     * @param obj2
+     *            对象2
      * @return 是否相等
      */
-    public static boolean equals(Object obj1, Object obj2) {
+    public static boolean equals( Object obj1, Object obj2 ) {
         return (obj1 != null) ? (obj1.equals(obj2)) : (obj2 == null);
+    }
+
+    public static boolean equalsNotNull( Object obj1, Object obj2 ) {
+        if (obj1 == null || obj2 == null)
+            return false;
+
+        return obj1.equals(obj2);
     }
 
     /**
      * 计算对象长度，如果是字符串调用其length函数，集合类调用其size函数，数组调用其length属性，其他可遍历对象遍历计算长度
      *
-     * @param obj 被计算长度的对象
+     * @param obj
+     *            被计算长度的对象
      * @return 长度
      */
-    public static int length(Object obj) {
+    public static int length( Object obj ) {
         if (obj == null) {
             return 0;
         }
@@ -75,11 +85,13 @@ public class ObjectKit {
     /**
      * 对象中是否包含元素
      *
-     * @param obj     对象
-     * @param element 元素
+     * @param obj
+     *            对象
+     * @param element
+     *            元素
      * @return 是否包含
      */
-    public static boolean contains(Object obj, Object element) {
+    public static boolean contains( Object obj, Object element ) {
         if (obj == null) {
             return false;
         }
@@ -131,21 +143,23 @@ public class ObjectKit {
     /**
      * 对象是否不为空(新增)
      *
-     * @param obj String,List,Map,Object[],int[],long[]
+     * @param obj
+     *            String,List,Map,Object[],int[],long[]
      * @return
      */
-    public static boolean isNotEmpty(Object o) {
+    public static boolean isNotEmpty( Object o ) {
         return !isEmpty(o);
     }
 
     /**
      * 对象是否为空
      *
-     * @param obj String,List,Map,Object[],int[],long[]
+     * @param obj
+     *            String,List,Map,Object[],int[],long[]
      * @return
      */
-    @SuppressWarnings("rawtypes")
-    public static boolean isEmpty(Object o) {
+    @SuppressWarnings( "rawtypes" )
+    public static boolean isEmpty( Object o ) {
         if (o == null) {
             return true;
         }
@@ -153,27 +167,33 @@ public class ObjectKit {
             if (o.toString().trim().equals("")) {
                 return true;
             }
-        } else if (o instanceof List) {
+        }
+        else if (o instanceof List) {
             if (((List) o).size() == 0) {
                 return true;
             }
-        } else if (o instanceof Map) {
+        }
+        else if (o instanceof Map) {
             if (((Map) o).size() == 0) {
                 return true;
             }
-        } else if (o instanceof Set) {
+        }
+        else if (o instanceof Set) {
             if (((Set) o).size() == 0) {
                 return true;
             }
-        } else if (o instanceof Object[]) {
+        }
+        else if (o instanceof Object[]) {
             if (((Object[]) o).length == 0) {
                 return true;
             }
-        } else if (o instanceof int[]) {
+        }
+        else if (o instanceof int[]) {
             if (((int[]) o).length == 0) {
                 return true;
             }
-        } else if (o instanceof long[]) {
+        }
+        else if (o instanceof long[]) {
             if (((long[]) o).length == 0) {
                 return true;
             }
@@ -184,10 +204,11 @@ public class ObjectKit {
     /**
      * 对象组中是否存在 Empty Object
      *
-     * @param os 对象组
+     * @param os
+     *            对象组
      * @return
      */
-    public static boolean isOneEmpty(Object... os) {
+    public static boolean isOneEmpty( Object... os ) {
         for (Object o : os) {
             if (isEmpty(o)) {
                 return true;
@@ -202,7 +223,7 @@ public class ObjectKit {
      * @param os
      * @return
      */
-    public static boolean isAllEmpty(Object... os) {
+    public static boolean isAllEmpty( Object... os ) {
         for (Object o : os) {
             if (!isEmpty(o)) {
                 return false;
@@ -210,14 +231,14 @@ public class ObjectKit {
         }
         return true;
     }
-    
+
     /**
      * 如果为空, 则调用默认值
      *
      * @param str
      * @return
      */
-    public static Object getValue(Object str, Object defaultValue) {
+    public static Object getValue( Object str, Object defaultValue ) {
         if (isEmpty(str)) {
             return defaultValue;
         }

@@ -5,6 +5,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.web.context.request.async.DeferredResult;
 
 import com.alibaba.fastjson.JSON;
+import com.kivi.framework.dto.KtfBaseRsp;
 
 import io.swagger.annotations.ApiModel;
 
@@ -33,13 +34,21 @@ public class KtfAsyncResult<T> extends DeferredResult<T> {
 
     @Override
     public boolean setResult( T result ) {
-
-        if (log.isTraceEnabled()) {
-            String json = JSON.toJSONString(result);
-            log.trace("响应结果：{}", json);
+        if (result instanceof KtfBaseRsp) {
+            @SuppressWarnings( "unchecked" )
+            KtfBaseRsp<T> ktfBaseRsp = (KtfBaseRsp<T>) result;
+            if (ktfBaseRsp.getBizSeqId() == null) {
+                ktfBaseRsp.setBizSeqId(this.msgId.toString());
+            }
         }
 
-        return super.setResult(result);
+        boolean ret = super.setResult(result);
+        if (log.isTraceEnabled()) {
+            String json = JSON.toJSONString(result);
+            log.trace("【{}】响应客户端，结果：{}，内容：{}", this.msgId, ret, json);
+        }
+
+        return ret;
     }
 
     public Long getMsgId() {

@@ -32,7 +32,7 @@ public class KtfBaseRsp<T> implements Serializable {
                        example = "1.0.0" )
     @NotEmpty
     @Size( max = 8, message = "版本号长度最大为8" )
-    private String            version;
+    private String            version          = "1.0.0";
 
     @ApiModelProperty(
                        position = 2,

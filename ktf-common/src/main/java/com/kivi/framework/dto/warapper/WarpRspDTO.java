@@ -14,6 +14,31 @@ public class WarpRspDTO<T> implements Serializable {
      */
     private static final long serialVersionUID = 1L;
 
+    /**
+     * 调用响应应用名称
+     */
+    private String            fromAppName;
+
+    /**
+     * 交易流水号
+     */
+    private String            tranSeqId;
+
+    /**
+     * 交易唯一序列号
+     */
+    private Long              tranUniqueId;
+
+    /**
+     * 参数
+     */
+    private Object[]          params;
+
+    /**
+     * 响应内容
+     */
+    private T                 rspObject;
+
     public WarpRspDTO() {
         this(null, null);
     }
@@ -23,31 +48,7 @@ public class WarpRspDTO<T> implements Serializable {
     }
 
     public WarpRspDTO( Long tranUniqueId, T rspObject ) {
+        this.tranUniqueId = tranUniqueId;
         this.rspObject = rspObject;
     }
-
-    /**
-     * 调用响应应用名称
-     */
-    private String   fromAppName;
-
-    /**
-     * 交易流水号
-     */
-    private String   tranSeqId;
-
-    /**
-     * 交易唯一序列号
-     */
-    private Long     tranUniqueId;
-
-    /**
-     * 参数
-     */
-    private Object[] params;
-
-    /**
-     * 响应内容
-     */
-    private T        rspObject;
 }

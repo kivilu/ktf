@@ -1058,6 +1058,32 @@ public class StrKit {
     }
 
     /**
+     * 比较两个字符串（大小写不敏感）。
+     * 
+     * <pre>
+     * equalsIgnoreCase(null, null)   = true
+     * equalsIgnoreCase(null, &quot;abc&quot;)  = false
+     * equalsIgnoreCase(&quot;abc&quot;, null)  = false
+     * equalsIgnoreCase(&quot;abc&quot;, &quot;abc&quot;) = true
+     * equalsIgnoreCase(&quot;abc&quot;, &quot;ABC&quot;) = true
+     * </pre>
+     * 
+     * @param str1
+     *            要比较的字符串1
+     * @param str2
+     *            要比较的字符串2
+     * 
+     * @return 如果两个字符串相同，或者都是<code>null</code>，则返回<code>false</code>
+     */
+    public static boolean equalsNotNull( String str1, String str2 ) {
+        if (str1 == null || str2 == null) {
+            return false;
+        }
+
+        return str1.equalsIgnoreCase(str2);
+    }
+
+    /**
      * 格式化文本, {} 表示占位符<br>
      * 例如：format("aaa {} ccc", "bbb") ----> aaa bbb ccc
      * 

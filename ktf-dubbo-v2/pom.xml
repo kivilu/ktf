@@ -74,7 +74,7 @@
 	        <artifactId>netty-all</artifactId>
 	    </dependency>
 	
-		<dependency>
+		<!-- <dependency>
             <groupId>com.alibaba</groupId>
             <artifactId>dubbo-rpc-rest</artifactId>
             <version>${dubbo.version}</version>
@@ -84,12 +84,18 @@
 	    			<artifactId>log4j</artifactId> 
 	    		</exclusion> 
 	    	</exclusions>
-        </dependency>
+        </dependency> -->
         
         <dependency>
         	<groupId>com.alibaba</groupId>
         	<artifactId>dubbo-serialization-fst</artifactId>
         	<version>${dubbo.version}</version>
+        	<exclusions>
+        		<exclusion>
+        			<groupId>log4j</groupId>
+        			<artifactId>log4j</artifactId>
+        		</exclusion>
+        	</exclusions>
         </dependency>
         
         
@@ -109,42 +115,11 @@
 		    </exclusions>
 		</dependency> 
 
-    	<!-- <dependency>
-            <groupId>org.jboss.resteasy</groupId>
-            <artifactId>resteasy-jackson-provider</artifactId>
-        </dependency> -->
-        
         <dependency>
 		    <groupId>org.apache.curator</groupId>
 		    <artifactId>curator-framework</artifactId>
 		</dependency>
 
-		<dependency>
-		    <groupId>org.apache.curator</groupId>
-		    <artifactId>curator-client</artifactId>
-		    <version>4.0.0</version>
-		</dependency>
-		
-        
-        <!-- <dependency>
-		  <groupId>com.deepoove</groupId>
-		  <artifactId>swagger-dubbo</artifactId>
-		  <version>${swagger-dubbo.version}</version>
-		</dependency> -->
-        
-       <!--  <dependency>
-            <groupId>org.springframework.cloud</groupId>
-            <artifactId>spring-cloud-starter-netflix-hystrix</artifactId>
-            <version>${netflix-hystrix.version}</version>
-            <optional>true</optional>
-        </dependency>
-        
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-test</artifactId>
-            <scope>test</scope>
-        </dependency> -->
-  
   </dependencies>
   
 </project>

@@ -20,6 +20,7 @@ import com.kivi.framework.dto.SvrStatusRspDTO;
 import com.kivi.framework.dto.warapper.WarpReqDTO;
 import com.kivi.framework.dto.warapper.WarpRspDTO;
 import com.kivi.framework.dto.warapper.WarpperDTO;
+import com.kivi.framework.exception.KtfException;
 import com.kivi.framework.util.kit.StrKit;
 import com.kivi.framework.vo.page.PageInfoBT;
 import com.kivi.framework.vo.page.PageInfoVO;
@@ -47,6 +48,7 @@ public class SerializationOptimizerImpl implements SerializationOptimizer {
         classes.add(PageReqVO.class);
         classes.add(byte.class);
         classes.add(Byte.class);
+        classes.add(KtfException.class);
 
         KtfDubboProperties ktfDubboProperties = SpringContextHolder.getBeanNoAssert(KtfDubboProperties.class);
         if (ktfDubboProperties == null) {

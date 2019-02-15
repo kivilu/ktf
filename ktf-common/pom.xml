@@ -57,6 +57,12 @@
 			<groupId>io.springfox</groupId>
 			<artifactId>springfox-swagger2</artifactId>
 			<version>${springfox-swagger2-version}</version>
+			<exclusions>
+				<exclusion>
+					<groupId>com.google.guava</groupId>
+					<artifactId>guava</artifactId>
+				</exclusion>
+			</exclusions>
 		</dependency>
 		<!-- /swagger -->
 		
@@ -82,6 +88,27 @@
 		    <version>${netty.version}</version>
 		    <optional>true</optional>
 		</dependency>
+
+		<!-- ctrip-apollo -->
+		<dependency>
+			<groupId>com.ctrip.framework.apollo</groupId>
+			<artifactId>apollo-client</artifactId>
+			<version>${apollo-client.version}</version>
+			<exclusions>
+				<exclusion>
+					<groupId>com.google.guava</groupId>
+					<artifactId>guava</artifactId>
+				</exclusion>
+			</exclusions>
+			<optional>true</optional>
+		</dependency>
+		<dependency>
+		    <groupId>org.springframework.cloud</groupId>
+		    <artifactId>spring-cloud-context</artifactId>
+		    <version>${spring-cloud-context.version}</version>
+		    <optional>true</optional>
+		</dependency>
+		<!-- ctrip-apollo -->
 		
   </dependencies>
   

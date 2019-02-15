@@ -6,11 +6,9 @@ import org.springframework.context.annotation.Configuration;
 
 import com.kivi.framework.component.ApplicationKit;
 
-import lombok.Getter;
-import lombok.Setter;
+import lombok.Data;
 
-@Setter
-@Getter
+@Data
 @Configuration( KtfCacheProperties.BEAN_NAME )
 @ConfigurationProperties( prefix = KtfCacheProperties.PREFIX )
 @ConditionalOnProperty(
@@ -30,6 +28,12 @@ public class KtfCacheProperties implements IKtfProperties {
      * 缓存失效时间
      */
     private int                expiration = 3600;
+    
+    /**
+	 * 缓存key的前缀，默认值：jyt-
+	 */
+	private String prefixKey = "jyt-";
+
 
     public String cacheType() {
         return ApplicationKit.me().getEnvProperty("spring.cache.type");

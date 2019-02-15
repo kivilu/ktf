@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # kivi-framework
 
 ## 简介
@@ -23,3 +24,7 @@ Kivi-framework是基于Spring Boot封装的一个Java开发框架，本框架既
 └── pom.xml                      ktf的parent pom文件
 ```
 
+=======
+# ktf
+基于springboot的基础开发框架
+>>>>>>> refs/remotes/origin/master

@@ -16,6 +16,7 @@ import com.kivi.framework.cache.factory.ICache;
 import com.kivi.framework.cache.factory.ILoader;
 import com.kivi.framework.cache.redis.factory.KtfRedisCacheManager;
 import com.kivi.framework.cache.redis.factory.RedisFactory;
+import com.kivi.framework.component.ApplicationKit;
 import com.kivi.framework.component.SpringContextHolder;
 
 /**
@@ -36,11 +37,11 @@ public class CacheKit {
 
     @PostConstruct
     private void init() {
-        if (CacheType.EHCACHE.compareTo(cacheProperties.getType()) == 0) {
+        if (CacheType.EHCACHE.compareTo(getCacheType()) == 0) {
             EhCacheCacheManager ehCacheCacheManager = (EhCacheCacheManager) cacheManager;
             cacheFactory = new EhcacheFactory(ehCacheCacheManager.getCacheManager());
         }
-        else if (CacheType.REDIS.compareTo(cacheProperties.getType()) == 0) {
+        else if (CacheType.REDIS.compareTo(getCacheType()) == 0) {
             cacheFactory = new RedisFactory((KtfRedisCacheManager) cacheManager);
         }
 
@@ -51,7 +52,8 @@ public class CacheKit {
     }
 
     public CacheType getCacheType() {
-        return cacheProperties.getType();
+        String cacheType = ApplicationKit.me().getEnvProperty("spring.cache.type");
+        return CacheType.valueOf(cacheType.toUpperCase());
     }
 
     public EhCacheCacheManager getEhCacheManager() {

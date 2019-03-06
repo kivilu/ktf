@@ -3,6 +3,7 @@ package com.kivi.framework.util.kit;
 import static org.junit.Assert.assertEquals;
 
 import java.nio.ByteBuffer;
+import java.util.Date;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -43,6 +44,13 @@ public class DateTimeKitTest {
         int seconds = DateTimeKit.toIntSecond(DateTimeKit.date());
 
         System.out.println(seconds);
+    }
+
+    @Test
+    public void testParse() {
+        String dateStr = "2020-03-05T00:00:00.064Z";
+        Date date = DateTimeKit.parse(dateStr);
+        System.out.println(date);
     }
 
 }

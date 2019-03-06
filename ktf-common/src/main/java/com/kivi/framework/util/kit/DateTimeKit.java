@@ -41,6 +41,7 @@ public class DateTimeKit {
      * ISO 日期时间格式
      */
     public final static String                   ISO_DATETIME_PATTERN         = "yyyyMMdd'T'HHmmssZ";
+    public final static String                   ISO_DATETIME_MS_PATTERN      = "yyyy-MM-dd'T'HH:mm:ss.SSSZ";
 
     /** 紧凑日期时间格式，精确到秒 ，yyyyMMddHHmmss */
     public final static String                   COMPACT_DATETIME_PATTERN     = "yyyyMMddHHmmss";
@@ -470,9 +471,14 @@ public class DateTimeKit {
             else if (length == NORM_DATETIME_MINUTE_PATTERN.length()) {
                 return parse(dateStr, NORM_DATETIME_MINUTE_PATTERN);
             }
+            else if (length == ISO_DATETIME_MS_PATTERN.length() - 2) {
+                dateStr = dateStr.replaceFirst("T", " ").replaceFirst(".\\d{3}Z", "");
+                return parseDateTime(dateStr);
+            }
             else if (length >= NORM_DATETIME_MS_PATTERN.length() - 2) {
                 return parse(dateStr, NORM_DATETIME_MS_PATTERN);
             }
+
         }
         catch (Exception e) {
             throw new ToolBoxException(StrKit.format("Parse [{}] with format normal error!", dateStr));
@@ -481,6 +487,25 @@ public class DateTimeKit {
         // 没有更多匹配的时间格式
         throw new ToolBoxException(StrKit.format(" [{}] format is not fit for date pattern!", dateStr));
     }
+
+    public static DateTime parseISODate( String time ) {
+        if (!time.matches("\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}.\\d{3}Z")) {
+            return null;
+        }
+        time = time.replaceFirst("T", " ").replaceFirst(".\\d{3}Z", "");
+        Date date = parse(time);
+        // 1、取得本地时间：
+        java.util.Calendar cal = java.util.Calendar.getInstance();
+        cal.setTime(date);
+        // 2、取得时间偏移量：
+        int zoneOffset = cal.get(java.util.Calendar.ZONE_OFFSET);
+        // 3、取得夏令时差：
+        int dstOffset = cal.get(java.util.Calendar.DST_OFFSET);
+        // 4、从本地时间里扣除这些差量，即可以取得UTC时间：
+        cal.add(Calendar.MILLISECOND, (zoneOffset + dstOffset));
+        return new DateTime(cal.getTime());
+    }
+
     // ------------------------------------ Parse end
     // ----------------------------------------------
 
@@ -623,6 +648,26 @@ public class DateTimeKit {
      * @return 日期差
      */
     public static long diff( Date subtrahend, Date minuend, long diffField ) {
+        long diff = minuend.getTime() - subtrahend.getTime();
+        return diff / diffField;
+    }
+
+    /**
+     * 判断两个日期相差的时长<br/>
+     * 返回 minuend - subtrahend 的差
+     * 
+     * @param subtrahend
+     *            减数日期
+     * @param minuend
+     *            被减数日期
+     * @param diffField
+     *            相差的选项：相差的天、小时
+     * @return 日期差
+     */
+    public static long diff( String subtrahendStr, String minuendStr, long diffField ) {
+        Date subtrahend = parse(subtrahendStr);
+        Date minuend = parse(minuendStr);
+
         long diff = minuend.getTime() - subtrahend.getTime();
         return diff / diffField;
     }

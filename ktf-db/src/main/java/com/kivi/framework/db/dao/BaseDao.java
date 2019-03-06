@@ -13,9 +13,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
+import com.kivi.framework.db.util.MyMapper;
 import com.kivi.framework.exception.DaoException;
 import com.kivi.framework.util.kit.BeanKit;
 import com.kivi.framework.util.kit.ObjectKit;
+import com.kivi.framework.util.kit.StrKit;
 import com.kivi.framework.vo.PageInfoKtf;
 import com.kivi.framework.vo.page.PageReqVO;
 
@@ -45,7 +47,7 @@ public abstract class BaseDao<T> implements IDao<T> {
                                             };
 
     @Autowired
-    protected Mapper<T>         mapper;
+    protected MyMapper<T>       mapper;
 
     @SuppressWarnings( "unchecked" )
     public BaseDao() {
@@ -155,6 +157,17 @@ public abstract class BaseDao<T> implements IDao<T> {
         int row = mapper.updateByExampleSelective(updateEntity, example);
 
         return row;
+    }
+
+    @Override
+    public List<T> selectByIds( String ids ) {
+        return mapper.selectByIds(ids);
+    }
+
+    @Override
+    public List<T> selectByIds( List<Object> ids ) {
+
+        return selectByIds(StrKit.join(StrKit.COMMA, ids));
     }
 
     @Override

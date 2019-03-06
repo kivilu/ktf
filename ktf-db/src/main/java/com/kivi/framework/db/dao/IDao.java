@@ -32,6 +32,17 @@ public interface IDao<T> {
     int updateNotNull( T condEntity, T updateEntity );
 
     /**
+     * 根据主键字符串进行查询，类中只有存在一个带有@Id注解的字段
+     *
+     * @param ids
+     *            如 "1,2,3,4"
+     * @return
+     */
+    List<T> selectByIds( String ids );
+
+    List<T> selectByIds( List<Object> ids );
+
+    /**
      * 根据条件查询
      * 
      * @param example

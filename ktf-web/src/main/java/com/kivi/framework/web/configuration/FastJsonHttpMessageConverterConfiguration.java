@@ -38,7 +38,7 @@ public class FastJsonHttpMessageConverterConfiguration {
 
     }
 
-    @Bean
+    @Bean( "fastJsonHttpMessageConverter4" )
     public FastJsonHttpMessageConverter4 fastJsonHttpMessageConverter4() {
         FastJsonHttpMessageConverter4 converter = new FastJsonHttpMessageConverter4();
 
@@ -49,7 +49,8 @@ public class FastJsonHttpMessageConverterConfiguration {
         FastJsonConfig fastJsonConfig = new FastJsonConfig();
         fastJsonConfig.setSerializerFeatures(SerializerFeature.QuoteFieldNames, SerializerFeature.PrettyFormat,
                 SerializerFeature.WriteMapNullValue,
-                SerializerFeature.WriteNullStringAsEmpty, SerializerFeature.WriteNullListAsEmpty,
+                SerializerFeature.WriteNullStringAsEmpty,
+                SerializerFeature.WriteNullListAsEmpty,
                 SerializerFeature.DisableCircularReferenceDetect);
 
         SerializeConfig serializeConfig = SerializeConfig.globalInstance;

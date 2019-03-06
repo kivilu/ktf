@@ -10,13 +10,13 @@ import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Before;
 import org.aspectj.lang.annotation.Pointcut;
 import org.aspectj.lang.reflect.MethodSignature;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 
 import com.alibaba.fastjson.JSON;
 import com.kivi.framework.annotation.KtfTrace;
 import com.kivi.framework.util.kit.DateTimeKit;
+
+import lombok.extern.slf4j.Slf4j;
 
 /**
  * 日志记录
@@ -24,9 +24,8 @@ import com.kivi.framework.util.kit.DateTimeKit;
  */
 @Aspect
 @Component
+@Slf4j
 public class KtfTraceAspect {
-
-    private Logger log = LoggerFactory.getLogger(this.getClass());
 
     @Pointcut( value = "@annotation(com.kivi.framework.annotation.KtfTrace)" )
     public void aopMethed() {

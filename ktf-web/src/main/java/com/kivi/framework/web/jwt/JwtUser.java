@@ -33,9 +33,10 @@ public class JwtUser implements Serializable {
     private UserType          userType;
 
     public String[] audience() {
-        String[] result = new String[2];
+        String[] result = new String[3];
         result[0] = id.toString();
         result[1] = encode(identifier);
+        result[2] = userType == null ? "" : userType.code;
 
         return result;
     }
@@ -44,6 +45,7 @@ public class JwtUser implements Serializable {
         JwtUser result = JwtUser.builder()
                 .id(Long.valueOf(audiences.get(0)))
                 .identifier(decode(audiences.get(1)))
+                .userType(UserType.userType(audiences.get(2)))
                 .build();
         return result;
     }
@@ -89,7 +91,8 @@ public class JwtUser implements Serializable {
         StringBuilder builder = new StringBuilder();
         builder
                 .append("id=").append(id).append(", ")
-                .append("identifier").append(identifier);
+                .append("identifier=").append(identifier).append(", ")
+                .append("userType=").append(userType.name());
         return builder.toString();
     }
 

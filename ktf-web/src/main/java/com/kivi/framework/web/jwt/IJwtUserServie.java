@@ -17,5 +17,12 @@ public interface IJwtUserServie {
      *            主键
      * @return
      */
-    String getCredential( Long id );
+    String getCredential( Long userId );
+
+    /**
+     * 用户已经退出
+     * 
+     * @param id
+     */
+    void logouted( Long userId );
 }

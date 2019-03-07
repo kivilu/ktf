@@ -17,13 +17,14 @@ import lombok.Data;
 @ConfigurationProperties( prefix = KtfJwtProperties.PREFIX )
 @Data
 public class KtfJwtProperties implements IKtfProperties {
-    public static final String BEAN_NAME  = "ktfJwtProperties";
-    public static final String PREFIX     = "ktf.jwt";
+    public static final String BEAN_NAME           = "ktfJwtProperties";
+    public static final String PREFIX              = "ktf.jwt";
 
-    private Boolean            enabled    = false;
-    private String             issuer     = "kivi";
-    private String             secretSeed = "kivi.jwt";
-    private Long               ttl        = 1800L;
+    private Boolean            enabled             = false;
+    private String             issuer              = "kivi";
+    private String             secretSeed          = "kivi.jwt";
+    private String             excludePathPatterns = "/login,/logout,/error";
+    private Long               ttl                 = 1800L;
 
     @Override
     public String prefix() {

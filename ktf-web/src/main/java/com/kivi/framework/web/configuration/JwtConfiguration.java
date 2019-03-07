@@ -1,11 +1,14 @@
 package com.kivi.framework.web.configuration;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.web.servlet.config.annotation.InterceptorRegistration;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 
+import com.kivi.framework.util.kit.StrKit;
 import com.kivi.framework.web.intercepter.JwtAuthInterceptor;
 import com.kivi.framework.web.properties.KtfJwtProperties;
 
@@ -16,13 +19,26 @@ import com.kivi.framework.web.properties.KtfJwtProperties;
                         matchIfMissing = false )
 @Configuration
 public class JwtConfiguration extends WebMvcConfigurerAdapter {
+    @Autowired( required = false )
+    private KtfJwtProperties ktfJwtProperties;
 
     @Override
     public void addInterceptors( InterceptorRegistry registry ) {
-        registry.addInterceptor(jwtAuthInterceptor())
-                .addPathPatterns("/**"); // 拦截所有请求，通过判断是否有 @LoginToken 注解
-                                         // 决定是否需要登录
-        super.addInterceptors(registry);
+        InterceptorRegistration registration = registry.addInterceptor(jwtAuthInterceptor());
+
+        String[] excludePathPatterns = StrKit.split(ktfJwtProperties.getExcludePathPatterns(), ",");
+
+        // 排除的路径
+        for (String excludePathPattern : excludePathPatterns) {
+            registration.excludePathPatterns(excludePathPattern);
+        }
+
+        // 将这个controller放行
+        registration.excludePathPatterns("/error");
+        // 拦截全部
+        registration.addPathPatterns("/**");
+
+        // super.addInterceptors(registry);
     }
 
     @Bean

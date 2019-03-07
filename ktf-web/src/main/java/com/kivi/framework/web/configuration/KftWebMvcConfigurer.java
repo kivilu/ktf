@@ -8,7 +8,6 @@ import org.springframework.boot.web.servlet.ServletListenerRegistrationBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.converter.HttpMessageConverter;
-import org.springframework.web.context.request.RequestContextListener;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
@@ -17,14 +16,10 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
 
 import com.alibaba.fastjson.support.spring.FastJsonHttpMessageConverter4;
-import com.kivi.framework.web.intercepter.CommonIntercepter;
 import com.kivi.framework.web.util.xss.XssFilter;
 
 @Configuration
 public class KftWebMvcConfigurer extends WebMvcConfigurerAdapter {
-
-    @Autowired
-    private CommonIntercepter             commonIntercepter;
 
     @Autowired( required = false )
     private FastJsonHttpMessageConverter4 fastJsonHttpMessageConverter4;
@@ -60,7 +55,7 @@ public class KftWebMvcConfigurer extends WebMvcConfigurerAdapter {
      */
     @Override
     public void addInterceptors( InterceptorRegistry registry ) {
-        registry.addInterceptor(commonIntercepter).addPathPatterns("/**");
+        // registry.addInterceptor(commonIntercepter).addPathPatterns("/**");
         super.addInterceptors(registry);
     }
 
@@ -77,10 +72,11 @@ public class KftWebMvcConfigurer extends WebMvcConfigurerAdapter {
     /**
      * RequestContextListener注册
      */
-    @Bean
-    public ServletListenerRegistrationBean<RequestContextListener> requestContextListenerRegistration() {
-        return new ServletListenerRegistrationBean<>(new RequestContextListener());
-    }
+    /*
+     * @Bean public ServletListenerRegistrationBean<RequestContextListener>
+     * requestContextListenerRegistration() { return new
+     * ServletListenerRegistrationBean<>(new RequestContextListener()); }
+     */
 
     /**
      * ConfigListener注册

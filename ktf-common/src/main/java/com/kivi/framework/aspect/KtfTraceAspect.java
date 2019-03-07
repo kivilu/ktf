@@ -60,14 +60,14 @@ public class KtfTraceAspect {
         Object[] params = point.getArgs();
 
         if (log.isTraceEnabled()) {
-            log.trace("===={}：{}.{} 参数：{}", annotation.value(), className, methodName, JSON.toJSONString(params));
+            log.trace("<<<<<{}：{}.{} 参数：{}", annotation.value(), className, methodName, JSON.toJSONString(params));
         }
 
         // 执行业务
         Object result = point.proceed();
 
         if (log.isTraceEnabled()) {
-            log.trace("===={}：{}.{}执行耗时：{}ms，返回值：{}", annotation.value(), className, methodName,
+            log.trace(">>>>>{}：{}.{}执行耗时：{}ms，返回值：{}", annotation.value(), className, methodName,
                     DateTimeKit.spendMs(start), JSON.toJSONString(result));
         }
 

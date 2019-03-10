@@ -207,6 +207,11 @@ public abstract class BaseDao<T> implements IDao<T> {
     }
 
     @Override
+    public int countByExample( Object example ) {
+        return mapper.selectCountByExample(example);
+    }
+
+    @Override
     public List<T> selectByEntity( T entity ) {
         Map<String, Object> map = BeanKit.beanToMap(entity);
 

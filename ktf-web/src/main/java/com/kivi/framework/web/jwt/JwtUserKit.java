@@ -1,36 +1,37 @@
 package com.kivi.framework.web.jwt;
 
-import java.io.Serializable;
 import java.util.List;
 
 import org.apache.commons.lang3.ArrayUtils;
 
 import com.kivi.framework.constant.enums.UserType;
+import com.kivi.framework.dto.JwtUserDTO;
 import com.kivi.framework.util.NumUtil;
 import com.kivi.framework.util.kit.ByteStringKit;
 import com.kivi.framework.util.kit.StrKit;
 
-import lombok.Builder;
 import lombok.Getter;
+import lombok.experimental.SuperBuilder;
 
-@Builder
 @Getter
-public class JwtUser implements Serializable {
+@SuperBuilder
+public class JwtUserKit extends JwtUserDTO {
 
     /**
      * 
      */
     private static final long serialVersionUID = 1L;
+
     // 用户iD
-    @Builder.Default
-    private Long              id               = 0L;
+    // @Builder.Default
+    // private Long id = 0L;
 
     // 用户标识
-    @Builder.Default
-    private String            identifier       = "";
+    // @Builder.Default
+    // private String identifier = "";
 
-    // 用户类型
-    private UserType          userType;
+    //// 用户类型
+    // private UserType userType;
 
     public String[] audience() {
         String[] result = new String[3];
@@ -41,8 +42,8 @@ public class JwtUser implements Serializable {
         return result;
     }
 
-    public static JwtUser audience( List<String> audiences ) {
-        JwtUser result = JwtUser.builder()
+    public static JwtUserDTO audience( List<String> audiences ) {
+        JwtUserDTO result = JwtUserDTO.builder()
                 .id(Long.valueOf(audiences.get(0)))
                 .identifier(decode(audiences.get(1)))
                 .userType(UserType.userType(audiences.get(2)))

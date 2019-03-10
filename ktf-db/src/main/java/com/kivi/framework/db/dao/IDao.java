@@ -75,6 +75,8 @@ public interface IDao<T> {
 
     int count();
 
+    int countByExample( Object example );
+
     /**
      * 分页查询
      * 

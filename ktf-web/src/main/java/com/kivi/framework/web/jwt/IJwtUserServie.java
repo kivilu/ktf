@@ -1,5 +1,7 @@
 package com.kivi.framework.web.jwt;
 
+import com.kivi.framework.dto.JwtUserDTO;
+
 public interface IJwtUserServie {
 
     /**
@@ -24,5 +26,5 @@ public interface IJwtUserServie {
      * 
      * @param id
      */
-    void logouted( Long userId );
+    void logouted( JwtUserDTO jwtUser );
 }

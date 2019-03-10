@@ -9,6 +9,7 @@ import com.auth0.jwt.JWTVerifier;
 import com.auth0.jwt.algorithms.Algorithm;
 import com.auth0.jwt.exceptions.JWTVerificationException;
 import com.kivi.framework.constant.KtfError;
+import com.kivi.framework.dto.JwtUserDTO;
 import com.kivi.framework.exception.KtfException;
 import com.kivi.framework.util.kit.DateTimeKit;
 
@@ -22,7 +23,7 @@ public class JwtKit {
      * @return
      * @throws Exception
      */
-    public static String create( JwtUser jwtUser, String token, Date expiresAt ) throws Exception {
+    public static String create( JwtUserKit jwtUser, String token, Date expiresAt ) throws Exception {
 
         long nowMillis = System.currentTimeMillis();
 
@@ -51,10 +52,10 @@ public class JwtKit {
      * @return
      * @throws Exception
      */
-    public static JwtUser getIdentifier( String jwt ) throws Exception {
+    public static JwtUserDTO getJwtUser( String jwt ) throws Exception {
         List<String> auds = JWT.decode(jwt).getAudience();
 
-        return JwtUser.audience(auds);
+        return JwtUserKit.audience(auds);
     }
 
     public static void main( String[] args ) {

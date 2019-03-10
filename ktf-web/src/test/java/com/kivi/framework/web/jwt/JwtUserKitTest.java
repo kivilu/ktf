@@ -5,9 +5,10 @@ import static org.junit.Assert.assertEquals;
 import org.junit.Before;
 import org.junit.Test;
 
+import com.kivi.framework.dto.JwtUserDTO;
 import com.kivi.framework.util.kit.CollectionKit;
 
-public class JwtUserTest {
+public class JwtUserKitTest {
 
     @Before
     public void setUp() throws Exception {
@@ -16,10 +17,10 @@ public class JwtUserTest {
     @Test
     public void testAudience() {
         final String identifier = "13800100500";
-        JwtUser jwtUser = JwtUser.builder().id(1L).identifier(identifier).build();
+        JwtUserKit jwtUser = JwtUserKit.builder().id(1L).identifier(identifier).build();
         String[] lists = jwtUser.audience();
 
-        JwtUser user = JwtUser.audience(CollectionKit.newArrayList(lists));
+        JwtUserDTO user = JwtUserKit.audience(CollectionKit.newArrayList(lists));
 
         assertEquals(Long.valueOf(1L), user.getId());
         assertEquals(identifier, user.getIdentifier());

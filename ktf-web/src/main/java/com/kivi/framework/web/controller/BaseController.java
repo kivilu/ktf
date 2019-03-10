@@ -18,6 +18,7 @@ import com.kivi.framework.component.ApplicationKit;
 import com.kivi.framework.component.KtfProperties;
 import com.kivi.framework.component.SpringContextHolder;
 import com.kivi.framework.constant.enums.Order;
+import com.kivi.framework.dto.JwtUserDTO;
 import com.kivi.framework.service.ITimeoutService;
 import com.kivi.framework.util.FileUtil;
 import com.kivi.framework.util.kit.StrKit;
@@ -29,7 +30,6 @@ import com.kivi.framework.web.async.KtfDeferredResult;
 import com.kivi.framework.web.async.KtfTimeoutRunnable;
 import com.kivi.framework.web.constant.WebConst;
 import com.kivi.framework.web.constant.tips.SuccessTip;
-import com.kivi.framework.web.jwt.JwtUser;
 import com.kivi.framework.web.util.kit.HttpKit;
 import com.kivi.framework.web.warpper.BaseControllerWarpper;
 
@@ -72,8 +72,8 @@ public class BaseController {
         return HttpKit.getRequest().getAttribute(name);
     }
 
-    protected JwtUser getJwtUser() {
-        return (JwtUser) HttpKit.getRequest().getAttribute(WebConst.ATTR_USERACCOUNT);
+    protected JwtUserDTO getJwtUser() {
+        return (JwtUserDTO) HttpKit.getRequest().getAttribute(WebConst.ATTR_USERACCOUNT);
     }
 
     protected Integer getSystemInvokCount() {
